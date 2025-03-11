@@ -47,21 +47,21 @@ The quantification results are stored in  `scats@rowRanges` and contain the foll
 
 | column name      |                                           content                                          |
 | ---------------- | ------------------------------------------------------------------------------------------ |
-| seqnames         | The chromosomal name of the gene to which TSS belongs  |
-| ranges           | The genomic locus of TSS, where the growth rate is highest  |
-| strand           | The genomic strand of the gene to which TSS belongs   |
-| gene_id          | The Ensembl ID of the gene to which TSS belongs   |
-| gene_name        | The HGNC Symbol of the gene to which TSS belongs   |
-| TSS              | The ID of the TSS in the format of [seqnames:ranges:strand]   |
+| seqnames         | The chromosomal name of the gene to which TSS belongs.  |
+| ranges           | The genomic locus of TSS, where the growth rate is highest.  |
+| strand           | The genomic strand of the gene to which TSS belongs.   |
+| gene_id          | The Ensembl ID of the gene to which TSS belongs.   |
+| gene_name        | The HGNC Symbol of the gene to which TSS belongs.   |
+| TSS              | The ID of the TSS in the format of [seqnames:ranges:strand].   |
 | Region           | The growth area of the sorted 5'-starts of read 1, or it can also be interpreted as the<br> TSS cluster. Another region must show a significant increase in the number of reads.   |
-| Base             | The span length of the start, which is actually included in the calculation, equal to sigma   |
-| PSI              | The percent spliced in (PSI) of TSS  |
-| Percent          | The ratio of TSS reads   |
-| Annotated        | The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region   |
+| Base             | The span length of the start, which is actually included in the calculation, equal to sigma.   |
+| PSI              | The percent spliced in (PSI) of TSS.  |
+| Percent          | The ratio of TSS reads.   |
+| Annotated        | The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region.   |
 | Greedy           | Greedy for the first TSS. If it is TRUE, it indicates that the first TSS is quantified<br> even if it does not meet the specified condition."   |
 | AUC              | The area under the cumulative distribution curve : close to 1, indicates no degradation,<br>while close to 0 indicates severe degradation.   |
 | MaxDist          | The y-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 1 indicates no degradation, while close to 0 indicates severe degradation.  |
-| AboveRandom      | ??   |
+| AboveRandom      | The proportion of reads (indicating a lower degree of degradation) above the diagonal in the cumulative distribution.   |
 | ApicesX          | The x-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 0 indicates no degradation, while close to 1 indicates severe degradation.   |
 | ApicesY          | Equal to MaxDist.  |
 | alpha1           | The degradation index fitted using the EM algorithm: the larger the value, the more severe the degradation.    |
@@ -107,9 +107,9 @@ The `DE` object contains following columns:
 | Cells1/2         | The number of cell-type corresponding to G1/2.   |
 | PSI1/2           | The average sum of all individual cell PSIs.   |
 | SudobulkPSI1/2   | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
-| wald.test        |    |
-| wilcox.test      |    |
-| prop.test        |    |
+| wald.test        | The p-value from the Wald test for differences in psi values among groups.  |
+| wilcox.test      | The p-value from the Wilcoxon test for differences in psi values among groups.   |
+| prop.test        | The p-value from the Proportion test for differences in psi values among groups.   |
 
 
 
@@ -131,18 +131,18 @@ The `psi` object contains following columns:
 | ---------------- | ------------------------------------------------------------------------------------------ |
 | TSS              | The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].   |
 | groupBy          | The level of group.   |
-| Cells            | The number of cell-type corresponding to a given groups.   |
-| N                | The expression of the host gene in a given groups.   |
-| n                | The expression of the TSS in a given groups.   |
-| mean             |    |
-| sd               |    |
-| se               |    |
-| ci               |    |
-| median           |    |
-| Q1               |    |
-| Q3               |    |
-| mad              |    |
-| iqr              |    |
+| Cells            | The number of cell-type corresponding to a given groups (The same applies to the following.).   |
+| N                | The expression of the host gene.   |
+| n                | The expression of the TSS.   |
+| mean             | The mean of PSI.  |
+| sd               | The standard deviation (std) of PSI.  |
+| se               | The standard error (SE) of PSI.   |
+| ci               | The confidence interval (CI) of PSI.   |
+| median           | The median of PSI.   |
+| Q1               | The first quartile (Q1) of PSI.   |
+| Q3               | The third quartile (Q3) of PSI.   |
+| mad              | The median absolute deviation (MAD) of PSI.  |
+| iqr              | The interquartile range (IQR) of PSI.   |
 | PseudobulkPSI    | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
 
 

@@ -143,37 +143,37 @@ celltype wsnn_cell_type
 </thead>
 <tbody>
 <tr class="row-even"><td><p>seqnames</p></td>
-<td><p>The chromosomal name of the gene to which TSS belongs</p></td>
+<td><p>The chromosomal name of the gene to which TSS belongs.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ranges</p></td>
-<td><p>The genomic locus of TSS, where the growth rate is highest</p></td>
+<td><p>The genomic locus of TSS, where the growth rate is highest.</p></td>
 </tr>
 <tr class="row-even"><td><p>strand</p></td>
-<td><p>The genomic strand of the gene to which TSS belongs</p></td>
+<td><p>The genomic strand of the gene to which TSS belongs.</p></td>
 </tr>
 <tr class="row-odd"><td><p>gene_id</p></td>
-<td><p>The Ensembl ID of the gene to which TSS belongs</p></td>
+<td><p>The Ensembl ID of the gene to which TSS belongs.</p></td>
 </tr>
 <tr class="row-even"><td><p>gene_name</p></td>
-<td><p>The HGNC Symbol of the gene to which TSS belongs</p></td>
+<td><p>The HGNC Symbol of the gene to which TSS belongs.</p></td>
 </tr>
 <tr class="row-odd"><td><p>TSS</p></td>
-<td><p>The ID of the TSS in the format of [seqnames:ranges:strand]</p></td>
+<td><p>The ID of the TSS in the format of [seqnames:ranges:strand].</p></td>
 </tr>
 <tr class="row-even"><td><p>Region</p></td>
 <td><p>The growth area of the sorted 5’-starts of read 1, or it can also be interpreted as the<br> TSS cluster. Another region must show a significant increase in the number of reads.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Base</p></td>
-<td><p>The span length of the start, which is actually included in the calculation, equal to sigma</p></td>
+<td><p>The span length of the start, which is actually included in the calculation, equal to sigma.</p></td>
 </tr>
 <tr class="row-even"><td><p>PSI</p></td>
-<td><p>The percent spliced in (PSI) of TSS</p></td>
+<td><p>The percent spliced in (PSI) of TSS.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Percent</p></td>
-<td><p>The ratio of TSS reads</p></td>
+<td><p>The ratio of TSS reads.</p></td>
 </tr>
 <tr class="row-even"><td><p>Annotated</p></td>
-<td><p>The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region</p></td>
+<td><p>The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Greedy</p></td>
 <td><p>Greedy for the first TSS. If it is TRUE, it indicates that the first TSS is quantified<br> even if it does not meet the specified condition.”</p></td>
@@ -185,7 +185,7 @@ celltype wsnn_cell_type
 <td><p>The y-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 1 indicates no degradation, while close to 0 indicates severe degradation.</p></td>
 </tr>
 <tr class="row-even"><td><p>AboveRandom</p></td>
-<td><p>??</p></td>
+<td><p>The proportion of reads (indicating a lower degree of degradation) above the diagonal in the cumulative distribution.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ApicesX</p></td>
 <td><p>The x-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 0 indicates no degradation, while close to 1 indicates severe degradation.</p></td>
@@ -272,13 +272,13 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 <td><p>The PSI value calculated by combining all reads and treating them as a pseudobulk sample.</p></td>
 </tr>
 <tr class="row-odd"><td><p>wald.test</p></td>
-<td><p></p></td>
+<td><p>The p-value from the Wald test for differences in psi values among groups.</p></td>
 </tr>
 <tr class="row-even"><td><p>wilcox.test</p></td>
-<td><p></p></td>
+<td><p>The p-value from the Wilcoxon test for differences in psi values among groups.</p></td>
 </tr>
 <tr class="row-odd"><td><p>prop.test</p></td>
-<td><p></p></td>
+<td><p>The p-value from the Proportion test for differences in psi values among groups.</p></td>
 </tr>
 </tbody>
 </table>
@@ -313,40 +313,40 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 <td><p>The level of group.</p></td>
 </tr>
 <tr class="row-even"><td><p>Cells</p></td>
-<td><p>The number of cell-type corresponding to a given groups.</p></td>
+<td><p>The number of cell-type corresponding to a given groups (The same applies to the following.).</p></td>
 </tr>
 <tr class="row-odd"><td><p>N</p></td>
-<td><p>The expression of the host gene in a given groups.</p></td>
+<td><p>The expression of the host gene.</p></td>
 </tr>
 <tr class="row-even"><td><p>n</p></td>
-<td><p>The expression of the TSS in a given groups.</p></td>
+<td><p>The expression of the TSS.</p></td>
 </tr>
 <tr class="row-odd"><td><p>mean</p></td>
-<td><p></p></td>
+<td><p>The mean of PSI.</p></td>
 </tr>
 <tr class="row-even"><td><p>sd</p></td>
-<td><p></p></td>
+<td><p>The standard deviation (std) of PSI.</p></td>
 </tr>
 <tr class="row-odd"><td><p>se</p></td>
-<td><p></p></td>
+<td><p>The standard error (SE) of PSI.</p></td>
 </tr>
 <tr class="row-even"><td><p>ci</p></td>
-<td><p></p></td>
+<td><p>The confidence interval (CI) of PSI.</p></td>
 </tr>
 <tr class="row-odd"><td><p>median</p></td>
-<td><p></p></td>
+<td><p>The median of PSI.</p></td>
 </tr>
 <tr class="row-even"><td><p>Q1</p></td>
-<td><p></p></td>
+<td><p>The first quartile (Q1) of PSI.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Q3</p></td>
-<td><p></p></td>
+<td><p>The third quartile (Q3) of PSI.</p></td>
 </tr>
 <tr class="row-even"><td><p>mad</p></td>
-<td><p></p></td>
+<td><p>The median absolute deviation (MAD) of PSI.</p></td>
 </tr>
 <tr class="row-odd"><td><p>iqr</p></td>
-<td><p></p></td>
+<td><p>The interquartile range (IQR) of PSI.</p></td>
 </tr>
 <tr class="row-even"><td><p>PseudobulkPSI</p></td>
 <td><p>The PSI value calculated by combining all reads and treating them as a pseudobulk sample.</p></td>

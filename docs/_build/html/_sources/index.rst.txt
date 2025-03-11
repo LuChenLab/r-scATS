@@ -26,9 +26,9 @@ If you use scATS in your research, please cite *********************************
 
 Contacts
 --------
-scATS is developed and maintained by `Zijie Xu <http://ramble.3vshej.cn>`_ and `Chao Tang <http://ramble.3vshej.cn>`_ 
+scATS is developed and maintained by `Zijie Xu <https://github.com/kayla-xu>`_ and `Chao Tang <https://github.com/ChaoTang-SCU>`_ 
 from Sichuan University. If you want to contribute or have any questions, 
-please leave an issue in our `repository <http://ramble.3vshej.cn>`_.
+please leave an issue in our `repository <https://github.com/LuChenLab/r-scATS/issues>`_.
 
 Thank you !
 
