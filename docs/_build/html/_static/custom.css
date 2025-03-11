@@ -1,0 +1,14 @@
+.highlight {
+    background-color: #eeffcc; /* 浅黄色背景 */
+    font-size: 12px; /* 设置你想要的字体大小 */
+    font-family: monospace; /* 使用等宽字体 */
+}
+
+.green-text {
+    color: #208050; /* 浅绿色 */
+}
+
+/* body {
+    font-family: Arial, sans-serif;
+    color: #333;
+} */

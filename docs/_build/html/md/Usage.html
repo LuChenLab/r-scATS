@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; scATS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=1ab9856b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting Help" href="Getting%20Help.html" />
+    <link rel="prev" title="Installation" href="Installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            scATS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tss-inference-and-quantification">TSS inference and quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-differentially-expressed-atss">Finding differentially expressed ATSs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#finding-markers-of-all-group">Finding markers of all group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-markers-of-given-group">Finding markers of given group</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-psi">Calculating PSI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sashimi-plots">Sashimi plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Getting%20Help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Citing%20scATS.html">Citing scATS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">scATS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/md/Usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+<p><strong>scATS</strong> can analyze both single-end and paired-end 5’-end scRNA-seq data, enabling direct quantification using Seurat objects, while incorporating <strong>RNA degradation</strong> (RD) modeling through expectation-maximization (EM).</p>
+<p>The main functions of scATS are: <code class="docutils literal notranslate"><span class="pre">TSSCDF</span></code>, <code class="docutils literal notranslate"><span class="pre">FindMarkers</span></code>, <code class="docutils literal notranslate"><span class="pre">psi</span></code>, <code class="docutils literal notranslate"><span class="pre">Sashimi</span></code></p>
+<section id="tss-inference-and-quantification">
+<h2>TSS inference and quantification<a class="headerlink" href="#tss-inference-and-quantification" title="Permalink to this heading"></a></h2>
+<p>The input files include:</p>
+<ul class="simple">
+<li><p>Seurat object (R object)</p></li>
+<li><p>Alignment file (bam file)</p></li>
+<li><p>Annotation file (gtf file)</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># load packages</span>
+<span class="nf">suppressMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">scATS</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># load input files</span>
+<span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/seurat/gene_wnn_res3_seurat.rds&quot;</span><span class="p">)</span>
+<span class="n">Genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
+<span class="n">gtfFile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;/mnt/raid61/Personal_data/tangchao/Document/gencode/mouse/release_M25/gencode.vM25.primary_assembly.annotation.sorted.gtf&quot;</span><span class="p">)</span>
+<span class="n">bams</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list.files</span><span class="p">(</span><span class="s">&quot;/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/bam/01bam&quot;</span><span class="p">,</span><span class="s">&quot;bam$&quot;</span><span class="p">,</span><span class="n">full.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">file.exists</span><span class="p">(</span><span class="n">bams</span><span class="p">)</span>
+
+<span class="c1"># quantification using wrapper function</span>
+<span class="n">scats</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">TSSCDF</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bams</span><span class="p">,</span><span class="w"> </span><span class="n">gtf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gtfFile</span><span class="p">,</span><span class="w"> </span><span class="n">genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Genes</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">scats</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class: scATSDataSet 
+dim: 11464 388 
+metadata(1): version
+assays(2): counts psi
+rownames(11464): CAAA01118383.1@GL456216.1:16275:+
+Vamp7@GL456233.1:39139:- ...
+Gm47283@chrY:90793346:+ Gm47283@chrY:90793469:+
+rowData names(19): gene_id gene_name ...
+UnclassifiedReads AllReads
+colnames(388): AACCGCGAGAGTCTGG-1
+AACTCAGAGCAGCGTA-1 ... TTTCCTCAGTCAAGGC-1
+TTTCCTCCACCAGATT-1
+colData names(32): orig.ident nCount_RNA ...
+celltype wsnn_cell_type
+</pre></div>
+</div>
+<p>The quantification results are stored in  <code class="docutils literal notranslate"><span class="pre">scats&#64;rowRanges</span></code> and contain the following columns:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>column name</p></th>
+<th class="head"><p>content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>seqnames</p></td>
+<td><p>The chromosomal name of the gene to which TSS belongs</p></td>
+</tr>
+<tr class="row-odd"><td><p>ranges</p></td>
+<td><p>The genomic locus of TSS, where the growth rate is highest</p></td>
+</tr>
+<tr class="row-even"><td><p>strand</p></td>
+<td><p>The genomic strand of the gene to which TSS belongs</p></td>
+</tr>
+<tr class="row-odd"><td><p>gene_id</p></td>
+<td><p>The Ensembl ID of the gene to which TSS belongs</p></td>
+</tr>
+<tr class="row-even"><td><p>gene_name</p></td>
+<td><p>The HGNC Symbol of the gene to which TSS belongs</p></td>
+</tr>
+<tr class="row-odd"><td><p>TSS</p></td>
+<td><p>The ID of the TSS in the format of [seqnames:ranges:strand]</p></td>
+</tr>
+<tr class="row-even"><td><p>Region</p></td>
+<td><p>The growth area of the sorted 5’-starts of read 1, or it can also be interpreted as the<br> TSS cluster. Another region must show a significant increase in the number of reads.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Base</p></td>
+<td><p>The span length of the start, which is actually included in the calculation, equal to sigma</p></td>
+</tr>
+<tr class="row-even"><td><p>PSI</p></td>
+<td><p>The percent spliced in (PSI) of TSS</p></td>
+</tr>
+<tr class="row-odd"><td><p>Percent</p></td>
+<td><p>The ratio of TSS reads</p></td>
+</tr>
+<tr class="row-even"><td><p>Annotated</p></td>
+<td><p>The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region</p></td>
+</tr>
+<tr class="row-odd"><td><p>Greedy</p></td>
+<td><p>Greedy for the first TSS. If it is TRUE, it indicates that the first TSS is quantified<br> even if it does not meet the specified condition.”</p></td>
+</tr>
+<tr class="row-even"><td><p>AUC</p></td>
+<td><p>The area under the cumulative distribution curve : close to 1, indicates no degradation,<br>while close to 0 indicates severe degradation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MaxDist</p></td>
+<td><p>The y-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 1 indicates no degradation, while close to 0 indicates severe degradation.</p></td>
+</tr>
+<tr class="row-even"><td><p>AboveRandom</p></td>
+<td><p>??</p></td>
+</tr>
+<tr class="row-odd"><td><p>ApicesX</p></td>
+<td><p>The x-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 0 indicates no degradation, while close to 1 indicates severe degradation.</p></td>
+</tr>
+<tr class="row-even"><td><p>ApicesY</p></td>
+<td><p>Equal to MaxDist.</p></td>
+</tr>
+<tr class="row-odd"><td><p>alpha1</p></td>
+<td><p>The degradation index fitted using the EM algorithm: the larger the value, the more severe the degradation.</p></td>
+</tr>
+<tr class="row-even"><td><p>alpha2</p></td>
+<td><p>The degradation index fitted using the EM algorithm, which has now been deprecated.</p></td>
+</tr>
+<tr class="row-odd"><td><p>theta</p></td>
+<td><p>The PSI value fitted using the EM algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p>UnclassifiedReads</p></td>
+<td><p>The ratio of discarded reads.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AllReads</p></td>
+<td><p>The total number of reads used for quantification.</p></td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Note : All the following analyses are based on the <code class="docutils literal notranslate"><span class="pre">scats</span></code> object.</strong></em></p>
+</section>
+<section id="finding-differentially-expressed-atss">
+<h2>Finding differentially expressed ATSs<a class="headerlink" href="#finding-differentially-expressed-atss" title="Permalink to this heading"></a></h2>
+<section id="finding-markers-of-all-group">
+<h3>Finding markers of all group<a class="headerlink" href="#finding-markers-of-all-group" title="Permalink to this heading"></a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">majorOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span>
+<span class="n">DE</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                     TSS  G1    G2 n1  n2 N1  N2 Cells1 Cells2      PSI1
+1 A1BG-AS1@19:58347753:+ AT2 Other 11 270 12 290    357   6826 0.9166667
+2 A1BG-AS1@19:58347753:+ Fib Other  4 277  6 296    385   6798 0.6666667
+       PSI2 SudobulkPSI1 SudobulkPSI2  wald.test wilcox.test    prop.test
+1 0.9310345    0.8253968    0.9417671 0.84819606   0.8511922 5.386585e-04
+2 0.9358108    0.6428571    0.9424460 0.02694748   0.0105782 1.232170e-09
+</pre></div>
+</div>
+</section>
+<section id="finding-markers-of-given-group">
+<h3>Finding markers of given group<a class="headerlink" href="#finding-markers-of-given-group" title="Permalink to this heading"></a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AT2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fib&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">majorOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span>
+<span class="n">DE</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                      TSS     G1     G2    n1    n2    N1    N2 Cells1 Cells2      PSI1
+1: A1BG-AS1@19:58347753:+    AT2    Fib    11     4    12     6    357    385 0.9166667
+        PSI2 SudobulkPSI1 SudobulkPSI2 wald.test wilcox.test prop.test
+1: 0.6666667    0.8253968    0.6428571  0.208955   0.2181715 0.1014264
+</pre></div>
+</div>
+<p>In addition, you can specify the host genes used in the calculation by setting the <code class="docutils literal notranslate"><span class="pre">gene</span></code> parameter.
+The <code class="docutils literal notranslate"><span class="pre">DE</span></code> object contains following columns:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>column name</p></th>
+<th class="head"><p>content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TSS</p></td>
+<td><p>The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].</p></td>
+</tr>
+<tr class="row-odd"><td><p>G1/2</p></td>
+<td><p>The levels of group.</p></td>
+</tr>
+<tr class="row-even"><td><p>n1/2</p></td>
+<td><p>The expression of the TSS in the G1/2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>N1/2</p></td>
+<td><p>The expression of the host gene in the G1/2.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cells1/2</p></td>
+<td><p>The number of cell-type corresponding to G1/2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PSI1/2</p></td>
+<td><p>The average sum of all individual cell PSIs.</p></td>
+</tr>
+<tr class="row-even"><td><p>SudobulkPSI1/2</p></td>
+<td><p>The PSI value calculated by combining all reads and treating them as a pseudobulk sample.</p></td>
+</tr>
+<tr class="row-odd"><td><p>wald.test</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>wilcox.test</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>prop.test</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="calculating-psi">
+<h2>Calculating PSI<a class="headerlink" href="#calculating-psi" title="Permalink to this heading"></a></h2>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">psi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">psi</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">)</span>
+<span class="n">psi</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                     TSS    groupBy Cells   N   n      mean        sd
+1 A1BG-AS1@19:58347753:+          B  2697  67  49 0.7038972 0.4525730
+2 A1BG-AS1@19:58347753:+ Epithilial  4299 142 105 0.7300469 0.4424003
+          se         ci median Q1 Q3 mad iqr PseudobulkPSI
+1 0.05529059 0.11039123      1  0  1   0   1     0.7441176
+2 0.03712541 0.07339439      1  0  1   0   1     0.7355705
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">psi</span></code> object contains following columns:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>column name</p></th>
+<th class="head"><p>content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TSS</p></td>
+<td><p>The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].</p></td>
+</tr>
+<tr class="row-odd"><td><p>groupBy</p></td>
+<td><p>The level of group.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cells</p></td>
+<td><p>The number of cell-type corresponding to a given groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>The expression of the host gene in a given groups.</p></td>
+</tr>
+<tr class="row-even"><td><p>n</p></td>
+<td><p>The expression of the TSS in a given groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mean</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>sd</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>se</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ci</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>median</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Q1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Q3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>mad</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>iqr</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PseudobulkPSI</p></td>
+<td><p>The PSI value calculated by combining all reads and treating them as a pseudobulk sample.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sashimi-plots">
+<h2>Sashimi plots<a class="headerlink" href="#sashimi-plots" title="Permalink to this heading"></a></h2>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take SCNN1D gene as an example</span>
+<span class="n">scATS</span><span class="o">::</span><span class="nf">Sashimi</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">bam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bams</span><span class="p">,</span>
+<span class="w">               </span><span class="n">xlimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1280352</span><span class="p">,</span><span class="w"> </span><span class="m">1282325</span><span class="p">),</span>
+<span class="w">               </span><span class="n">transcripts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;SCNN1D-201&quot;</span><span class="p">,</span><span class="s">&quot;SCNN1D-206&quot;</span><span class="p">,</span><span class="s">&quot;SCNN1D-205&quot;</span><span class="p">),</span>
+<span class="w">               </span><span class="n">gtf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gtfFile</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SCNN1D&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">TSS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1280452</span><span class="p">,</span><span class="w"> </span><span class="m">1281224</span><span class="p">,</span><span class="w"> </span><span class="m">1282125</span><span class="p">),</span><span class="w"> </span><span class="c1"># TSS位点</span>
+<span class="w">               </span><span class="n">free_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">,</span><span class="c1">#是否scale</span>
+<span class="w">               </span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="c1">#read部分字体大小</span>
+<span class="w">               </span><span class="n">rel_height</span><span class="o">=</span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="c1">#注释/read ，小于1 read部分比例更大</span>
+<span class="w">               </span><span class="n">fill.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grey&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">line.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">line.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span>
+<span class="n">p</span>
+</pre></div>
+</div>
+<p><img alt="sashimi" src="../_images/image.png" /></p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>R version 3.6.0 (2019-04-26)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.7 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/openblas-base/libblas.so.3
+LAPACK: /usr/lib/libopenblasp-r0.2.18.so
+
+locale:
+[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+[4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+[7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+[1] bitops_1.0-7                matrixStats_1.3.0           bit64_4.0.5                
+[4] RcppAnnoy_0.0.19            RColorBrewer_1.1-3          progress_1.2.3             
+[7] httr_1.4.7                  GenomeInfoDb_1.22.1         tools_3.6.0                
+[10] irlba_2.3.3                 utf8_1.2.4                  R6_2.5.1                   
+[13] KernSmooth_2.23-24          DBI_1.2.3                   BiocGenerics_0.32.0        
+[16] colorspace_2.1-0            tidyselect_1.2.1            prettyunits_1.2.0          
+[19] bit_4.0.5                   curl_5.2.1                  compiler_3.6.0             
+[22] cli_3.6.3                   Biobase_2.46.0              DelayedArray_0.12.3        
+[25] rtracklayer_1.46.0          scales_1.3.0                lmtest_0.9-40              
+[28] ggridges_0.5.6              askpass_1.2.0               rappdirs_0.3.3             
+[31] stringr_1.5.1               digest_0.6.25               Rsamtools_2.2.3            
+[34] R.utils_2.12.3              XVector_0.26.0              pkgconfig_2.0.3            
+[37] htmltools_0.5.0             parallelly_1.37.1           dbplyr_2.5.0               
+[40] fastmap_1.2.0               htmlwidgets_1.5.1           rlang_1.1.1                
+[43] rstudioapi_0.11             RSQLite_2.3.7               generics_0.1.3             
+[46] zoo_1.8-12                  jsonlite_1.8.8              ica_1.0-3                  
+[49] BiocParallel_1.20.1         dplyr_1.1.4                 R.oo_1.26.0                
+[52] RCurl_1.98-1.16             magrittr_2.0.3              GenomeInfoDbData_1.2.2     
+[55] patchwork_1.2.0             Matrix_1.5-3                Rcpp_1.0.13                
+[58] munsell_0.5.1               S4Vectors_0.24.4            fansi_1.0.6                
+[61] reticulate_1.38.0           lifecycle_1.0.4             R.methodsS3_1.8.2          
+[64] stringi_1.8.4               MASS_7.3-57                 SummarizedExperiment_1.16.1
+[67] zlibbioc_1.32.0             Rtsne_0.17                  BiocFileCache_1.10.2       
+[70] grid_3.6.0                  blob_1.2.4                  ggrepel_0.9.5              
+[73] listenv_0.9.1               parallel_3.6.0              crayon_1.5.3               
+[76] lattice_0.20-45             Biostrings_2.54.0           cowplot_1.1.3              
+[79] splines_3.6.0               GenomicFeatures_1.38.2      hms_1.1.3                  
+[82] knitr_1.29                  pillar_1.9.0                igraph_2.0.3               
+[85] GenomicRanges_1.38.0        future.apply_1.11.2         codetools_0.2-20           
+[88] biomaRt_2.42.1              stats4_3.6.0                leiden_0.4.3.1             
+[91] XML_3.99-0.3                glue_1.7.0                  png_0.1-8                  
+[94] vctrs_0.6.5                 gtable_0.3.5                openssl_2.2.0              
+[97] RANN_2.6.1                  future_1.33.2               cachem_1.1.0               
+[100] ggplot2_3.5.1               xfun_0.16                   survival_3.7-0             
+[103] tibble_3.2.1                GenomicAlignments_1.22.1    AnnotationDbi_1.48.0       
+[106] memoise_2.0.1               IRanges_2.20.2              cluster_2.1.6              
+[109] globals_0.16.3              fitdistrplus_1.2-1          ROCR_1.0-11  
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Getting%20Help.html" class="btn btn-neutral float-right" title="Getting Help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, LuChenLab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
