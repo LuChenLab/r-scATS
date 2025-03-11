@@ -61,7 +61,7 @@ The quantification results are stored in  `scats@rowRanges` and contain the foll
 | Greedy           | Greedy for the first TSS. If it is TRUE, it indicates that the first TSS is quantified<br> even if it does not meet the specified condition."   |
 | AUC              | The area under the cumulative distribution curve : close to 1, indicates no degradation,<br>while close to 0 indicates severe degradation.   |
 | MaxDist          | The y-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 1 indicates no degradation, while close to 0 indicates severe degradation.  |
-| AboveRandom      | ??   |
+| AboveRandom      | 在对角线上的read比例   |
 | ApicesX          | The x-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 0 indicates no degradation, while close to 1 indicates severe degradation.   |
 | ApicesY          | Equal to MaxDist.  |
 | alpha1           | The degradation index fitted using the EM algorithm: the larger the value, the more severe the degradation.    |
@@ -107,7 +107,7 @@ The `DE` object contains following columns:
 | Cells1/2         | The number of cell-type corresponding to G1/2.   |
 | PSI1/2           | The average sum of all individual cell PSIs.   |
 | SudobulkPSI1/2   | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
-| wald.test        |    |
+| wald.test        |  psi在两组的差异  |
 | wilcox.test      |    |
 | prop.test        |    |
 
@@ -134,14 +134,14 @@ The `psi` object contains following columns:
 | Cells            | The number of cell-type corresponding to a given groups.   |
 | N                | The expression of the host gene in a given groups.   |
 | n                | The expression of the TSS in a given groups.   |
-| mean             |    |
+| mean             |  都是psi  |
 | sd               |    |
 | se               |    |
-| ci               |    |
+| ci               | 置信区间   |
 | median           |    |
 | Q1               |    |
 | Q3               |    |
-| mad              |    |
+| mad              |  std  |
 | iqr              |    |
 | PseudobulkPSI    | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
 
