@@ -9,7 +9,7 @@
 project = 'scATS'
 copyright = '2025, LuChenLab'
 author = 'LuChenLab'
-release = '1.0.0'
+release = '0.5.4'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

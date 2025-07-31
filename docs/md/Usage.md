@@ -12,36 +12,35 @@ The input files include:
 ```r
 # load packages
 suppressMessages({
-library(scATS)
-library(Seurat)
+    library(scATS)
+    library(Seurat)
 })
 
 # load input files
-seu <- readRDS("/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/seurat/gene_wnn_res3_seurat.rds")
+seu <- readRDS("demo_seurat.Rds")
 Genes <- rownames(seu)
-gtfFile <- file.path("/mnt/raid61/Personal_data/tangchao/Document/gencode/mouse/release_M25/gencode.vM25.primary_assembly.annotation.sorted.gtf")
-bams <- list.files("/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/bam/01bam","bam$",full.names = T)
+gtfFile <- file.path("demo.gtf")
+bams <- "demo.bam"
 file.exists(bams)
 
 # quantification using wrapper function
 scats <- TSSCDF(object = seu, bam = bams, gtf = gtfFile, genes = Genes, verbose = TRUE)
 scats
+
 ```
 
-    class: scATSDataSet 
-    dim: 11464 388 
-    metadata(1): version
-    assays(2): counts psi
-    rownames(11464): CAAA01118383.1@GL456216.1:16275:+
-    Vamp7@GL456233.1:39139:- ...
-    Gm47283@chrY:90793346:+ Gm47283@chrY:90793469:+
-    rowData names(19): gene_id gene_name ...
-    UnclassifiedReads AllReads
-    colnames(388): AACCGCGAGAGTCTGG-1
-    AACTCAGAGCAGCGTA-1 ... TTTCCTCAGTCAAGGC-1
-    TTTCCTCCACCAGATT-1
-    colData names(32): orig.ident nCount_RNA ...
-    celltype wsnn_cell_type
+    class: scATSDataSet
+    dim: 2043 2000
+    metadata(2): version parameters
+    assays(3): counts psi theta
+    rownames(2043): OR4F5@1:69063:+ OR4F5@1:69071:+ ... OR2G6@1:248508175:+
+    ZNF672@1:248838224:+
+    rowData names(12): TSS gene_id ... alpha theta
+    colnames(2000): TGGACGCTCCTTCAAT-1 CGAGCACGTCAGAATA-1 ...
+    ATCGAGTAGCGGCTTC-1 CTAGAGTAGTGCCATT-1
+    colData names(4): orig.ident nCount_RNA nFeature_RNA Cell
+
+
 
 The quantification results are stored in  `scats@rowRanges` and contain the following columns:  
 
@@ -54,83 +53,129 @@ The quantification results are stored in  `scats@rowRanges` and contain the foll
 | gene_name        | The HGNC Symbol of the gene to which TSS belongs.   |
 | TSS              | The ID of the TSS in the format of [seqnames:ranges:strand].   |
 | Region           | The growth area of the sorted 5'-starts of read 1, or it can also be interpreted as the<br> TSS cluster. Another region must show a significant increase in the number of reads.   |
-| Base             | The span length of the start, which is actually included in the calculation, equal to sigma.   |
 | PSI              | The percent spliced in (PSI) of TSS.  |
 | Percent          | The ratio of TSS reads.   |
 | Annotated        | The nearest annotated TSS locus that exists in the region, if it is NA, <br>indicates that there are no annotated TSS loci in the region.   |
 | Greedy           | Greedy for the first TSS. If it is TRUE, it indicates that the first TSS is quantified<br> even if it does not meet the specified condition."   |
-| AUC              | The area under the cumulative distribution curve : close to 1, indicates no degradation,<br>while close to 0 indicates severe degradation.   |
-| MaxDist          | The y-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 1 indicates no degradation, while close to 0 indicates severe degradation.  |
-| AboveRandom      | The proportion of reads (indicating a lower degree of degradation) above the diagonal in the cumulative distribution.   |
-| ApicesX          | The x-axis value corresponding to the farthest point of the cumulative distribution curve:<br> close to 0 indicates no degradation, while close to 1 indicates severe degradation.   |
-| ApicesY          | Equal to MaxDist.  |
-| alpha1           | The degradation index fitted using the EM algorithm: the larger the value, the more severe the degradation.    |
-| alpha2           | The degradation index fitted using the EM algorithm, which has now been deprecated.   |
+| beta             | The area under the cumulative distribution curve : close to 1, indicates no degradation,<br>while close to 0 indicates severe degradation.   |
+| alpha            | The degradation index fitted using the EM algorithm: the larger the value, the more severe the degradation.    |
 | theta            | The PSI value fitted using the EM algorithm.   |
-|UnclassifiedReads | The ratio of discarded reads.   |
 | AllReads         | The total number of reads used for quantification.   |
 
 ***Note : All the following analyses are based on the `scats` object.***
 
+
 ## Finding differentially expressed ATSs
 ### Finding markers of all group
+
+**Identifying ATS markers based on `θ` value.**
+
+```r
+DE <- scATS::FindMarkersByTheta(object = scats, groupBy = "CellType", group1 = NULL, group2 = NULL, cores = 20)
+DE[1:2,]
+```
+
+          gene            TSS group1    theta1    theta2
+        <char>         <char> <char>     <num>     <num>
+    1:  OR4F5 OR4F5@1:69063:+      A 0.2780345 0.2835192
+    2:  OR4F5 OR4F5@1:69063:+      B 0.2862817 0.2620500
+        cell1    cell2   percent1   percent2          p
+        <int>    <int>      <num>      <num>      <num>
+    1:      6       17   0.896861  1.2772352  0.9682337
+    2:     10       13   1.459854  0.9885932  0.5724791
+
+The `DE` object contains following columns:
+
+| column name      |                                           content                                          |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| gene             | The HGNC Symbol of the gene to which TSS belongs.   |
+| TSS              | The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].   |
+| group1           | The levels of group.   |
+| theta1/2         | The theta value of the TSS in the group.   |
+| cell1/2          | The number of cell-type corresponding to group.   |
+| percent1/2       | The ratio of TSS reads.  |
+| p                | The p-value from the Wilcoxon test for differences in psi values among groups.   |
+
+
+**Identifying ATS markers based on `ψ` value.**
+
 ```r
 DE <- scATS::FindMarkers(object = scats, groupBy = "CellType", group1 = NULL, group2 = NULL, cores = 20, majorOnly = F) 
 DE[1:2,]
 ```
-                         TSS  G1    G2 n1  n2 N1  N2 Cells1 Cells2      PSI1
-    1 A1BG-AS1@19:58347753:+ AT2 Other 11 270 12 290    357   6826 0.9166667
-    2 A1BG-AS1@19:58347753:+ Fib Other  4 277  6 296    385   6798 0.6666667
-           PSI2 SudobulkPSI1 SudobulkPSI2  wald.test wilcox.test    prop.test
-    1 0.9310345    0.8253968    0.9417671 0.84819606   0.8511922 5.386585e-04
-    2 0.9358108    0.6428571    0.9424460 0.02694748   0.0105782 1.232170e-09
+                   TSS     G1     G2    n1    n2    N1    N2 Cells1 Cells2      PSI1
+                <char> <char> <char> <int> <int> <int> <int>  <int>  <int>     <num>
+    1: OR4F5@1:69071:+      B  Other    41    83   156   277    685   1315 0.2088708
+    2: OR4F5@1:69156:+      B  Other    40    90   156   277    685   1315 0.2169872
+            PSI2 PseudobulkPSI1 PseudobulkPSI2  wald.test wilcox.test    prop.test
+            <num>          <num>          <num>      <num>       <num>        <num>
+    1: 0.2488509      0.3492958      0.2088773 0.42343003  0.32714124 3.331726e-11
+    2: 0.2964099      0.1309859      0.2663185 0.06632703  0.08046456 7.544541e-12
 
-### Finding markers of given group
-```r
-DE <- scATS::FindMarkers(object = scats, groupBy = "CellType", group1 = "AT2", group2 = "Fib", cores = 20, majorOnly = F) 
-DE[1:2,]
-```
-                          TSS     G1     G2    n1    n2    N1    N2 Cells1 Cells2      PSI1
-    1: A1BG-AS1@19:58347753:+    AT2    Fib    11     4    12     6    357    385 0.9166667
-            PSI2 SudobulkPSI1 SudobulkPSI2 wald.test wilcox.test prop.test
-    1: 0.6666667    0.8253968    0.6428571  0.208955   0.2181715 0.1014264
-
-In addition, you can specify the host genes used in the calculation by setting the `gene` parameter.
 The `DE` object contains following columns:
 
 | column name      |                                           content                                          |
 | ---------------- | ------------------------------------------------------------------------------------------ |
 | TSS              | The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].   |
 | G1/2             | The levels of group.   |
-| n1/2             | The expression of the TSS in the G1/2.   |
-| N1/2             | The expression of the host gene in the G1/2.   |
+| n1/2             | The expression number of the TSS in the G1/2.   |
+| N1/2             | The expression number of the host gene in the G1/2.   |
 | Cells1/2         | The number of cell-type corresponding to G1/2.   |
 | PSI1/2           | The average sum of all individual cell PSIs.   |
-| SudobulkPSI1/2   | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
+| PseudobulkPSI1/2   | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
 | wald.test        | The p-value from the Wald test for differences in psi values among groups.  |
 | wilcox.test      | The p-value from the Wilcoxon test for differences in psi values among groups.   |
 | prop.test        | The p-value from the Proportion test for differences in psi values among groups.   |
 
 
 
-## Calculating PSI
+### Finding markers of given group
+
 ```r
-psi <- scATS::psi(object = scats, groupBy = "CellType")
+### based on θ value
+DE <- scATS::FindMarkersByTheta(object = scats, groupBy = "CellType", group1 = NULL, group2 = NULL, cores = 20)
+### based on  ψ value
+DE <- scATS::FindMarkers(object = scats, groupBy = "CellType", group1 = "A", group2 = "B", cores = 20, majorOnly = F,gene = "OR4F5") 
+```
+
+In addition, you can specify the host genes used in the calculation by setting the `gene` parameter.
+
+
+## Calculating PSI
+
+**Calculating PSI based on `θ` value.**
+```r
+theta <- scATS::ThetaByGroup(object = scats, gene = "OR4F5",groupBy = "CellType")
+theta[1:2,]
+```
+
+    Group       TSS     alpha     theta
+    <char>    <char>     <num>     <num>
+    1:      A 1:69156:+ 0.1061093 0.1718889
+    2:      A 1:69090:+ 0.3006347 0.2107304
+
+
+**Calculating PSI based on `ψ` value.**
+
+```r
+psi <- scATS::psi(object = scats, groupBy = "CellType", TSS=c("OR4F5@1:69071:+", "OR4F5@1:69156:+"))
 psi[1:2,]
 ```
-                         TSS    groupBy Cells   N   n      mean        sd
-    1 A1BG-AS1@19:58347753:+          B  2697  67  49 0.7038972 0.4525730
-    2 A1BG-AS1@19:58347753:+ Epithilial  4299 142 105 0.7300469 0.4424003
-              se         ci median Q1 Q3 mad iqr PseudobulkPSI
-    1 0.05529059 0.11039123      1  0  1   0   1     0.7441176
-    2 0.03712541 0.07339439      1  0  1   0   1     0.7355705
+                    TSS groupBy Cells   N  n    mean        sd
+    1 OR4F5@1:69071:+       A   669 129 39 0.2562320 0.4188128
+    2 OR4F5@1:69071:+       B   685 156 41 0.2088708 0.3822363
+              se         ci median Q1  Q3 mad iqr PseudobulkPSI
+    1 0.03687441 0.07296233      0  0 0.5   0 0.5     0.2067138
+    2 0.03060340 0.06045356      0  0 0.2   0 0.2     0.3492958
 
-The `psi` object contains following columns:
+
+The `theta` or `psi` object contains following columns:
 
 | column name      |                                           content                                          |
 | ---------------- | ------------------------------------------------------------------------------------------ |
+| Group/groupBy    | The level of group.   |
 | TSS              | The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].   |
-| groupBy          | The level of group.   |
+| alpha            | The degradation index fitted using the EM algorithm.   |
 | Cells            | The number of cell-type corresponding to a given groups (The same applies to the following.).   |
 | N                | The expression of the host gene.   |
 | n                | The expression of the TSS.   |
@@ -143,7 +188,7 @@ The `psi` object contains following columns:
 | Q3               | The third quartile (Q3) of PSI.   |
 | mad              | The median absolute deviation (MAD) of PSI.  |
 | iqr              | The interquartile range (IQR) of PSI.   |
-| PseudobulkPSI    | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
+| theta/PseudobulkPSI    | The PSI value calculated by combining all reads and treating them as a pseudobulk sample.   |
 
 
 ## Sashimi plots

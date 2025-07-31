@@ -1,12 +1,12 @@
 Package: scATS
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.5.0
+Version: 0.5.4
 Author: Chao Tang
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: MIT
+License: GPL (>= 3)
 Encoding: UTF-8
 Imports: data.table, fitdistrplus, GenomicAlignments, GenomicFeatures,
         GenomicRanges, ggbio, mclust, mixtools, parallel, rtracklayer,

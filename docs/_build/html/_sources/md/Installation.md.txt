@@ -30,5 +30,5 @@ remotes::install_github("LuChenLab/r-scATS/scATS/")
 Alternatively, you can install `scATS` using the source file downloaded from the [repository](https://github.com/LuChenLab/r-scATS) :
 ```r
 # Install scATS from a downloaded source file
-R CMD INSTALL scATS_0.5.0.tar.gz
+R CMD INSTALL scATS_0.5.4.tar.gz
 ```

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to scATS’s documentation! &mdash; scATS 1.0.0 documentation</title>
+  <title>Welcome to scATS’s documentation! &mdash; scATS 0.5.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=af2ce170"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c3dca1ed"></script>
       <script src="_static/doctools.js?v=888ff710"></script>
       <script src="_static/sphinx_highlight.js?v=4825356b"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -79,8 +79,10 @@
              
   <section id="welcome-to-scats-s-documentation">
 <h1>Welcome to scATS’s documentation!<a class="headerlink" href="#welcome-to-scats-s-documentation" title="Permalink to this heading"></a></h1>
-<p>scATS is a tool designed to quantify alternative transcription start site (ATS) events from single-end or paired-end 5’-end single-cell RNA sequencing (scRNA-seq) data. It achieves this by modeling the decreasing trend of short-read counts in exons from the 3’ to the 5’ ends of transcripts, which is attributable to RNA degradation (RD).
-Users are required to specify the genes and cells to be included in the analysis, as well as the minimum number for each gene. With these parameters, scATS can accurately calculate the expected abundance of ATS isoforms and conduct differential analysis for specific groups.</p>
+<p><strong>scATS</strong> is a tool designed to <strong>de novo</strong> quantify alternative transcription start site (ATS) from paired-end 5’-end single-cell RNA sequencing (scRNA-seq) data. It achieves this by modeling the decreasing trend of short-read counts in exons from the 3’ to the 5’ ends of transcripts, which is attributable to <strong>RNA degradation</strong>.</p>
+<p><strong>scATS</strong> introduces two novel metrics (<cite>α</cite> and <cite>β</cite>) to precisely quantify RNA degradation, and provides both raw (<cite>ψ</cite>) and corrected (<cite>θ</cite>) metrics to correct ATS expression profiles from resulting distortions.</p>
+<a class="reference internal image-reference" href="_images/method.png"><img alt="scATS Workflow Diagram" class="align-center" src="_images/method.png" style="width: 670.4000000000001px; height: 513.6px;" /></a>
+<p>Users are required to specify the genes and cells to be included in the analysis, as well as the minimum number for each gene. With these parameters, <strong>scATS</strong> can accurately calculate the expected abundance of ATS isoforms and conduct differential analysis for specific groups.</p>
 <p>To use scATS, you can follow the instructions below:</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
