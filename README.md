@@ -70,7 +70,7 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 ## <span id="Tutorial">Tutorial</span>
 
 
-To use scATS, you can follow the instructions below. The detailed installation and usage of scATS are available in our [document](https://github.com/LuChenLab/r-scATS/blob/main/docs/_build/html/index.html).
+To use scATS, you can follow the instructions below. The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/).
 
 Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
 
