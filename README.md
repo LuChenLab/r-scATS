@@ -96,7 +96,7 @@ Training data: `dataset.xlsx`
 
 Trained model file: `rf_pipeline_model.pkl`
 
-You can directly load the trained model from [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS) for predictions without applying feature scaling again. Example:
+You can directly load these data from [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS) for predictions without applying feature scaling again. Example:
 
 ```python
 import pickle
