@@ -14,6 +14,7 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Tutorial](#Tutorial)
+- [LRS model](#LRS model)
 - [Citing](#Citing)
 
 
@@ -73,6 +74,37 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 To use scATS, you can follow the instructions below. The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/).
 
 Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
+
+
+## <span id="LRS model">Tutorial</span>
+
+The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
+
+For model development:
+
+The dataset was split into training, validation, and test sets using **StratifiedKFold cross-validation** with `n_splits=10`, `shuffle=True`, and `random_state=42`.
+
+Features were standardized using **StandardScaler**.
+
+A **Random Forest** Classifier (**RandomForestClassifier**) was used as the base model.
+
+Both preprocessing and the classifier were wrapped into a **Pipeline**, ensuring they can be saved and reloaded together.
+
+Resources in this repository:
+
+Training data: `dataset.xlsx`
+
+Trained model file: `rf_pipeline_model.pkl`
+
+You can directly load the trained model from [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS) for predictions without applying feature scaling again. Example:
+
+```python
+import pickle
+
+# Load the trained pipeline
+with open("rf_pipeline_model.pkl", "rb") as f:
+    model = pickle.load(f)
+```
 
 ## <span id="Citing">Citing</span>
 
