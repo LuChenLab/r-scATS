@@ -14,7 +14,7 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Tutorial](#Tutorial)
-- [LRS model](#LRS_model)
+- [LRS_model](#LRS_model)
 - [Citing](#Citing)
 
 
