@@ -94,7 +94,7 @@ Resources in this repository:
 
 Training data: `dataset.xlsx`
 
-Trained model file: `rf_pipeline_model.pkl`
+Trained model file: `final_LRS_RF.pkl`
 
 You can directly load these data from [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS) for predictions without applying feature scaling again. Example:
 
