@@ -14,7 +14,7 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Tutorial](#Tutorial)
-- [LRS model](#LRS model)
+- [LRS model](#LRS_model)
 - [Citing](#Citing)
 
 
@@ -76,7 +76,7 @@ To use scATS, you can follow the instructions below. The detailed installation a
 Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
 
 
-## <span id="LRS model">Tutorial</span>
+## <span id="LRS_model">Tutorial</span>
 
 The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
 
