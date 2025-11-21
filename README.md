@@ -78,8 +78,6 @@ Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS
 
 ## <span id="LRS model">LRS_model</span>
 
-The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
-
 ### 1. Requirements
 
    
@@ -93,6 +91,7 @@ The training dataset contains 33 features. Detailed feature categories can be fo
 
 
 ### 2. model development:  
+The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
 
 The dataset was split into training, validation, and test sets using **StratifiedKFold cross-validation** with `n_splits=10`, `shuffle=True`, and `random_state=42`.
 
