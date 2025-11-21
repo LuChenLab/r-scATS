@@ -80,6 +80,7 @@ Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS
 
 The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
 
+1. Requirements
 |        module        |    version   |
 | -------------------- | ------------ |
 | pandas           | >= 2.0.3    |
@@ -89,7 +90,7 @@ The training dataset contains 33 features. Detailed feature categories can be fo
 | scikit-learn        | >= 1.3.2    |
 
 
-For model development:
+2. model development:
 
 The dataset was split into training, validation, and test sets using **StratifiedKFold cross-validation** with `n_splits=10`, `shuffle=True`, and `random_state=42`.
 
