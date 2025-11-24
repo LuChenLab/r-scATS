@@ -13,9 +13,9 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Overview](#Overview)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
-- [Tutorial](#Tutorial)
+- [Quick start](#Quick-start)
   - [infer TSS](#infer-TSS)
-- [LRS_model](#LRS_model)
+  - [Disease_model](#Disease-model)
 - [Citing](#Citing)
 
 
@@ -69,16 +69,106 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 ```
 
 
-## <span id="Tutorial">Tutorial</span>
+## <span id="Quick start">Quick start</span>
 
 ### <span id="infer TSS">infer TSS</span>
 
-To use scATS, you can follow the instructions below. The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/).
+```r
+TSSCDF {scATS}	R Documentation
+TSS inference and quantification
+Description
+TSS inference and quantification
 
-Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
+Usage
+TSSCDF(
+  object,
+  bam,
+  sep = "_",
+  genes,
+  gtfFile,
+  txdb = NULL,
+  UTROnly = FALSE,
+  MinGeneReads = 500,
+  scDR = FALSE,
+  MinscTSSReads = 5,
+  mapqFilter = 255,
+  isSecondaryAlignment = FALSE,
+  isSupplementaryAlignment = FALSE,
+  isDuplicate = NA,
+  Upstream = 1000,
+  min.TSS.percent = 5,
+  min.local.percent = 1,
+  p.cutoff = 0.01,
+  window = 10,
+  greedy = TRUE,
+  cores = 1L,
+  verbose = FALSE,
+  project.name = NULL
+)
+Arguments
+object	
+A Seurat object.
+
+bam, sep	
+Path of bam file(s), and the character string to separate the bams.
+
+genes	
+Genes for ATS inference and quantification.
+
+txdb	
+A TxDb object.
+
+UTROnly	
+Only infer ATS within annotated 5'-UTR regions or first exons of transcripts without 5'-UTR.
+
+MinGeneReads	
+The minimum reads of a gene for TSS inference.
+
+scDR	
+Whether to estimate the degradation rate of single cell TSS.
+
+MinscTSSReads	
+Minimum reads of single cell TSS reads for single cell degradation rate estimation.
+
+mapqFilter, isSecondaryAlignment, isSupplementaryAlignment, isDuplicate	
+parameters for ScanBamParam to read bam file(s).
+
+min.TSS.percent	
+The minimum percent of a TSS.
+
+min.local.percent	
+The minimum difference between observed and local average derivative of CDF of a TSS.
+
+p.cutoff	
+The cutoff of p-value of a TSS.
+
+window	
+The window for local mean value estimating.
+
+greedy	
+greedy for the first TSS? If this parameter is set to TRUE, the first TSS will be printed even if it does not satisfy the specified condition.
+
+cores	
+The number of cores for parallel working.
+
+verbose	
+A logical controlling if a text progress bar is displayed.
+
+project.name	
+The name of project.
+
+gtf	
+Path of GTF file or GRanges file of GTF file.
+```
 
 
-## <span id="LRS model">LRS_model</span>
+
+The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/). Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
+
+
+## <span id="Disease model">Disease model</span>
+The pipeline for identifying disease-related TSSs is not included in the scATS R package.
+All code and model related to this workflow are provided separately and can be found in [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS).
 
 ### 1. Requirements
 
