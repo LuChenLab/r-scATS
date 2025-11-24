@@ -124,18 +124,18 @@ TSSCDF(
 | gtf      | Path of GTF file or GRanges file of GTF file.    |
 | txdb      | A TxDb object.  |
 | UTROnly        | Only infer ATS within annotated 5'-UTR regions or first exons of transcripts without 5'-UTR.(default=True)    |
-| scDR        | Whether to estimate the degradation rate of single cell TSS. Setting TRUE triggers an additional inference step and increases runtime.   |
-| MinGeneReads        | The minimum reads of a gene for TSS inference.    |
-| MinscTSSReads        | Minimum reads of single cell TSS reads for single cell degradation rate estimation.    |
-| min.TSS.percent	     | The minimum percent of a TSS.    |
-| min.local.percent	    | The minimum difference between observed and local average derivative of CDF of a TSS.    |
+| scDR        | Whether to estimate the degradation rate of single cell TSS. Setting TRUE triggers an additional inference step and increases runtime.(default=False)   |
+| MinGeneReads        | The minimum reads of a gene for TSS inference.(default=500)    |
+| MinscTSSReads        | Minimum reads of single cell TSS reads for single cell degradation rate estimation when scDR = TRUE.(default=5)    |
+| min.TSS.percent	     | Defines the minimum proportion of total supporting reads (i.e., the change in cumulative density, F1 – F0) that a candidate TSS region must contribute. This parameter filters out weak or noise-driven TSS peaks. (default=5%)    |
+| min.local.percent	    | Based on the maximum local derivative change, this parameter evaluates whether a candidate TSS region exhibits sufficiently sharp local enrichment. It is used to remove locally insignificant or low-confidence peaks.(default=1%)    |
 | mapqFilter, isSecondaryAlignment, isSupplementaryAlignment, isDuplicate	        | parameters for ScanBamParam to read bam file(s).    |
-| p.cutoff      | The cutoff of p-value of a TSS.    |
-| window      | The window for local mean value estimating.    |
-| greedy     | greedy for the first TSS? If this parameter is set to TRUE, the first TSS will be printed even if it does not satisfy the specified condition.    |
-| cores      | The number of cores for parallel working.    |
-| verbose      | A logical controlling if a text progress bar is displayed.    |
-| project.name	      | The name of project.    |
+| p.cutoff      | A significance threshold used to determine whether the smoothed derivative exceeds the background derivative distribution, where the cutoff is computed from a fitted normal model. Smaller values of p.cutoff impose stricter criteria and retain only high-confidence TSS candidates.(default=0.01)    |
+| window      | Controls the Gaussian smoothing window and is also used to define local flanking regions and extend candidate TSS boundaries. Larger windows produce smoother trends with reduced resolution, while smaller windows increase sensitivity at the cost of higher noise.(default=10)    |
+| greedy     | greedy for the first TSS? If this parameter is set to TRUE, the first TSS will be printed even if it does not satisfy the specified condition.(default=True)    |
+| cores      | The number of cores for parallel working.(default=1)    |
+| verbose      | A logical controlling if a text progress bar is displayed.(default=False)    |
+| project.name	      | The name of project.(default=NULL)    |
 
 
 
