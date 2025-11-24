@@ -73,7 +73,7 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 
 ### <span id="infer TSS">infer TSS</span>
 
-```r
+```R
 TSSCDF {scATS}	R Documentation
 TSS inference and quantification
 Description
