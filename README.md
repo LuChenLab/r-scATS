@@ -72,14 +72,21 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 ## <span id="Quick start">Quick start</span>
 
 ### <span id="infer TSS">infer TSS</span>
+Now, let's test scATS with a function (TSSCDF) that directly processes 5′ scRNA-seq data stored in a Seurat object.
+Before running the analysis, we first check the help message of TSSCDF.
+In R, you can always access the documentation of any function using `?TSSCDF` or `help("TSSCDF")`.
+
+```r
+#--- check out the help message of TSSCDF
+library(scATS)
+?TSSCDF
+# or
+help("TSSCDF")
+```
+
+It should print the help message as the followings:
 
 ```R
-TSSCDF {scATS}	R Documentation
-TSS inference and quantification
-Description
-TSS inference and quantification
-
-Usage
 TSSCDF(
   object,
   bam,
@@ -105,61 +112,30 @@ TSSCDF(
   verbose = FALSE,
   project.name = NULL
 )
-Arguments
-object	
-A Seurat object.
-
-bam, sep	
-Path of bam file(s), and the character string to separate the bams.
-
-genes	
-Genes for ATS inference and quantification.
-
-txdb	
-A TxDb object.
-
-UTROnly	
-Only infer ATS within annotated 5'-UTR regions or first exons of transcripts without 5'-UTR.
-
-MinGeneReads	
-The minimum reads of a gene for TSS inference.
-
-scDR	
-Whether to estimate the degradation rate of single cell TSS.
-
-MinscTSSReads	
-Minimum reads of single cell TSS reads for single cell degradation rate estimation.
-
-mapqFilter, isSecondaryAlignment, isSupplementaryAlignment, isDuplicate	
-parameters for ScanBamParam to read bam file(s).
-
-min.TSS.percent	
-The minimum percent of a TSS.
-
-min.local.percent	
-The minimum difference between observed and local average derivative of CDF of a TSS.
-
-p.cutoff	
-The cutoff of p-value of a TSS.
-
-window	
-The window for local mean value estimating.
-
-greedy	
-greedy for the first TSS? If this parameter is set to TRUE, the first TSS will be printed even if it does not satisfy the specified condition.
-
-cores	
-The number of cores for parallel working.
-
-verbose	
-A logical controlling if a text progress bar is displayed.
-
-project.name	
-The name of project.
-
-gtf	
-Path of GTF file or GRanges file of GTF file.
 ```
+
+
+   
+|        Arguments        |    Description   |
+| -------------------- | ------------ |
+| object           | A Seurat object.    |
+| bam, sep         | 	Path of bam file(s), and the character string to separate the bams.     |
+| genes    | Genes used for ATS inference and quantification. By default, all genes in the dataset are included.   |
+| gtf      | Path of GTF file or GRanges file of GTF file.    |
+| txdb      | A TxDb object.  |
+| UTROnly        | Only infer ATS within annotated 5'-UTR regions or first exons of transcripts without 5'-UTR.(default=True)    |
+| scDR        | Whether to estimate the degradation rate of single cell TSS. Setting TRUE triggers an additional inference step and increases runtime.   |
+| MinGeneReads        | The minimum reads of a gene for TSS inference.    |
+| MinscTSSReads        | Minimum reads of single cell TSS reads for single cell degradation rate estimation.    |
+| min.TSS.percent	     | The minimum percent of a TSS.    |
+| min.local.percent	    | The minimum difference between observed and local average derivative of CDF of a TSS.    |
+| mapqFilter, isSecondaryAlignment, isSupplementaryAlignment, isDuplicate	        | parameters for ScanBamParam to read bam file(s).    |
+| p.cutoff      | The cutoff of p-value of a TSS.    |
+| window      | The window for local mean value estimating.    |
+| greedy     | greedy for the first TSS? If this parameter is set to TRUE, the first TSS will be printed even if it does not satisfy the specified condition.    |
+| cores      | The number of cores for parallel working.    |
+| verbose      | A logical controlling if a text progress bar is displayed.    |
+| project.name	      | The name of project.    |
 
 
 
