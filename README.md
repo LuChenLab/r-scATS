@@ -15,7 +15,7 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Installation](#Installation)
 - [Quick start](#Quick-start)
   - [infer TSS](#infer-TSS)
-  - [Disease_model](#Disease-model)
+  - [Disease model](#Disease-model)
 - [Citing](#Citing)
 
 
@@ -35,7 +35,7 @@ We further applied scATS on three different 5’ scRNA-seq datasets, including m
 
 scATS has been developed with `R 4.0.0` and the following packages are needed to be installed in `R` (R scripts in `scATS` automatically check to see if an R library is already installed and then install those that are needed. So no need for manual preinstallation):
 
-|        module        |    version   |
+| Packages        |    Version   |
 | -------------------- | ------------ |
 | data.table           | >= 1.15.4    |
 | fitdistrplus         | >= 1.2-1     |
@@ -116,7 +116,7 @@ TSSCDF(
 
 
    
-|        Arguments        |    Description   |
+| Arguments        | Description   |
 | -------------------- | ------------ |
 | object           | A Seurat object.    |
 | bam, sep         | 	Path of bam file(s), and the character string to separate the bams.     |
@@ -149,7 +149,7 @@ All code and model related to this workflow are provided separately and can be f
 ### 1. Requirements
 
    
-|        module        |    version   |
+| Packages        | Version   |
 | -------------------- | ------------ |
 | pandas           | >= 2.0.3    |
 | matplotlib         | >= 3.7.5     |
