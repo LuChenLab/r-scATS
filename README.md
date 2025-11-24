@@ -14,6 +14,7 @@ overall, scATS is a stepwise computational method, scATS, to de novo infer the r
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Tutorial](#Tutorial)
+  - [infer TSS](#infer TSS)
 - [LRS_model](#LRS_model)
 - [Citing](#Citing)
 
@@ -70,6 +71,7 @@ R CMD INSTALL scATS_0.5.4.tar.gz
 
 ## <span id="Tutorial">Tutorial</span>
 
+### <span id="infer TSS">infer TSS</span>
 
 To use scATS, you can follow the instructions below. The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/).
 
