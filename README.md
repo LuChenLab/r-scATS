@@ -137,6 +137,16 @@ TSSCDF(
 | verbose      | A logical controlling if a text progress bar is displayed.(default=False)    |
 | project.name	      | The name of project.(default=NULL)    |
 
+In practice, **MinGeneReads** is a key parameter controlling the stringency of TSS detection, as it specifies the minimum number of effective reads supporting a gene required for TSS inference. To help users select an appropriate threshold, scATS provides the built-in function `loadbamgene`, which allows users to inspect the distribution of effective supporting reads per gene using their own data. For example:
+
+```r
+scATS:::loadbamgene(gene = "GATD3B",
+            txdb = txdb,
+            bam = bam,
+            region = as("21:5079294-5128413:-", "GRanges"))
+```
+
+By examining this distribution, users may choose a suitable **MinGeneReads** value based on the sequencing depth and signal quality of their dataset. Reducing **MinGeneReads** increases the number of detected TSSs but inevitably introduces more noise, while higher values make detection more stringent.
 
 
 The detailed installation and usage of scATS are available in our [document](https://r-scats.readthedocs.io/en/latest/). Demo data can be obtained from [repository](https://github.com/LuChenLab/r-scATS/tree/main/demo).
