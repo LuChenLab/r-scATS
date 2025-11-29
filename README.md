@@ -167,7 +167,14 @@ All code and model related to this workflow are provided separately and can be f
 | shap      | >= 0.44.1    |
 | scikit-learn        | >= 1.3.2    |
 
+The code was developed and tested in a Python 3.8 environment.
+A complete Conda environment specification file (LRS.yml) is provided in [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS), Users can recreate the exact environment by running:
 
+```python
+conda env create -f LRS.yml
+conda activate LRS
+
+```
 ### 2. model development:  
 The training dataset contains 33 features. Detailed feature categories can be found in the column headers of the data file.
 
