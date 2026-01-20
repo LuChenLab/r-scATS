@@ -102,15 +102,15 @@
 </ul>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># load packages</span>
 <span class="nf">suppressMessages</span><span class="p">({</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">scATS</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">scATS</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 <span class="p">})</span>
 
 <span class="c1"># load input files</span>
-<span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/seurat/gene_wnn_res3_seurat.rds&quot;</span><span class="p">)</span>
+<span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;demo_seurat.Rds&quot;</span><span class="p">)</span>
 <span class="n">Genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
-<span class="n">gtfFile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;/mnt/raid61/Personal_data/tangchao/Document/gencode/mouse/release_M25/gencode.vM25.primary_assembly.annotation.sorted.gtf&quot;</span><span class="p">)</span>
-<span class="n">bams</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list.files</span><span class="p">(</span><span class="s">&quot;/mnt/raid66/Personal_data/xuzijie/task/07ATS/00data/thesis/mm_BM/bam/01bam&quot;</span><span class="p">,</span><span class="s">&quot;bam$&quot;</span><span class="p">,</span><span class="n">full.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<span class="n">gtfFile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;demo.gtf&quot;</span><span class="p">)</span>
+<span class="n">bams</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;demo.bam&quot;</span>
 <span class="nf">file.exists</span><span class="p">(</span><span class="n">bams</span><span class="p">)</span>
 
 <span class="c1"># quantification using wrapper function</span>
@@ -186,13 +186,13 @@ colData names(4): orig.ident nCount_RNA nFeature_RNA Cell
 </tbody>
 </table>
 <p><em><strong>Note : All the following analyses are based on the <code class="docutils literal notranslate"><span class="pre">scats</span></code> object.</strong></em></p>
-<p>？？？？？ 加上theta的结果</p>
 </section>
 <section id="finding-differentially-expressed-atss">
 <h2>Finding differentially expressed ATSs<a class="headerlink" href="#finding-differentially-expressed-atss" title="Permalink to this heading"></a></h2>
 <section id="finding-markers-of-all-group">
 <h3>Finding markers of all group<a class="headerlink" href="#finding-markers-of-all-group" title="Permalink to this heading"></a></h3>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkersByTheta</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OR4F5&quot;</span><span class="p">)</span>
+<p><strong>Identifying ATS markers based on <code class="docutils literal notranslate"><span class="pre">θ</span></code> value.</strong></p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkersByTheta</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
 <span class="n">DE</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
 </pre></div>
 </div>
@@ -206,6 +206,38 @@ colData names(4): orig.ident nCount_RNA nFeature_RNA Cell
 2:     10       13   1.459854  0.9885932  0.5724791
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">DE</span></code> object contains following columns:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>column name</p></th>
+<th class="head"><p>content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gene</p></td>
+<td><p>The HGNC Symbol of the gene to which TSS belongs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TSS</p></td>
+<td><p>The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].</p></td>
+</tr>
+<tr class="row-even"><td><p>group1</p></td>
+<td><p>The levels of group.</p></td>
+</tr>
+<tr class="row-odd"><td><p>theta1/2</p></td>
+<td><p>The theta value of the TSS in the group.</p></td>
+</tr>
+<tr class="row-even"><td><p>cell1/2</p></td>
+<td><p>The number of cell-type corresponding to group.</p></td>
+</tr>
+<tr class="row-odd"><td><p>percent1/2</p></td>
+<td><p>The ratio of TSS reads.</p></td>
+</tr>
+<tr class="row-even"><td><p>p</p></td>
+<td><p>The p-value from the Wilcoxon test for differences in psi values among groups.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Identifying ATS markers based on <code class="docutils literal notranslate"><span class="pre">ψ</span></code> value.</strong></p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">majorOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span>
 <span class="n">DE</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
 </pre></div>
@@ -220,25 +252,7 @@ colData names(4): orig.ident nCount_RNA nFeature_RNA Cell
 2: 0.2964099      0.1309859      0.2663185 0.06632703  0.08046456 7.544541e-12
 </pre></div>
 </div>
-</section>
-<section id="finding-markers-of-given-group">
-<h3>Finding markers of given group<a class="headerlink" href="#finding-markers-of-given-group" title="Permalink to this heading"></a></h3>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">majorOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">,</span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OR4F5&quot;</span><span class="p">)</span><span class="w"> </span>
-<span class="n">DE</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>               TSS     G1     G2    n1    n2    N1    N2 Cells1 Cells2     PSI1
-            &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;    &lt;num&gt;
-1: OR4F5@1:69071:+      A      B    39    41   129   156    669    685 0.256232
-2: OR4F5@1:69090:+      A      B    29    29   129   156    669    685 0.179470
-        PSI2 PseudobulkPSI1 PseudobulkPSI2 wald.test wilcox.test    prop.test
-        &lt;num&gt;          &lt;num&gt;          &lt;num&gt;     &lt;num&gt;       &lt;num&gt;        &lt;num&gt;
-1: 0.2088708      0.2067138      0.3492958 0.4882352   0.3615713 3.080466e-08
-2: 0.1344227      0.2438163      0.1211268 0.2837820   0.3546702 1.612600e-08
-</pre></div>
-</div>
-<p>In addition, you can specify the host genes used in the calculation by setting the <code class="docutils literal notranslate"><span class="pre">gene</span></code> parameter.
-The <code class="docutils literal notranslate"><span class="pre">DE</span></code> object contains following columns:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DE</span></code> object contains following columns:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>column name</p></th>
@@ -253,10 +267,10 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 <td><p>The levels of group.</p></td>
 </tr>
 <tr class="row-even"><td><p>n1/2</p></td>
-<td><p>The expression of the TSS in the G1/2.</p></td>
+<td><p>The expression number of the TSS in the G1/2.</p></td>
 </tr>
 <tr class="row-odd"><td><p>N1/2</p></td>
-<td><p>The expression of the host gene in the G1/2.</p></td>
+<td><p>The expression number of the host gene in the G1/2.</p></td>
 </tr>
 <tr class="row-even"><td><p>Cells1/2</p></td>
 <td><p>The number of cell-type corresponding to G1/2.</p></td>
@@ -279,9 +293,31 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 </tbody>
 </table>
 </section>
+<section id="finding-markers-of-given-group">
+<h3>Finding markers of given group<a class="headerlink" href="#finding-markers-of-given-group" title="Permalink to this heading"></a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### based on θ value</span>
+<span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkersByTheta</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="c1">### based on  ψ value</span>
+<span class="n">DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">majorOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">,</span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OR4F5&quot;</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>In addition, you can specify the host genes used in the calculation by setting the <code class="docutils literal notranslate"><span class="pre">gene</span></code> parameter.</p>
+</section>
 </section>
 <section id="calculating-psi">
 <h2>Calculating PSI<a class="headerlink" href="#calculating-psi" title="Permalink to this heading"></a></h2>
+<p><strong>Calculating PSI based on <code class="docutils literal notranslate"><span class="pre">θ</span></code> value.</strong></p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">ThetaByGroup</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OR4F5&quot;</span><span class="p">,</span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">)</span>
+<span class="n">theta</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Group       TSS     alpha     theta
+&lt;char&gt;    &lt;char&gt;     &lt;num&gt;     &lt;num&gt;
+1:      A 1:69156:+ 0.1061093 0.1718889
+2:      A 1:69090:+ 0.3006347 0.2107304
+</pre></div>
+</div>
+<p><strong>Calculating PSI based on <code class="docutils literal notranslate"><span class="pre">ψ</span></code> value.</strong></p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">psi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">psi</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">TSS</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;OR4F5@1:69071:+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OR4F5@1:69156:+&quot;</span><span class="p">))</span>
 <span class="n">psi</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
 </pre></div>
@@ -294,17 +330,7 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 2 0.03060340 0.06045356      0  0 0.2   0 0.2     0.3492958
 </pre></div>
 </div>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scATS</span><span class="o">::</span><span class="nf">ThetaByGroup</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scats</span><span class="p">,</span><span class="w"> </span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OR4F5&quot;</span><span class="p">,</span><span class="n">groupBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CellType&quot;</span><span class="p">)</span>
-<span class="n">theta</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,]</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Group       TSS     alpha     theta
-&lt;char&gt;    &lt;char&gt;     &lt;num&gt;     &lt;num&gt;
-1:      A 1:69156:+ 0.1061093 0.1718889
-2:      A 1:69090:+ 0.3006347 0.2107304
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">psi</span></code> or <code class="docutils literal notranslate"><span class="pre">theta</span></code> object contains following columns:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">theta</span></code> or <code class="docutils literal notranslate"><span class="pre">psi</span></code> object contains following columns:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>column name</p></th>
@@ -312,49 +338,52 @@ The <code class="docutils literal notranslate"><span class="pre">DE</span></code
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>TSS</p></td>
-<td><p>The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].</p></td>
-</tr>
-<tr class="row-odd"><td><p>groupBy</p></td>
+<tr class="row-even"><td><p>Group/groupBy</p></td>
 <td><p>The level of group.</p></td>
 </tr>
-<tr class="row-even"><td><p>Cells</p></td>
+<tr class="row-odd"><td><p>TSS</p></td>
+<td><p>The ID of the TSS in the format of [gene_name:seqnames:ranges:strand].</p></td>
+</tr>
+<tr class="row-even"><td><p>alpha</p></td>
+<td><p>The degradation index fitted using the EM algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cells</p></td>
 <td><p>The number of cell-type corresponding to a given groups (The same applies to the following.).</p></td>
 </tr>
-<tr class="row-odd"><td><p>N</p></td>
+<tr class="row-even"><td><p>N</p></td>
 <td><p>The expression of the host gene.</p></td>
 </tr>
-<tr class="row-even"><td><p>n</p></td>
+<tr class="row-odd"><td><p>n</p></td>
 <td><p>The expression of the TSS.</p></td>
 </tr>
-<tr class="row-odd"><td><p>mean</p></td>
+<tr class="row-even"><td><p>mean</p></td>
 <td><p>The mean of PSI.</p></td>
 </tr>
-<tr class="row-even"><td><p>sd</p></td>
+<tr class="row-odd"><td><p>sd</p></td>
 <td><p>The standard deviation (std) of PSI.</p></td>
 </tr>
-<tr class="row-odd"><td><p>se</p></td>
+<tr class="row-even"><td><p>se</p></td>
 <td><p>The standard error (SE) of PSI.</p></td>
 </tr>
-<tr class="row-even"><td><p>ci</p></td>
+<tr class="row-odd"><td><p>ci</p></td>
 <td><p>The confidence interval (CI) of PSI.</p></td>
 </tr>
-<tr class="row-odd"><td><p>median</p></td>
+<tr class="row-even"><td><p>median</p></td>
 <td><p>The median of PSI.</p></td>
 </tr>
-<tr class="row-even"><td><p>Q1</p></td>
+<tr class="row-odd"><td><p>Q1</p></td>
 <td><p>The first quartile (Q1) of PSI.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Q3</p></td>
+<tr class="row-even"><td><p>Q3</p></td>
 <td><p>The third quartile (Q3) of PSI.</p></td>
 </tr>
-<tr class="row-even"><td><p>mad</p></td>
+<tr class="row-odd"><td><p>mad</p></td>
 <td><p>The median absolute deviation (MAD) of PSI.</p></td>
 </tr>
-<tr class="row-odd"><td><p>iqr</p></td>
+<tr class="row-even"><td><p>iqr</p></td>
 <td><p>The interquartile range (IQR) of PSI.</p></td>
 </tr>
-<tr class="row-even"><td><p>PseudobulkPSI</p></td>
+<tr class="row-odd"><td><p>theta/PseudobulkPSI</p></td>
 <td><p>The PSI value calculated by combining all reads and treating them as a pseudobulk sample.</p></td>
 </tr>
 </tbody>

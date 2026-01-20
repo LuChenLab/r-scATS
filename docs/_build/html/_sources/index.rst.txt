@@ -26,6 +26,7 @@ To use scATS, you can follow the instructions below:
 
    md/Installation
    md/Usage
+   md/Disease model
    md/Getting Help
    md/Citing scATS
 

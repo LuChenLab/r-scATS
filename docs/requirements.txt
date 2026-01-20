@@ -1,0 +1,6 @@
+# Sphinx and extensions
+sphinx
+sphinx-rtd-theme
+myst-parser
+sphinxcontrib-mermaid
+sphinx-copybutton
