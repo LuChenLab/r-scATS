@@ -10,7 +10,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Imports: data.table, fitdistrplus, GenomicAlignments, GenomicFeatures,
         GenomicRanges, ggbio, mclust, mixtools, parallel, rtracklayer,
-        Seurat, SummarizedExperiment
+        Seurat, SummarizedExperiment, rowRanges, rpart, nnet
 RoxygenNote: 7.1.1
 NeedsCompilation: no
 Packaged: 2025-01-08 07:34:48 UTC; tangchao
