@@ -59,7 +59,7 @@ To install `scATS`, you have two options: either install directly from GitHub or
 if (!requireNamespace("remotes", quietly = TRUE))
     install.packages("remotes")
 
-remotes::install_github("LuChenLab/r-scATS/scATS/")
+remotes::install_github("LuChenLab/r-scATS/")
 ```
 
 Alternatively, you can install `scATS` using the source file downloaded from the [repository](https://github.com/LuChenLab/r-scATS/blob/main/scATS_0.5.5.tar.gz) :
@@ -195,7 +195,8 @@ Trained model file: `final_LRS_RF.pkl`
 You can directly load these data from [here](https://github.com/LuChenLab/r-scATS/tree/main/LRS) for predictions without applying feature scaling again. Example:
 
 ```python
-import pickle
+import pickle<img width="432" height="121" alt="image" src="https://github.com/user-attachments/assets/f5748ff3-c544-47cf-a164-c087470134ac" />
+
 
 # Load the trained pipeline
 with open("rf_pipeline_model.pkl", "rb") as f:
