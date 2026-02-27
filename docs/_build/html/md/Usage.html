@@ -23,7 +23,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Help" href="Getting%20Help.html" />
+    <link rel="next" title="Disease model" href="Disease%20model.html" />
     <link rel="prev" title="Installation" href="Installation.html" /> 
 </head>
 
@@ -60,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#sashimi-plots">Sashimi plots</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Disease%20model.html">Disease model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Getting%20Help.html">Getting Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Citing%20scATS.html">Citing scATS</a></li>
 </ul>
@@ -412,61 +413,89 @@ colData names(4): orig.ident nCount_RNA nFeature_RNA Cell
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>R version 3.6.0 (2019-04-26)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 16.04.7 LTS
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="m">4.5</span><span class="n">.</span><span class="m">1</span><span class="w"> </span><span class="p">(</span><span class="m">2025-06-13</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Platform</span><span class="o">:</span><span class="w"> </span><span class="n">x86_64</span><span class="o">-</span><span class="n">conda</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span>
+<span class="w">    </span><span class="n">Running</span><span class="w"> </span><span class="n">under</span><span class="o">:</span><span class="w"> </span><span class="n">CentOS</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="p">(</span><span class="n">Core</span><span class="p">)</span>
 
-Matrix products: default
-BLAS:   /usr/lib/openblas-base/libblas.so.3
-LAPACK: /usr/lib/libopenblasp-r0.2.18.so
+<span class="w">    </span><span class="n">Matrix</span><span class="w"> </span><span class="n">products</span><span class="o">:</span><span class="w"> </span><span class="n">default</span>
+<span class="w">    </span><span class="n">BLAS</span><span class="o">/</span><span class="n">LAPACK</span><span class="o">:</span><span class="w"> </span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">data4</span><span class="o">/</span><span class="n">xuzijie</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">r451</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libopenblasp</span><span class="o">-</span><span class="n">r0.3.30.so</span><span class="p">;</span><span class="w">  </span><span class="n">LAPACK</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="m">3.12</span><span class="n">.</span><span class="m">0</span>
 
-locale:
-[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
-[4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-[7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+<span class="w">    </span><span class="n">locale</span><span class="o">:</span>
+<span class="w">    </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="n">LC_CTYPE</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span><span class="w">       </span><span class="n">LC_NUMERIC</span><span class="o">=</span><span class="n">C</span><span class="w">               </span><span class="n">LC_TIME</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span>
+<span class="w">    </span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="n">LC_COLLATE</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span><span class="w">     </span><span class="n">LC_MONETARY</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span><span class="w">    </span><span class="n">LC_MESSAGES</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span>
+<span class="w">    </span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="n">LC_PAPER</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span><span class="w">       </span><span class="n">LC_NAME</span><span class="o">=</span><span class="n">C</span><span class="w">                  </span><span class="n">LC_ADDRESS</span><span class="o">=</span><span class="n">C</span>
+<span class="w">    </span><span class="p">[</span><span class="m">10</span><span class="p">]</span><span class="w"> </span><span class="n">LC_TELEPHONE</span><span class="o">=</span><span class="n">C</span><span class="w">             </span><span class="n">LC_MEASUREMENT</span><span class="o">=</span><span class="n">zh_CN.UTF</span><span class="m">-8</span><span class="w"> </span><span class="n">LC_IDENTIFICATION</span><span class="o">=</span><span class="n">C</span>
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="n">zone</span><span class="o">:</span><span class="w"> </span><span class="n">America</span><span class="o">/</span><span class="n">New_York</span>
+<span class="w">    </span><span class="n">tzcode</span><span class="w"> </span><span class="n">source</span><span class="o">:</span><span class="w"> </span><span class="nf">system </span><span class="p">(</span><span class="n">glibc</span><span class="p">)</span>
 
-loaded via a namespace (and not attached):
-[1] bitops_1.0-7                matrixStats_1.3.0           bit64_4.0.5                
-[4] RcppAnnoy_0.0.19            RColorBrewer_1.1-3          progress_1.2.3             
-[7] httr_1.4.7                  GenomeInfoDb_1.22.1         tools_3.6.0                
-[10] irlba_2.3.3                 utf8_1.2.4                  R6_2.5.1                   
-[13] KernSmooth_2.23-24          DBI_1.2.3                   BiocGenerics_0.32.0        
-[16] colorspace_2.1-0            tidyselect_1.2.1            prettyunits_1.2.0          
-[19] bit_4.0.5                   curl_5.2.1                  compiler_3.6.0             
-[22] cli_3.6.3                   Biobase_2.46.0              DelayedArray_0.12.3        
-[25] rtracklayer_1.46.0          scales_1.3.0                lmtest_0.9-40              
-[28] ggridges_0.5.6              askpass_1.2.0               rappdirs_0.3.3             
-[31] stringr_1.5.1               digest_0.6.25               Rsamtools_2.2.3            
-[34] R.utils_2.12.3              XVector_0.26.0              pkgconfig_2.0.3            
-[37] htmltools_0.5.0             parallelly_1.37.1           dbplyr_2.5.0               
-[40] fastmap_1.2.0               htmlwidgets_1.5.1           rlang_1.1.1                
-[43] rstudioapi_0.11             RSQLite_2.3.7               generics_0.1.3             
-[46] zoo_1.8-12                  jsonlite_1.8.8              ica_1.0-3                  
-[49] BiocParallel_1.20.1         dplyr_1.1.4                 R.oo_1.26.0                
-[52] RCurl_1.98-1.16             magrittr_2.0.3              GenomeInfoDbData_1.2.2     
-[55] patchwork_1.2.0             Matrix_1.5-3                Rcpp_1.0.13                
-[58] munsell_0.5.1               S4Vectors_0.24.4            fansi_1.0.6                
-[61] reticulate_1.38.0           lifecycle_1.0.4             R.methodsS3_1.8.2          
-[64] stringi_1.8.4               MASS_7.3-57                 SummarizedExperiment_1.16.1
-[67] zlibbioc_1.32.0             Rtsne_0.17                  BiocFileCache_1.10.2       
-[70] grid_3.6.0                  blob_1.2.4                  ggrepel_0.9.5              
-[73] listenv_0.9.1               parallel_3.6.0              crayon_1.5.3               
-[76] lattice_0.20-45             Biostrings_2.54.0           cowplot_1.1.3              
-[79] splines_3.6.0               GenomicFeatures_1.38.2      hms_1.1.3                  
-[82] knitr_1.29                  pillar_1.9.0                igraph_2.0.3               
-[85] GenomicRanges_1.38.0        future.apply_1.11.2         codetools_0.2-20           
-[88] biomaRt_2.42.1              stats4_3.6.0                leiden_0.4.3.1             
-[91] XML_3.99-0.3                glue_1.7.0                  png_0.1-8                  
-[94] vctrs_0.6.5                 gtable_0.3.5                openssl_2.2.0              
-[97] RANN_2.6.1                  future_1.33.2               cachem_1.1.0               
-[100] ggplot2_3.5.1               xfun_0.16                   survival_3.7-0             
-[103] tibble_3.2.1                GenomicAlignments_1.22.1    AnnotationDbi_1.48.0       
-[106] memoise_2.0.1               IRanges_2.20.2              cluster_2.1.6              
-[109] globals_0.16.3              fitdistrplus_1.2-1          ROCR_1.0-11  
+<span class="w">    </span><span class="n">attached</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">packages</span><span class="o">:</span>
+<span class="w">    </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="n">stats</span><span class="w">     </span><span class="n">graphics</span><span class="w">  </span><span class="n">grDevices</span><span class="w"> </span><span class="n">utils</span><span class="w">     </span><span class="n">datasets</span><span class="w">  </span><span class="n">methods</span><span class="w">   </span><span class="n">base</span>
+
+<span class="w">    </span><span class="n">other</span><span class="w"> </span><span class="n">attached</span><span class="w"> </span><span class="n">packages</span><span class="o">:</span>
+<span class="w">    </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="n">scATS_0.5.5</span>
+
+<span class="w">    </span><span class="n">loaded</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nf">namespace </span><span class="p">(</span><span class="n">and</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">attached</span><span class="p">)</span><span class="o">:</span>
+<span class="w">    </span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="n">RcppAnnoy_0.0.19</span><span class="w">            </span><span class="n">splines_4.5.1</span><span class="w">               </span><span class="n">later_1.3.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="n">bitops_1.0</span><span class="m">-7</span><span class="w">                </span><span class="n">tibble_3.2.1</span><span class="w">                </span><span class="n">R.oo_1.24.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="n">polyclip_1.10</span><span class="m">-0</span><span class="w">             </span><span class="n">graph_1.68.0</span><span class="w">                </span><span class="n">xts_0.13.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">10</span><span class="p">]</span><span class="w"> </span><span class="n">XML_3.99</span><span class="m">-0.14</span><span class="w">               </span><span class="n">rpart_4.1</span><span class="m">-15</span><span class="w">                </span><span class="n">lifecycle_1.0.4</span>
+<span class="w">    </span><span class="p">[</span><span class="m">13</span><span class="p">]</span><span class="w"> </span><span class="n">OrganismDbi_1.32.0</span><span class="w">          </span><span class="n">ensembldb_2.14.1</span><span class="w">            </span><span class="n">globals_0.16.3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">16</span><span class="p">]</span><span class="w"> </span><span class="n">lattice_0.22</span><span class="m">-9</span><span class="w">              </span><span class="n">MASS_7.3</span><span class="m">-58.3</span><span class="w">               </span><span class="n">backports_1.4.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">19</span><span class="p">]</span><span class="w"> </span><span class="n">magrittr_2.0.3</span><span class="w">              </span><span class="n">Hmisc_4.6</span><span class="m">-0</span><span class="w">                 </span><span class="n">plotly_4.10.4</span>
+<span class="w">    </span><span class="p">[</span><span class="m">22</span><span class="p">]</span><span class="w"> </span><span class="n">httpuv_1.6.15</span><span class="w">               </span><span class="n">Seurat_4.0.5</span><span class="w">                </span><span class="n">sctransform_0.3.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">25</span><span class="p">]</span><span class="w"> </span><span class="n">spatstat.core_2.3</span><span class="m">-2</span><span class="w">         </span><span class="n">askpass_1.2.0</span><span class="w">               </span><span class="n">spatstat.sparse_3.0</span><span class="m">-3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">28</span><span class="p">]</span><span class="w"> </span><span class="n">reticulate_1.24</span><span class="w">             </span><span class="n">ggbio_1.38.0</span><span class="w">                </span><span class="n">cowplot_1.1.3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">31</span><span class="p">]</span><span class="w"> </span><span class="n">pbapply_1.7</span><span class="m">-2</span><span class="w">               </span><span class="n">DBI_1.2.2</span><span class="w">                   </span><span class="n">RColorBrewer_1.1</span><span class="m">-3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">34</span><span class="p">]</span><span class="w"> </span><span class="n">abind_1.4</span><span class="m">-5</span><span class="w">                 </span><span class="n">zlibbioc_1.36.0</span><span class="w">             </span><span class="n">Rtsne_0.17</span>
+<span class="w">    </span><span class="p">[</span><span class="m">37</span><span class="p">]</span><span class="w"> </span><span class="n">GenomicRanges_1.42.0</span><span class="w">        </span><span class="n">mixtools_1.2.0</span><span class="w">              </span><span class="n">purrr_1.0.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">40</span><span class="p">]</span><span class="w"> </span><span class="n">R.utils_2.11.0</span><span class="w">              </span><span class="n">AnnotationFilter_1.14.0</span><span class="w">     </span><span class="n">biovizBase_1.38.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">43</span><span class="p">]</span><span class="w"> </span><span class="n">BiocGenerics_0.40.0</span><span class="w">         </span><span class="n">RCurl_1.98</span><span class="m">-1.5</span><span class="w">              </span><span class="n">nnet_7.3</span><span class="m">-16</span>
+<span class="w">    </span><span class="p">[</span><span class="m">46</span><span class="p">]</span><span class="w"> </span><span class="n">VariantAnnotation_1.36.0</span><span class="w">    </span><span class="n">rappdirs_0.3.3</span><span class="w">              </span><span class="n">GenomeInfoDbData_1.2.4</span>
+<span class="w">    </span><span class="p">[</span><span class="m">49</span><span class="p">]</span><span class="w"> </span><span class="n">IRanges_2.24.1</span><span class="w">              </span><span class="n">S4Vectors_0.28.1</span><span class="w">            </span><span class="n">ggrepel_0.9.5</span>
+<span class="w">    </span><span class="p">[</span><span class="m">52</span><span class="p">]</span><span class="w"> </span><span class="n">irlba_2.3.5.1</span><span class="w">               </span><span class="n">listenv_0.9.1</span><span class="w">               </span><span class="n">spatstat.utils_3.1</span><span class="m">-3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">55</span><span class="p">]</span><span class="w"> </span><span class="n">goftest_1.2</span><span class="m">-3</span><span class="w">               </span><span class="n">fitdistrplus_1.1</span><span class="m">-6</span><span class="w">          </span><span class="n">parallelly_1.37.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">58</span><span class="p">]</span><span class="w"> </span><span class="n">smoother_1.1</span><span class="w">                </span><span class="n">leiden_0.3.9</span><span class="w">                </span><span class="n">codetools_0.2</span><span class="m">-19</span>
+<span class="w">    </span><span class="p">[</span><span class="m">61</span><span class="p">]</span><span class="w"> </span><span class="n">DelayedArray_0.16.3</span><span class="w">         </span><span class="n">xml2_1.3.6</span><span class="w">                  </span><span class="n">tidyselect_1.2.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">64</span><span class="p">]</span><span class="w"> </span><span class="n">matrixStats_1.2.0</span><span class="w">           </span><span class="n">stats4_4.5.1</span><span class="w">                </span><span class="n">BiocFileCache_1.14.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">67</span><span class="p">]</span><span class="w"> </span><span class="n">base64enc_0.1</span><span class="m">-3</span><span class="w">             </span><span class="n">GenomicAlignments_1.26.0</span><span class="w">    </span><span class="n">jsonlite_1.8.8</span>
+<span class="w">    </span><span class="p">[</span><span class="m">70</span><span class="p">]</span><span class="w"> </span><span class="n">Formula_1.2</span><span class="m">-4</span><span class="w">               </span><span class="n">ggridges_0.5.3</span><span class="w">              </span><span class="n">survival_3.5</span><span class="m">-5</span>
+<span class="w">    </span><span class="p">[</span><span class="m">73</span><span class="p">]</span><span class="w"> </span><span class="n">segmented_1.3</span><span class="m">-4</span><span class="w">             </span><span class="n">tools_4.5.1</span><span class="w">                 </span><span class="n">progress_1.2.3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">76</span><span class="p">]</span><span class="w"> </span><span class="n">ica_1.0</span><span class="m">-2</span><span class="w">                   </span><span class="n">Rcpp_1.0.12</span><span class="w">                 </span><span class="n">glue_1.7.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">79</span><span class="p">]</span><span class="w"> </span><span class="n">gridExtra_2.3</span><span class="w">               </span><span class="n">xfun_0.43</span><span class="w">                   </span><span class="n">mgcv_1.8</span><span class="m">-42</span>
+<span class="w">    </span><span class="p">[</span><span class="m">82</span><span class="p">]</span><span class="w"> </span><span class="n">TTR_0.24.3</span><span class="w">                  </span><span class="n">MatrixGenerics_1.2.1</span><span class="w">        </span><span class="n">GenomeInfoDb_1.30.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">85</span><span class="p">]</span><span class="w"> </span><span class="n">dplyr_1.1.4</span><span class="w">                 </span><span class="n">BiocManager_1.30.22</span><span class="w">         </span><span class="n">fastmap_1.1.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">88</span><span class="p">]</span><span class="w"> </span><span class="n">GGally_2.1.2</span><span class="w">                </span><span class="n">latticeExtra_0.6</span><span class="m">-29</span><span class="w">         </span><span class="n">fansi_1.0.6</span>
+<span class="w">    </span><span class="p">[</span><span class="m">91</span><span class="p">]</span><span class="w"> </span><span class="n">openssl_2.1.1</span><span class="w">               </span><span class="n">digest_0.6.35</span><span class="w">               </span><span class="n">R6_2.5.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">94</span><span class="p">]</span><span class="w"> </span><span class="n">mime_0.12</span><span class="w">                   </span><span class="n">colorspace_2.1</span><span class="m">-0</span><span class="w">            </span><span class="n">scattermore_1.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">97</span><span class="p">]</span><span class="w"> </span><span class="n">tensor_1.5</span><span class="w">                  </span><span class="n">dichromat_2.0</span><span class="m">-0</span><span class="w">             </span><span class="n">jpeg_0.1</span><span class="m">-9</span>
+<span class="w">    </span><span class="p">[</span><span class="m">100</span><span class="p">]</span><span class="w"> </span><span class="n">spatstat.data_3.0</span><span class="m">-4</span><span class="w">         </span><span class="n">biomaRt_2.46.3</span><span class="w">              </span><span class="n">RSQLite_2.2.9</span>
+<span class="w">    </span><span class="p">[</span><span class="m">103</span><span class="p">]</span><span class="w"> </span><span class="n">R.methodsS3_1.8.1</span><span class="w">           </span><span class="n">utf8_1.2.4</span><span class="w">                  </span><span class="n">tidyr_1.3.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">106</span><span class="p">]</span><span class="w"> </span><span class="n">generics_0.1.3</span><span class="w">              </span><span class="n">data.table_1.15.4</span><span class="w">           </span><span class="n">rtracklayer_1.50.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">109</span><span class="p">]</span><span class="w"> </span><span class="n">prettyunits_1.2.0</span><span class="w">           </span><span class="n">httr_1.4.7</span><span class="w">                  </span><span class="n">htmlwidgets_1.6.4</span>
+<span class="w">    </span><span class="p">[</span><span class="m">112</span><span class="p">]</span><span class="w"> </span><span class="n">uwot_0.1.16</span><span class="w">                 </span><span class="n">pkgconfig_2.0.3</span><span class="w">             </span><span class="n">gtable_0.3.5</span>
+<span class="w">    </span><span class="p">[</span><span class="m">115</span><span class="p">]</span><span class="w"> </span><span class="n">blob_1.2.4</span><span class="w">                  </span><span class="n">lmtest_0.9</span><span class="m">-39</span><span class="w">               </span><span class="n">XVector_0.30.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">118</span><span class="p">]</span><span class="w"> </span><span class="n">htmltools_0.5.8.1</span><span class="w">           </span><span class="n">RBGL_1.66.0</span><span class="w">                 </span><span class="n">ProtGenerics_1.22.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">121</span><span class="p">]</span><span class="w"> </span><span class="n">SeuratObject_4.0.4</span><span class="w">          </span><span class="n">scales_1.3.0</span><span class="w">                </span><span class="n">Biobase_2.50.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">124</span><span class="p">]</span><span class="w"> </span><span class="n">png_0.1</span><span class="m">-8</span><span class="w">                   </span><span class="n">rstudioapi_0.16.0</span><span class="w">           </span><span class="n">knitr_1.46</span>
+<span class="w">    </span><span class="p">[</span><span class="m">127</span><span class="p">]</span><span class="w"> </span><span class="n">reshape2_1.4.4</span><span class="w">              </span><span class="n">checkmate_2.0.0</span><span class="w">             </span><span class="n">nlme_3.1</span><span class="m">-162</span>
+<span class="w">    </span><span class="p">[</span><span class="m">130</span><span class="p">]</span><span class="w"> </span><span class="n">curl_5.2.1</span><span class="w">                  </span><span class="n">cachem_1.0.8</span><span class="w">                </span><span class="n">zoo_1.8</span><span class="m">-9</span>
+<span class="w">    </span><span class="p">[</span><span class="m">133</span><span class="p">]</span><span class="w"> </span><span class="n">stringr_1.5.1</span><span class="w">               </span><span class="n">KernSmooth_2.23</span><span class="m">-20</span><span class="w">          </span><span class="n">parallel_4.5.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">136</span><span class="p">]</span><span class="w"> </span><span class="n">miniUI_0.1.1.1</span><span class="w">              </span><span class="n">foreign_0.8</span><span class="m">-81</span><span class="w">              </span><span class="n">AnnotationDbi_1.52.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">139</span><span class="p">]</span><span class="w"> </span><span class="n">pillar_1.9.0</span><span class="w">                </span><span class="n">grid_4.5.1</span><span class="w">                  </span><span class="n">reshape_0.8.8</span>
+<span class="w">    </span><span class="p">[</span><span class="m">142</span><span class="p">]</span><span class="w"> </span><span class="n">vctrs_0.6.5</span><span class="w">                 </span><span class="n">RANN_2.6.1</span><span class="w">                  </span><span class="n">VGAM_1.1</span><span class="m">-5</span>
+<span class="w">    </span><span class="p">[</span><span class="m">145</span><span class="p">]</span><span class="w"> </span><span class="n">promises_1.3.0</span><span class="w">              </span><span class="n">dbplyr_2.5.0</span><span class="w">                </span><span class="n">xtable_1.8</span><span class="m">-4</span>
+<span class="w">    </span><span class="p">[</span><span class="m">148</span><span class="p">]</span><span class="w"> </span><span class="n">cluster_2.1.4</span><span class="w">               </span><span class="n">htmlTable_2.3.0</span><span class="w">             </span><span class="n">GenomicFeatures_1.42.3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">151</span><span class="p">]</span><span class="w"> </span><span class="n">cli_3.6.3</span><span class="w">                   </span><span class="n">compiler_4.5.1</span><span class="w">              </span><span class="n">Rsamtools_2.6.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">154</span><span class="p">]</span><span class="w"> </span><span class="n">rlang_1.1.4</span><span class="w">                 </span><span class="n">crayon_1.5.2</span><span class="w">                </span><span class="n">future.apply_1.11.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">157</span><span class="p">]</span><span class="w"> </span><span class="n">mclust_6.0.0</span><span class="w">                </span><span class="n">plyr_1.8.9</span><span class="w">                  </span><span class="n">stringi_1.8.3</span>
+<span class="w">    </span><span class="p">[</span><span class="m">160</span><span class="p">]</span><span class="w"> </span><span class="n">viridisLite_0.4.2</span><span class="w">           </span><span class="n">deldir_1.0</span><span class="m">-6</span><span class="w">                </span><span class="n">BiocParallel_1.24.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">163</span><span class="p">]</span><span class="w"> </span><span class="n">munsell_0.5.1</span><span class="w">               </span><span class="n">Biostrings_2.58.0</span><span class="w">           </span><span class="n">lazyeval_0.2.2</span>
+<span class="w">    </span><span class="p">[</span><span class="m">166</span><span class="p">]</span><span class="w"> </span><span class="n">spatstat.geom_3.2</span><span class="m">-9</span><span class="w">         </span><span class="n">Matrix_1.5</span><span class="m">-3</span><span class="w">                </span><span class="n">BSgenome_1.58.0</span>
+<span class="w">    </span><span class="p">[</span><span class="m">169</span><span class="p">]</span><span class="w"> </span><span class="n">hms_1.1.3</span><span class="w">                   </span><span class="n">patchwork_1.2.0</span><span class="w">             </span><span class="n">bit64_4.0.5</span>
+<span class="w">    </span><span class="p">[</span><span class="m">172</span><span class="p">]</span><span class="w"> </span><span class="n">future_1.33.2</span><span class="w">               </span><span class="n">ggplot2_3.5.1</span><span class="w">               </span><span class="n">shiny_1.8.1.1</span>
+<span class="w">    </span><span class="p">[</span><span class="m">175</span><span class="p">]</span><span class="w"> </span><span class="n">SummarizedExperiment_1.20.0</span><span class="w"> </span><span class="n">kernlab_0.9</span><span class="m">-29</span><span class="w">              </span><span class="n">ROCR_1.0</span><span class="m">-11</span>
+<span class="w">    </span><span class="p">[</span><span class="m">178</span><span class="p">]</span><span class="w"> </span><span class="n">igraph_1.5.1</span><span class="w">                </span><span class="n">memoise_2.0.1</span><span class="w">               </span><span class="n">bit_4.0.5</span>
 </pre></div>
 </div>
 </section>
@@ -477,7 +506,7 @@ loaded via a namespace (and not attached):
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Getting%20Help.html" class="btn btn-neutral float-right" title="Getting Help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Disease%20model.html" class="btn btn-neutral float-right" title="Disease model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

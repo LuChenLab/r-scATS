@@ -1,0 +1,71 @@
+> install.packages("/mnt/data4/xuzijie/soft/scATS_0.5.5.tar.gz", repos=NULL)
+将程序包安装入‘/mnt/data4/xuzijie/soft’
+(因为‘lib’没有被指定)
+* installing *source* package ‘scATS’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** help
+*** installing help indices
+  converting help for package ‘scATS’
+    finding HTML links ... 好了
+    CliffSite                               html
+    CliffSite2                              html
+    DR                                      html
+    DTSS                                    html
+    FeaturePlot                             html
+    FindMarkers                             html
+    InflexionPoint                          html
+    Sashimi                                 html
+    TSSCDF                                  html
+    TSSPlot                                 html
+    ThetaByGroup                            html
+    gmmc                                    html
+    loadbamgene                             html
+    loadbamregion                           html
+    loadregionR1                            html
+    myproportions                           html
+    rss                                     html
+    scATSDataSet-class                      html
+** building package indices
+** testing if installed package can be loaded from temporary location
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** testing if installed package can be loaded from final location
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** testing if installed package keeps a record of temporary installation path
+* DONE (scATS)
+
+> sessionInfo()
+R version 4.0.5 (2021-03-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: CentOS Linux 7 (Core)
+
+Matrix products: default
+BLAS/LAPACK: /usr/lib64/libopenblasp-r0.3.3.so
+
+locale:
+ [1] LC_CTYPE=zh_CN.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=zh_CN.UTF-8
+ [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=zh_CN.UTF-8
+ [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+loaded via a namespace (and not attached):
+[1] compiler_4.0.5 tools_4.0.5

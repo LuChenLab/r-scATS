@@ -1,0 +1,60 @@
+-bash-4.2$  R CMD INSTALL scATS_0.5.5.tar.gz
+* installing to library ‘/mnt/data4/xuzijie/soft’
+* installing *source* package ‘scATS’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** help
+*** installing help indices
+  converting help for package ‘scATS’
+    finding HTML links ... 好了
+    CliffSite                               html
+    CliffSite2                              html
+    DR                                      html
+    DTSS                                    html
+    FeaturePlot                             html
+    FindMarkers                             html
+    InflexionPoint                          html
+    Sashimi                                 html
+    TSSCDF                                  html
+    TSSPlot                                 html
+    ThetaByGroup                            html
+    gmmc                                    html
+    loadbamgene                             html
+    loadbamregion                           html
+    loadregionR1                            html
+    myproportions                           html
+    rss                                     html
+    scATSDataSet-class                      html
+** building package indices
+** testing if installed package can be loaded from temporary location
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** testing if installed package can be loaded from final location
+Possible Ensembl SSL connectivity problems detected.
+Please see the 'Connection Troubleshooting' section of the biomaRt vignette
+vignette('accessing_ensembl', package = 'biomaRt')Error in curl::curl_fetch_memory(url, handle = handle) :
+  Peer certificate cannot be authenticated with given CA certificates: [uswest.ensembl.org] Peer's Certificate has expired.
+
+** testing if installed package keeps a record of temporary installation path
+* DONE (scATS)
+
+
+-bash-4.2$ R --version
+R version 4.0.5 (2021-03-31) -- "Shake and Throw"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+https://www.gnu.org/licenses/.

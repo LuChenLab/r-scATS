@@ -1,0 +1,175 @@
+> remotes::install_github('LuChenLab/r-scATS')
+Downloading GitHub repo LuChenLab/r-scATS@HEAD
+These packages have more recent versions available.
+It is recommended to update all of them.
+Which would you like to update?
+
+  1: All
+  2: CRAN packages only
+  3: None
+  4: Rcpp         (1.0.13    -> 1.1.1    ) [CRAN]
+  5: RcppEigen    (0.3.4.0.0 -> 0.3.4.0.2) [CRAN]
+  6: BH           (1.84.0-0  -> 1.90.0-1 ) [CRAN]
+  7: RcppAnnoy    (0.0.22    -> 0.0.23   ) [CRAN]
+  8: irlba        (2.3.5.1   -> 2.3.7    ) [CRAN]
+  9: FNN          (1.1.4     -> 1.1.4.1  ) [CRAN]
+ 10: utf8         (1.2.4     -> 1.2.6    ) [CRAN]
+ 11: glue         (1.7.0     -> 1.8.0    ) [CRAN]
+ 12: vctrs        (0.6.5     -> 0.7.1    ) [CRAN]
+ 13: rlang        (1.1.4     -> 1.1.7    ) [CRAN]
+ 14: pillar       (1.9.0     -> 1.11.1   ) [CRAN]
+ 15: magrittr     (2.0.3     -> 2.0.4    ) [CRAN]
+ 16: lifecycle    (1.0.4     -> 1.0.5    ) [CRAN]
+ 17: cli          (3.6.3     -> 3.6.5    ) [CRAN]
+ 18: spatstat.... (3.0-5     -> 3.2-1    ) [CRAN]
+ 19: spatstat.... (3.0-0     -> 3.1-6    ) [CRAN]
+ 20: spatstat.... (3.1-2     -> 3.1-9    ) [CRAN]
+ 21: tensor       (1.5       -> 1.5.1    ) [CRAN]
+ 22: abind        (1.4-5     -> 1.4-8    ) [CRAN]
+ 23: spatstat.... (3.3-1     -> 3.4-4    ) [CRAN]
+ 24: spatstat.... (3.3-2     -> 3.7-0    ) [CRAN]
+ 25: rappdirs     (0.3.3     -> 0.3.4    ) [CRAN]
+ 26: fs           (1.6.4     -> 1.6.6    ) [CRAN]
+ 27: digest       (0.6.36    -> 0.6.39   ) [CRAN]
+ 28: sass         (0.4.9     -> 0.4.10   ) [CRAN]
+ 29: base64enc    (0.1-3     -> 0.1-6    ) [CRAN]
+ 30: xtable       (1.8-4     -> 1.8-8    ) [CRAN]
+ 31: withr        (3.0.0     -> 3.0.2    ) [CRAN]
+ 32: R6           (2.5.1     -> 2.6.1    ) [CRAN]
+ 33: promises     (1.3.0     -> 1.5.0    ) [CRAN]
+ 34: mime         (0.12      -> 0.13     ) [CRAN]
+ 35: later        (1.3.2     -> 1.4.7    ) [CRAN]
+ 36: jsonlite     (1.8.8     -> 2.0.0    ) [CRAN]
+ 37: httpuv       (1.6.15    -> 1.6.16   ) [CRAN]
+ 38: htmltools    (0.5.8.1   -> 0.5.9    ) [CRAN]
+ 39: fontawesome  (0.5.2     -> 0.5.3    ) [CRAN]
+ 40: commonmark   (1.9.1     -> 2.0.0    ) [CRAN]
+ 41: bslib        (0.7.0     -> 0.10.0   ) [CRAN]
+ 42: stringi      (1.8.4     -> 1.8.7    ) [CRAN]
+ 43: viridisLite  (0.4.2     -> 0.4.3    ) [CRAN]
+ 44: cpp11        (0.4.7     -> 0.5.3    ) [CRAN]
+ 45: stringr      (1.5.1     -> 1.6.0    ) [CRAN]
+ 46: scales       (1.3.0     -> 1.4.0    ) [CRAN]
+ 47: S7           (0.2.0     -> 0.2.1    ) [CRAN]
+ 48: isoband      (0.2.7     -> 0.3.0    ) [CRAN]
+ 49: gtable       (0.3.5     -> 0.3.6    ) [CRAN]
+ 50: listenv      (0.9.1     -> 0.10.0   ) [CRAN]
+ 51: globals      (0.16.3    -> 0.19.0   ) [CRAN]
+ 52: tibble       (3.2.1     -> 3.3.1    ) [CRAN]
+ 53: generics     (0.1.3     -> 0.1.4    ) [CRAN]
+ 54: RcppArmad... (14.0.0-1  -> 15.2.3-1 ) [CRAN]
+ 55: matrixStats  (1.3.0     -> 1.5.0    ) [CRAN]
+ 56: reshape2     (1.4.4     -> 1.4.5    ) [CRAN]
+ 57: ggplot2      (3.5.1     -> 4.0.2    ) [CRAN]
+ 58: parallelly   (1.37.1    -> 1.46.1   ) [CRAN]
+ 59: future       (1.33.2    -> 1.69.0   ) [CRAN]
+ 60: future.apply (1.11.2    -> 1.20.2   ) [CRAN]
+ 61: dplyr        (1.1.4     -> 1.2.0    ) [CRAN]
+ 62: bitops       (1.0-7     -> 1.0-9    ) [CRAN]
+ 63: caTools      (1.18.2    -> 1.18.3   ) [CRAN]
+ 64: gplots       (3.1.3.1   -> 3.3.0    ) [CRAN]
+ 65: rprojroot    (2.0.4     -> 2.1.1    ) [CRAN]
+ 66: here         (1.0.1     -> 1.0.2    ) [CRAN]
+ 67: RcppTOML     (0.2.2     -> 0.2.3    ) [CRAN]
+ 68: sys          (3.4.2     -> 3.4.3    ) [CRAN]
+ 69: tinytex      (0.52      -> 0.58     ) [CRAN]
+ 70: askpass      (1.2.0     -> 1.2.1    ) [CRAN]
+ 71: xfun         (0.52      -> 0.56     ) [CRAN]
+ 72: evaluate     (0.24.0    -> 1.0.5    ) [CRAN]
+ 73: openssl      (2.2.0     -> 2.3.5    ) [CRAN]
+ 74: curl         (5.2.1     -> 7.0.0    ) [CRAN]
+ 75: yaml         (2.3.9     -> 2.3.12   ) [CRAN]
+ 76: rmarkdown    (2.27      -> 2.30     ) [CRAN]
+ 77: knitr        (1.48      -> 1.51     ) [CRAN]
+ 78: data.table   (1.15.4    -> 1.18.2.1 ) [CRAN]
+ 79: purrr        (1.0.2     -> 1.2.1    ) [CRAN]
+ 80: crosstalk    (1.2.1     -> 1.2.2    ) [CRAN]
+ 81: tidyr        (1.3.1     -> 1.3.2    ) [CRAN]
+ 82: httr         (1.4.7     -> 1.4.8    ) [CRAN]
+ 83: shiny        (1.8.1.1   -> 1.13.0   ) [CRAN]
+ 84: zoo          (1.8-12    -> 1.8-15   ) [CRAN]
+ 85: dotCall64    (1.1-1     -> 1.2      ) [CRAN]
+ 86: spam         (2.10-0    -> 2.11-3   ) [CRAN]
+ 87: progressr    (0.14.0    -> 0.18.0   ) [CRAN]
+ 88: sp           (2.1-4     -> 2.2-1    ) [CRAN]
+ 89: uwot         (0.2.2     -> 0.2.4    ) [CRAN]
+ 90: spatstat.... (3.3-1     -> 3.7-0    ) [CRAN]
+ 91: sctransform  (0.4.1     -> 0.4.3    ) [CRAN]
+ 92: ROCR         (1.0-11    -> 1.0-12   ) [CRAN]
+ 93: reticulate   (1.38.0    -> 1.45.0   ) [CRAN]
+ 94: RANN         (2.6.1     -> 2.6.2    ) [CRAN]
+ 95: plotly       (4.10.4    -> 4.12.0   ) [CRAN]
+ 96: pbapply      (1.7-2     -> 1.7-4    ) [CRAN]
+ 97: patchwork    (1.2.0     -> 1.3.2    ) [CRAN]
+ 98: miniUI       (0.1.1.1   -> 0.1.2    ) [CRAN]
+ 99: igraph       (2.0.3     -> 2.2.2    ) [CRAN]
+100: ggridges     (0.5.6     -> 0.5.7    ) [CRAN]
+101: ggrepel      (0.9.5     -> 0.9.7    ) [CRAN]
+102: fitdistrplus (1.2-1     -> 1.2-6    ) [CRAN]
+103: fastDummies  (1.7.3     -> 1.7.5    ) [CRAN]
+104: cowplot      (1.1.3     -> 1.2.0    ) [CRAN]
+105: SeuratObject (4.1.4     -> 5.3.0    ) [CRAN]
+106: segmented    (2.1-0     -> 2.2-1    ) [CRAN]
+107: kernlab      (0.9-32    -> 0.9-33   ) [CRAN]
+108: Seurat       (4.4.0     -> 5.4.0    ) [CRAN]
+109: mixtools     (2.0.0     -> 2.0.0.1  ) [CRAN]
+110: mclust       (6.1.1     -> 6.1.2    ) [CRAN]
+
+Enter one or more numbers, or an empty line to skip updates:
+── R CMD build ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+✔  checking for file ‘/tmp/RtmprsUaya/remotes9dad76abb6a6/LuChenLab-r-scATS-a3a6995/DESCRIPTION’ ...
+─  preparing ‘scATS’:
+✔  checking DESCRIPTION meta-information ...
+─  excluding invalid files (341ms)
+   Subdirectory 'demo' contains invalid file names:
+     ‘demo.bam’ ‘demo.bam.bai’ ‘demo.gtf’ ‘demo_seurat.Rds’
+─  checking for LF line-endings in source and make files and shell scripts
+─  checking for empty or unneeded directories
+   Removed empty directory ‘scATS/demo’
+─  building ‘scATS_0.5.5.tar.gz’
+
+Installing package into ‘/mnt/data3/xuzijie/package’
+(as ‘lib’ is unspecified)
+* installing *source* package ‘scATS’ ...
+** this is package ‘scATS’ version ‘0.5.5’
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘AnnotationDbi’
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘AnnotationDbi’
+** testing if installed package can be loaded from final location
+Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘AnnotationDbi’
+** testing if installed package keeps a record of temporary installation path
+* DONE (scATS)
+
+
+> sessionInfo()
+R version 4.5.1 (2025-06-13)
+Platform: x86_64-conda-linux-gnu
+Running under: Ubuntu 18.04.6 LTS
+
+Matrix products: default
+BLAS/LAPACK: /mnt/data3/xuzijie/myconda3/envs/r451/lib/libopenblasp-r0.3.30.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C
+
+time zone: Asia/Shanghai
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+loaded via a namespace (and not attached):
+ [1] processx_3.8.4 compiler_4.5.1 R6_2.5.1       cli_3.6.3      tools_4.5.1
+ [6] curl_5.2.1     remotes_2.5.0  desc_1.4.3     callr_3.7.6    ps_1.7.7
+[11] pkgbuild_1.4.4

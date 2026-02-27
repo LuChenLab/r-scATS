@@ -127,17 +127,22 @@
 </tr>
 </tbody>
 </table>
-<p>To install <code class="docutils literal notranslate"><span class="pre">scATS</span></code>, you have two options: either install directly from GitHub or use the compressed source file:</p>
+<p>To install <code class="docutils literal notranslate"><span class="pre">scATS</span></code>, you have two options: either install directly from GitHub or use the compressed source file.
+In addition, we provide installation [logs] (https://github.com/LuChenLab/r-scATS/tree/main/logs) for three successful installation methods to ensure full reproducibility.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install from GitHub if remotes package is not installed</span>
 <span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">requireNamespace</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">quietly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="w">    </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">)</span>
 
-<span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS/scATS/&quot;</span><span class="p">)</span>
+<span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, you can install <code class="docutils literal notranslate"><span class="pre">scATS</span></code> using the source file downloaded from the <a class="reference external" href="https://github.com/LuChenLab/r-scATS">repository</a> :</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install scATS from a downloaded source file</span>
-<span class="n">R</span><span class="w"> </span><span class="n">CMD</span><span class="w"> </span><span class="n">INSTALL</span><span class="w"> </span><span class="n">scATS_0.5.5.tar.gz</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install scATS from a downloaded source file</span>
+R<span class="w"> </span>CMD<span class="w"> </span>INSTALL<span class="w"> </span>scATS_0.5.5.tar.gz
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># or</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;scATS_0.5.5.tar.gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
