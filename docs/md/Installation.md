@@ -19,7 +19,7 @@ scATS has been developed with `R 4.0.0` and the following packages are needed to
 
 
 To install `scATS`, you have two options: either install directly from GitHub or use the compressed source file.
-In addition, we provide installation <a href="https://github.com/LuChenLab/r-scATS/tree/main/logs">logs</a> for three successful installation methods to ensure full reproducibility.
+In addition, we provide installation logs for three successful installation methods to ensure full reproducibility in <a href="https://github.com/LuChenLab/r-scATS/tree/main/logs">here</a>.
 
 ```r
 # Install from GitHub if remotes package is not installed
