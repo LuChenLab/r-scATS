@@ -1,0 +1,51 @@
+Sending build context to Docker daemon  94.02MB
+Step 1/4 : FROM xzj/scats-base:r451
+ ---> e7fd8ff4cc70
+Step 2/4 : WORKDIR /scATS
+ ---> Running in 3fab9cb3b664
+Removing intermediate container 3fab9cb3b664
+ ---> 248a3c33a755
+Step 3/4 : COPY . /scATS
+ ---> 25ec7e0cf027
+Step 4/4 : RUN R -e "install.packages('/scATS', repos=NULL, type='source')"
+ ---> Running in e633be6ac7d1
+
+R version 4.5.1 (2025-06-13) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> install.packages('/scATS', repos=NULL, type='source')
+[91mInstalling package into ‘/usr/local/lib/R/site-library’
+(as ‘lib’ is unspecified)
+[0m[91m* installing *source* package ‘scATS’ ...
+[0m[91m** this is package ‘scATS’ version ‘0.5.6’
+[0m[91m** using staged installation
+[0m[91m** R
+[0m[91m** demo
+[0m[91m** byte-compile and prepare package for lazy loading
+[0m[91m** help
+[0m[91m*** installing help indices
+[0m[91m** building package indices
+[0m[91m** testing if installed package can be loaded from temporary location
+[0m[91m** testing if installed package can be loaded from final location
+[0m[91m** testing if installed package keeps a record of temporary installation path
+[0m[91m* DONE (scATS)
+[0m> 
+Removing intermediate container e633be6ac7d1
+ ---> 5858649263a7
+Successfully built 5858649263a7
+Successfully tagged xzj/scats-evi:r451

@@ -2,6 +2,7 @@
 % Please edit documentation in R/TSS.R
 \name{FindMarkers}
 \alias{FindMarkers}
+\alias{FindMarkersByTheta}
 \title{FindMarkers}
 \usage{
 FindMarkers(
@@ -15,6 +16,16 @@ FindMarkers(
   deltaPSI = 0.1,
   majorOnly = TRUE,
   method = NULL,
+  cores = 1
+)
+
+FindMarkersByTheta(
+  object,
+  gene = NULL,
+  cells = NULL,
+  groupBy,
+  group1 = NULL,
+  group2 = NULL,
   cores = 1
 )
 }

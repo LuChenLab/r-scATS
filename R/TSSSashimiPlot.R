@@ -59,7 +59,7 @@ Sashimi <- function(object, bam, sep = "_", gtf, txdb = NULL, gene = NULL, Cells
   if(is.character(gtf)) {
     stopifnot(file.exists(gtf))
     if(is.null(txdb) | !is(txdb, "TxDb")) {
-      txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtf)))
+      txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtf)))
     }
     gtf <- rtracklayer::readGFFAsGRanges(gtf)
     stopifnot(all(c("gene_name", "type") %in% names(S4Vectors::mcols(gtf))))
@@ -371,7 +371,7 @@ StartSite <- function(object, bam, sep = "_", gtf, txdb = NULL, gene = NULL, Cel
   if(is.character(gtf)) {
     stopifnot(file.exists(gtf))
     if(is.null(txdb) | !is(txdb, "TxDb")) {
-      txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtf)))
+      txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtf)))
     }
     gtf <- rtracklayer::readGFFAsGRanges(gtf)
     stopifnot(all(c("gene_name", "type") %in% names(S4Vectors::mcols(gtf))))

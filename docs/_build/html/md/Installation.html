@@ -48,7 +48,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-selection">Version Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-logs">Installation Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-guide">Docker Guide</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Disease%20model.html">Disease model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Getting%20Help.html">Getting Help</a></li>
@@ -81,70 +88,106 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
-<p>scATS has been developed with <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">4.0.0</span></code> and the following packages are needed to be installed in <code class="docutils literal notranslate"><span class="pre">R</span></code> (R scripts in <code class="docutils literal notranslate"><span class="pre">scATS</span></code> automatically check to see if an R library is already installed and then install those that are needed. So no need for manual preinstallation):</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>module</p></th>
-<th class="head"><p>version</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>data.table</p></td>
-<td><p>&gt;= 1.15.4</p></td>
-</tr>
-<tr class="row-odd"><td><p>fitdistrplus</p></td>
-<td><p>&gt;= 1.2-1</p></td>
-</tr>
-<tr class="row-even"><td><p>GenomicAlignments</p></td>
-<td><p>&gt;= 1.22.1</p></td>
-</tr>
-<tr class="row-odd"><td><p>GenomicFeatures</p></td>
-<td><p>&gt;= 1.38.2</p></td>
-</tr>
-<tr class="row-even"><td><p>GenomicRanges</p></td>
-<td><p>&gt;= 1.38.0</p></td>
-</tr>
-<tr class="row-odd"><td><p>ggbio</p></td>
-<td><p>&gt;= 1.42.0</p></td>
-</tr>
-<tr class="row-even"><td><p>mclust</p></td>
-<td><p>&gt;= 6.1.1</p></td>
-</tr>
-<tr class="row-odd"><td><p>mixtools</p></td>
-<td><p>&gt;= 2.0.0</p></td>
-</tr>
-<tr class="row-even"><td><p>parallel</p></td>
-<td><p>&gt;= 3.6.0</p></td>
-</tr>
-<tr class="row-odd"><td><p>rtracklayer</p></td>
-<td><p>&gt;= 1.46.0</p></td>
-</tr>
-<tr class="row-even"><td><p>Seurat</p></td>
-<td><p>&gt;= 4.4.0</p></td>
-</tr>
-<tr class="row-odd"><td><p>SummarizedExperiment</p></td>
-<td><p>&gt;= 1.16.1</p></td>
-</tr>
-</tbody>
-</table>
-<p>To install <code class="docutils literal notranslate"><span class="pre">scATS</span></code>, you have two options: either install directly from GitHub or use the compressed source file.
-In addition, we provide installation logs for three successful installation methods to ensure full reproducibility in <a href="https://github.com/LuChenLab/r-scATS/tree/main/logs">here</a>.</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install from GitHub if remotes package is not installed</span>
-<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">requireNamespace</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">quietly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
-<span class="w">    </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">)</span>
-
-<span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">)</span>
+<section id="version-selection">
+<h2>Version Selection<a class="headerlink" href="#version-selection" title="Permalink to this heading"></a></h2>
+<p>Please choose the appropriate version of scATS based on your R environment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">v0.5.6</span></code> (Recommended): For users with R &gt;= 4.4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v0.5.5</span></code> (Legacy): For users with R &lt; 4.4.</p></li>
+</ul>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>System Dependencies</p></li>
+</ul>
+<p>Before installing scATS, please ensure that <code class="docutils literal notranslate"><span class="pre">samtools</span></code> (version &gt;= 1.19.2) is installed and available in your system’s PATH.</p>
+<ul class="simple">
+<li><p>R Dependencies
+The following R packages are required for all versions of scATS. You can install them using the following command:</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&#39;remotes&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;R.utils&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s">&#39;TTR&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s">&#39;VGAM&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;prettyunits&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;httr2&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;mclust&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;mixtools&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Note:</strong> 💡 For v0.5.5, you must manually install the smoother package from the CRAN archive before installing scATS:</p>
+</div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;https://cran.r-project.org/src/contrib/Archive/smoother/smoother_1.3.tar.gz&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;source&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">scATS</span></code>, you have two options: either install directly from GitHub or use the compressed source file.</p>
+<ul class="simple">
+<li><p>Via GitHub:</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Via Source File:</p></li>
+</ul>
 <p>Alternatively, you can install <code class="docutils literal notranslate"><span class="pre">scATS</span></code> using the source file downloaded from the <a class="reference external" href="https://github.com/LuChenLab/r-scATS">repository</a> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install scATS from a downloaded source file</span>
-R<span class="w"> </span>CMD<span class="w"> </span>INSTALL<span class="w"> </span>scATS_0.5.5.tar.gz
+R<span class="w"> </span>CMD<span class="w"> </span>INSTALL<span class="w"> </span>scATS_0.5.6.tar.gz
 </pre></div>
 </div>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># or</span>
-<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;scATS_0.5.5.tar.gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;scATS_0.5.6.tar.gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="installation-logs">
+<h2>Installation Logs<a class="headerlink" href="#installation-logs" title="Permalink to this heading"></a></h2>
+<p>To ensure reproducibility, we provide comprehensive installation logs for three different installation methods across multiple R versions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/LuChenLab/r-scATS/tree/main/logs/R4.5">Installation Logs for R 4.5.x</a></p></li>
+<li><p><a class="reference external" href="https://github.com/LuChenLab/r-scATS/tree/main/logs/R4.0">Installation Logs for R 4.0.x</a></p></li>
+</ul>
+</section>
+<section id="docker-guide">
+<h2>Docker Guide<a class="headerlink" href="#docker-guide" title="Permalink to this heading"></a></h2>
+<p>We provide a pre-configured Docker container to eliminate system-specific dependency conflicts.</p>
+<ul class="simple">
+<li><p>Step 1: Install Docker
+If you do not have Docker installed, please follow the <a class="reference external" href="https://docs.docker.com/engine/install/">official Docker installation guide</a>.</p></li>
+<li><p>Step 2: Run the scATS Container
+Pull the pre-built image from the GitHub Container Registry and start an interactive session:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pull the image</span>
+docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/kayla-xu/scats-evi:r451
+
+<span class="c1"># Run the container</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>ghcr.io/kayla-xu/scats-evi:r451
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Step 3: Build Docker Locally (Optional)
+If you prefer to build the image locally, use the provided Dockerfiles. Building logs are also provided for your reference.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the base environment</span>
+docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-t<span class="w"> </span>scATS/base:r451<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-f<span class="w"> </span>Dockerfile_base_r451<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>Dockerfile_base_r451.log
+
+<span class="c1"># Build the final scATS image</span>
+docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-t<span class="w"> </span>scATS/evi:r451<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-f<span class="w"> </span>Dockerfile_scats_r451<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>Dockerfile_scats_r451.log
+</pre></div>
+</div>
+</section>
 </section>
 
 

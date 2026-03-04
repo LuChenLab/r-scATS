@@ -1,0 +1,237 @@
+setwd("/mnt/raid61/Personal_data/tangchao/Mouse_iso_atlas")
+library(MASS)
+library(igraph)
+library(ggplot2)
+library(pbapply)
+library(parallel)
+library(rootSolve)
+library(data.table)
+library(Biostrings)
+library(GenomicFeatures)
+library(GenomicAlignments)
+
+IRangesList2GRangesList <- function(x, chr, strand) {
+  stopifnot(is(x, "IRangesList"))
+  stopifnot(is.character(chr)); stopifnot(length(chr) == 1)
+  stopifnot(is.character(strand)); stopifnot(length(strand) == 1); stopifnot(is.element(strand, c("+", "-", "*")))
+  oldname <- names(x)
+  if(is.null(oldname)) names(x) <- seq_along(x)
+  stopifnot(!any(duplicated(names(x))))
+  y <- unlist(x)
+  id <- names(y)
+  names(y) <- NULL
+  y <- GRangesList(split(GRanges(chr, y, strand), id))
+  y <- y[names(x)]
+  if(is.null(oldname)) names(y) <- NULL
+  return(y)
+}
+
+
+minreadspergene <- 50
+resolution <- 10
+minpct <- 1
+minreads <- 10
+
+
+gtfFile <- paste0("/mnt/raid61/Personal_data/tangchao/Document/gencode/mouse/release_M25/gencode.vM25.primary_assembly.annotation.sorted.gtf")
+gtf <- as.data.table(rtracklayer::readGFF(gtfFile))
+PCGs <- gtf[type == "gene" & gene_type == "protein_coding", gene_id]
+txdb <- makeTxDbFromGFF(gtfFile)
+E2G <- exonsBy(txdb, by = "gene")
+E2G <- E2G[names(E2G) %in% PCGs]
+B2G <- mclapply(E2G, function(x) unique(unlist(lapply(seq_along(x), function(i) start(x[i]):end(x[i])))), mc.cores = 15)
+
+RefTES <- gtf[type == "transcript" & gene_id %in% names(E2G), .(gene_id, TES = ifelse(strand == "+", end, start))]
+
+C57_sc <- list.files("/mnt/raid66/Personal_data/zhangdan/MIA/01barcodeassign/01prepare/ONT_rmbc_umi_linker_fq_V4/fastq/new/new2/new3/bam2", pattern = "bam$", full.names = TRUE)
+C57_bk <- list.files("/mnt/data2/tangchao/Mouse_iso_atlas/analysis/01.IsoformReconstruction/03.Realignment/bk_ontcDNA_C571", pattern = "bam$", full.names = TRUE)
+
+Balbc_sc <- list.files("/mnt/raid66/Personal_data/zhangdan/MIA/01barcodeassign/01prepare/ONT_Bc_PC_rmbc_umi_linker/minimap2", pattern = "bam$", full.names = TRUE)
+Balbc_bk <- list.files("/mnt/data2/tangchao/Mouse_iso_atlas/analysis/01.IsoformReconstruction/03.Realignment/bk_ontcDNA_Balbc1", pattern = "bam$", full.names = TRUE)
+
+bamFile <- c(C57_sc, C57_bk, Balbc_sc, Balbc_bk)
+bamFile <- bamFile[!grepl("pancreas", bamFile)]
+
+bam <- C57_bk[1]
+
+param = Rsamtools::ScanBamParam(flag = Rsamtools::scanBamFlag(isNotPassingQualityControls = FALSE,
+                                                              isSecondaryAlignment = FALSE,
+                                                              isSupplementaryAlignment = FALSE),
+                                what = c("qname", "flag"),
+                                mapqFilter = 60,
+                                reverseComplement = FALSE)
+bam <- GenomicAlignments::readGAlignments(file = bam, param = param, use.names = T)
+
+BAM <- mclapply(seqlevels(bam), function(i) {
+  b1 <- subset(bam, as.vector(seqnames(bam) == i & strand(bam) == "+"))
+  b2 <- subset(bam, as.vector(seqnames(bam) == i & strand(bam) == "-"))
+  if(length(b1) > 0) {
+    m1 <- IRangesList2GRangesList(cigarRangesAlongReferenceSpace(cigar(b1), ops = "M", with.ops = F, pos = start(b1)), i, "+")
+    names(m1) <- mcols(b1)$qname
+  } else {
+    m1 <- NULL
+  }
+  if(length(b2) > 0) {
+    m2 <- IRangesList2GRangesList(cigarRangesAlongReferenceSpace(cigar(b2), ops = "M", with.ops = F, pos = start(b2)), i, "-")
+    names(m2) <- mcols(b2)$qname
+  } else {
+    m2 <- NULL
+  }
+  if(is.null(m1) & is.null(m2)) return(NULL)
+  if(!is.null(m1) & is.null(m2)) return(m1)
+  if(is.null(m1) & !is.null(m2)) return(m2)
+  if(!is.null(m1) & !is.null(m2)) return(c(m1, m2))
+}, mc.cores = length(seqlevels(bam)))
+BAM <- BAM[!mapply(is.null, BAM)]
+BAM <- suppressWarnings(do.call(c, BAM))
+
+R2G <- suppressWarnings(findOverlaps(BAM, E2G, ignore.strand = FALSE))
+R2G <- data.table(gene_id = names(E2G)[subjectHits(R2G)], read_id = names(BAM)[queryHits(R2G)])
+R2G <- R2G[gene_id %in% R2G[, .N, gene_id][N >= minreadspergene, gene_id]]
+R2G <- merge(R2G, gtf[type == "gene", .(seqid, gene_id, gene_strand = strand)], by = "gene_id")
+R2G <- merge(R2G, data.table(read_id = mcols(bam)$qname, start = start(bam), end = end(bam), strand = as.vector(strand(bam))), by = "read_id")
+
+if(R2G[, any(duplicated(read_id))]) {
+  mar <- R2G[read_id %in% R2G[, .N, read_id][N > 1, read_id], .(read_id, gene_id)]
+  BAM <- BAM[mar[, read_id]]
+  E2G <- E2G[mar[, gene_id]]
+  BAM <- mclapply(BAM, ranges, mc.cores = 15)
+  E2G <- mclapply(E2G, function(x) reduce(ranges(x)), mc.cores = 15)
+  ols <- data.table(LG = mcmapply(function(x) sum(width(x)), E2G, mc.cores = 15),
+                    LR = mcmapply(function(x) sum(width(x)), BAM, mc.cores = 15),
+                    M = mcmapply(function(i) sum(coverage(c(BAM[[i]], E2G[[i]])) > 1), seq_len(nrow(mar)), mc.cores = 15))
+  mar <- data.table(mar, ols)
+  mar <- mar[, .SD[M == max(M)], .(read_id)][, .SD[LG == min(LG)], .(read_id)]
+  R2G <- rbind(R2G[!read_id %in% mar[, read_id]], merge(R2G, mar[, .(read_id, gene_id)], by = c("read_id", "gene_id")))
+}
+setkey(R2G, gene_id, read_id)
+
+R2G$cigar <- cigar(bam[R2G$read_id])
+R2G[strand == "+", clip := grepl("S$", cigar)]
+R2G[strand == "-", clip := grepl("^([[:digit:]]+)S", cigar)]
+R2G[, cigar := NULL]
+
+
+# rm("BAM"); rm("bam"); gc()
+
+gs <- R2G[, .N, .(gene_id, seqid, strand)][N >= minreadspergene]
+
+RLs <- pblapply(seq_len(nrow(gs)), function(i) {
+  gi <- gs[i, gene_id]
+  si <- gs[i, strand]
+  ci <- gs[i, seqid]
+  if(si == "-") {
+    x <- R2G[gene_id == gi, start]
+    F1 <- ecdf(x)
+    L1 <- data.table(pos = min(x):max(x), CDR = F1(min(x):max(x)))
+    L1 <- merge(data.table(pos = x)[, .N, pos], L1, by = "pos", all.y = T)[order(pos)]
+    setkey(L1, pos)
+    L1[is.na(N), N := 0]
+    B2R <- reduce(L1[N > 0, IRanges(pos - resolution, pos + resolution)])
+    L1[N > 0 | (inrange(pos, start(B2R), end(B2R)) & pos %in% B2G[[gi]]), I := seq_len(.N)]
+    F2 <- ecdf(L1[!is.na(I), rep(I, N)])
+    L1[!is.na(I), CDRs := F2(I)]
+    L1[!is.na(I), CDRs := smoother::smth.gaussian(L1[!is.na(I), CDR], window = resolution, tails = TRUE)]
+    L1[!is.na(I), LocalDelta := CDR - CDRs]
+    F3 <- L1[!is.na(I), splinefun(I, CDRs)]
+    L1[!is.na(I), CDRd := F3(I, deriv = 1)]
+    L1[!is.na(I), CDRds := smoother::smth.gaussian(L1[!is.na(I), CDRd], window = resolution, tails = TRUE)]
+    L1[, Ref := pos %in% RefTES[gene_id == gi, TES]]
+
+    F4 <- L1[!is.na(I), splinefun(I, CDRds)]
+    F5 <- function(x) F4(x, deriv = 1)
+    roots <- uniroot.all(F5, L1[!is.na(I), c(min(I) - resolution, max(I) + resolution)], n = L1[!is.na(I), max(I)] + 2 * resolution)
+    Ps <- pmax(roots[F4(roots - .1) < F4(roots) & F4(roots + .1) < F4(roots)], 1)
+    m1 <- data.table(start = suppressWarnings(mapply(function(x) max(roots[roots < x]), Ps)),
+                     end = suppressWarnings(mapply(function(x) min(roots[roots > x]), Ps)),
+                     pos = round(Ps))
+    m1[, P := (F2(end) - F2(start)) * 100]
+    m1[, R := P * length(x) / 100]
+    m1 <- m1[R >= minreads]
+    m1$Ref <- mapply(function(i) L1[I > m1[i, start] & I < m1[i, end], any(Ref)], seq_len(nrow(m1)))
+    m1$pos <- plyr::mapvalues(m1$pos, L1$I, L1$pos, warn_missing = F)
+    m1 <- m1[Ref == TRUE | P >= minpct]
+    if(m1[, .N > 0]) {
+      res1 <- m1[, .(gene_id = gi, TES = pos, Pct = P)]
+      res2 <- lapply(res1[, TES], function(i) {
+        j <- merge(data.table(pos = c((i - 50):(i + 50)), CDR = F1((i - 50):(i + 50))), L1[, .(pos, LocalDelta, CDRds)], by = "pos", all.x = T)
+        j[is.na(CDRds), CDRds := 0]
+        j[is.na(LocalDelta), LocalDelta := 0]
+        j[order(pos), .(gene_id = gi, TES = i, pos = -50:50,
+                        CDR = as.numeric(scale(CDR)),
+                        CDRd = as.numeric(scale(CDRds)),
+                        Delta = as.numeric(scale(LocalDelta)))]
+      })
+      res2 <- do.call(rbind, res2)
+    }
+  } else {
+    x <- R2G[gene_id == gi, - end]
+    F1 <- ecdf(x)
+    L1 <- data.table(pos = (min(x) - resolution):(max(x) + resolution),
+                     CDR = F1((min(x) - resolution):(max(x) + resolution)))
+    L1 <- merge(data.table(pos = x)[, .N, pos], L1, by = "pos", all.y = T)[order(pos)]
+    setkey(L1, pos)
+    L1[is.na(N), N := 0]
+    B2R <- reduce(L1[N > 0, IRanges(pos - resolution, pos + resolution)])
+    L1[N > 0 | (inrange(pos, start(B2R), end(B2R)) & pos %in% B2G[[gi]]), I := seq_len(.N)]
+    F2 <- ecdf(L1[!is.na(I), rep(I, N)])
+    L1[!is.na(I), CDRs := F2(I)]
+    L1[!is.na(I), CDRs := smoother::smth.gaussian(L1[!is.na(I), CDR], window = resolution, tails = TRUE)]
+    L1[!is.na(I), LocalDelta := CDR - CDRs]
+    F3 <- L1[!is.na(I), splinefun(I, CDRs)]
+    L1[!is.na(I), CDRd := F3(I, deriv = 1)]
+    L1[!is.na(I), CDRds := smoother::smth.gaussian(L1[!is.na(I), CDRd], window = resolution, tails = TRUE)]
+    L1[, Ref := pos %in% - RefTES[gene_id == gi, TES]]
+
+    F4 <- L1[!is.na(I), splinefun(I, CDRds)]
+    F5 <- function(x) F4(x, deriv = 1)
+    roots <- uniroot.all(F5, L1[!is.na(I), c(min(I) - resolution, max(I) + resolution)], n = L1[!is.na(I), max(I)] + 2 * resolution)
+    Ps <- pmax(roots[F4(roots - .1) < F4(roots) & F4(roots + .1) < F4(roots)], 1)
+    m1 <- data.table(start = suppressWarnings(mapply(function(x) max(roots[roots < x]), Ps)),
+                     end = suppressWarnings(mapply(function(x) min(roots[roots > x]), Ps)),
+                     pos = round(Ps))
+    m1[, P := (F2(end) - F2(start)) * 100]
+    m1[, R := P * length(x) / 100]
+    m1 <- m1[R >= minreads]
+    m1$Ref <- mapply(function(i) L1[I > m1[i, start] & I < m1[i, end], any(Ref)], seq_len(nrow(m1)))
+    m1$pos <- plyr::mapvalues(m1$pos, L1$I, L1$pos, warn_missing = F)
+    m1 <- m1[Ref == TRUE | P >= minpct]
+    if(m1[, .N > 0]) {
+      res1 <- m1[, .(gene_id = gi, TES = - pos, Pct = P)]
+      res2 <- lapply(res1[, - TES], function(i) {
+        j <- merge(data.table(pos = c((i - 50):(i + 50)), CDR = F1((i - 50):(i + 50))), L1[, .(pos, LocalDelta, CDRds)], by = "pos", all.x = T)
+        j[is.na(CDRds), CDRds := 0]
+        j[is.na(LocalDelta), LocalDelta := 0]
+        j[order(pos), .(gene_id = gi, TES = - i, pos = -50:50,
+                        CDR = as.numeric(scale(CDR)),
+                        CDRd = as.numeric(scale(CDRds)),
+                        Delta = as.numeric(scale(LocalDelta)))]
+      })
+      res2 <- do.call(rbind, res2)
+    }
+  }
+  if(m1[, .N > 0]) {
+    res <- merge(res1, res2)
+    res[, TES := paste0(ci, ":", TES, ":", si)]
+  } else {
+    res <- NULL
+  }
+  res
+}, cl = 20)
+
+RLs <- do.call(rbind, RLs)
+
+saveRDS(RLs, file = "/mnt/raid61/Personal_data/tangchao/Temp/bk_ontcDNA_C57_F_11m_cortex.Rds")
+
+
+ggplot(L1[!is.na(I)], aes(x = pos)) +
+  geom_step(aes(y = CDR)) +
+  geom_step(aes(y = CDRs), colour = "red") +
+  geom_line(aes(y = CDRds), colour = "green") +
+  scale_x_continuous(limits = c(m1[end > 10, min(pos) - 100], m1[end > 10, max(pos) + 100])) +
+  geom_vline(xintercept = m1[Ref == F, pos], lty = 2, alpha = .5) +
+  geom_vline(xintercept = m1[Ref == T, pos], lty = 2, alpha = .5, colour = "red")
+
+
+
+

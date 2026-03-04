@@ -9,14 +9,17 @@ TSSCDF(
   bam,
   sep = "_",
   genes,
-  gtf,
+  gtfFile,
   txdb = NULL,
   UTROnly = FALSE,
   MinGeneReads = 500,
+  scDR = FALSE,
+  MinscTSSReads = 5,
   mapqFilter = 255,
   isSecondaryAlignment = FALSE,
   isSupplementaryAlignment = FALSE,
   isDuplicate = NA,
+  Upstream = 1000,
   min.TSS.percent = 5,
   min.local.percent = 1,
   p.cutoff = 0.01,
@@ -34,13 +37,15 @@ TSSCDF(
 
 \item{genes}{Genes for ATS inference and quantification.}
 
-\item{gtf}{Path of GTF file or GRanges file of GTF file.}
-
 \item{txdb}{A \code{TxDb} object.}
 
 \item{UTROnly}{Only infer ATS within annotated 5'-UTR regions or first exons of transcripts without 5'-UTR.}
 
 \item{MinGeneReads}{The minimum reads of a gene for TSS inference.}
+
+\item{scDR}{Whether to estimate the degradation rate of single cell TSS.}
+
+\item{MinscTSSReads}{Minimum reads of single cell TSS reads for single cell degradation rate estimation.}
 
 \item{mapqFilter, isSecondaryAlignment, isSupplementaryAlignment, isDuplicate}{parameters for \code{ScanBamParam} to read bam file(s).}
 
@@ -59,6 +64,8 @@ TSSCDF(
 \item{verbose}{A logical controlling if a text progress bar is displayed.}
 
 \item{project.name}{The name of project.}
+
+\item{gtf}{Path of GTF file or GRanges file of GTF file.}
 }
 \description{
 TSS inference and quantification

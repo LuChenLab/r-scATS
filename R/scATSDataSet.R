@@ -1,4 +1,5 @@
 #' scATSDataSet
+#' @importClassesFrom SummarizedExperiment RangedSummarizedExperiment
 
 setClass("scATSDataSet",
          contains = "RangedSummarizedExperiment",
@@ -7,7 +8,7 @@ setClass("scATSDataSet",
            project.name = "ANY"
          ))
 
-scATSDataSet <- function(se, reductions = NULL, project.name = NULL, ...) {
+scATSDataSet <- function(se, reductions = NULL, project.name = NULL, parameters = NULL, ...) {
   if (!is(se, "RangedSummarizedExperiment")) {
     if (is(se, "SummarizedExperiment")) {
       se <- as(se, "RangedSummarizedExperiment")
@@ -25,6 +26,7 @@ scATSDataSet <- function(se, reductions = NULL, project.name = NULL, ...) {
   object <- new("scATSDataSet", se, reductions = reductions, project.name = project.name, ...)
   # stash the package version
   S4Vectors::metadata(object)[["version"]] <- packageVersion("scATS")
+  S4Vectors::metadata(object)[["parameters"]] <- parameters
   # validObject(object)
   return(object)
 }
@@ -117,6 +119,19 @@ setMethod(f = "counts",
             cells <- cells %||% colnames(object)
             TSSs <- TSSs %||% row.names(object)
             SummarizedExperiment::assay(object[TSSs, cells], "counts")
+          })
+
+#' @export
+setGeneric("theta", function(object, cells = NULL, TSSs = NULL) standardGeneric("theta"))
+
+setMethod(f = "theta",
+          signature = "scATSDataSet",
+          definition = function(object, cells = NULL, TSSs = NULL) {
+            if(!is.null(cells)) stopifnot(all(is.element(cells, colnames(object))))
+            if(!is.null(TSSs)) stopifnot(all(is.element(TSSs, row.names(object))))
+            cells <- cells %||% colnames(object)
+            TSSs <- TSSs %||% row.names(object)
+            SummarizedExperiment::assay(object[TSSs, cells], "theta")
           })
 
 #'

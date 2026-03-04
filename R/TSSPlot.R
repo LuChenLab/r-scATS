@@ -59,10 +59,10 @@ TSSPlot <- function(object, bam, gtf, txdb = NULL, gene = NULL, Cells = NULL, Ex
   }
 
   if(is.null(txdb)) {
-    txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtf)))
+    txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtf)))
   } else {
     if(!is(txdb, "TxDb")) {
-      txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtf)))
+      txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtf)))
     }
   }
   EBG <- GenomicFeatures::exonsBy(txdb, by = "gene")
@@ -391,7 +391,7 @@ PlotGene <- function(gtffile = NULL, txdb = NULL, gtfrange = NULL, gene) {
   if(is.null(txdb) | is.null(gtfrange)) stopifnot(!is.null(gtffile))
   if(is.null(txdb) | is.null(gtfrange)) stopifnot(file.exists(gtffile))
   if(is.null(txdb)) {
-    txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtffile)))
+    txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtffile)))
   }
   if(is.null(gtfrange)) gtfrange <- rtracklayer::import(gtffile)
   stopifnot(is.element(gene, with(as.data.frame(gtfrange), gene_id)) | is.element(gene, with(as.data.frame(gtfrange), gene_name)))
@@ -415,7 +415,7 @@ PlotR1 <- function(bam, gene, gtffile = NULL, txdb = NULL, gtfrange = NULL, exon
   if(is.null(txdb) | is.null(gtfrange)) stopifnot(!is.null(gtffile))
   if(is.null(txdb) | is.null(gtfrange)) stopifnot(file.exists(gtffile))
   if(is.null(txdb)) {
-    txdb <- suppressMessages(suppressWarnings(GenomicFeatures::makeTxDbFromGFF(gtffile)))
+    txdb <- suppressMessages(suppressWarnings(txdbmaker::makeTxDbFromGFF(gtffile)))
   }
   if(is.null(gtfrange)) gtfrange <- rtracklayer::import(gtffile)
   stopifnot(is.element(gene, with(as.data.frame(gtfrange), gene_id)) | is.element(gene, with(as.data.frame(gtfrange), gene_name)))

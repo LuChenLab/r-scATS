@@ -1,0 +1,37 @@
+FROM ghcr.io/rocker-org/r-ver:4.5.1
+
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libfontconfig1-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libtiff5-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libglpk-dev \
+    samtools \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo "options(repos = c(CRAN='https://cloud.r-project.org'))" \
+    >> /usr/local/lib/R/etc/Rprofile.site
+
+
+RUN R -e "install.packages(c('remotes','BiocManager'))"
+
+
+COPY DESCRIPTION /tmp/DESCRIPTION
+
+RUN R -e "remotes::install_deps('/tmp', dependencies = TRUE, upgrade = 'never')"
+
+RUN R -e "BiocManager::install(c( \
+  'GenomicAlignments','GenomicFeatures','GenomicRanges', \
+  'ggbio','rtracklayer','SummarizedExperiment','txdbmaker', \
+  'biomaRt','AnnotationDbi' \
+), ask=FALSE, update=FALSE)"
+
+
+RUN R -e "install.packages(c('R.utils','TTR','VGAM','prettyunits',httr2))"

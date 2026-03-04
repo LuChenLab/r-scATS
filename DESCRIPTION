@@ -1,16 +1,25 @@
 Package: scATS
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.5.4
+Version: 0.5.6
 Author: Chao Tang
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: GPL (>= 3)
+License: MIT
 Encoding: UTF-8
-Imports: data.table, fitdistrplus, GenomicAlignments, GenomicFeatures,
-        GenomicRanges, ggbio, mclust, mixtools, parallel, rtracklayer,
-        Seurat, SummarizedExperiment
-RoxygenNote: 7.1.1
-NeedsCompilation: no
-Packaged: 2025-01-08 07:34:48 UTC; tangchao
+LazyData: true
+Imports: 
+    data.table,
+    fitdistrplus,
+    GenomicAlignments,
+    GenomicFeatures,
+    GenomicRanges,
+    ggbio,
+    mclust,
+    mixtools,
+    parallel,
+    rtracklayer,
+    Seurat,
+    SummarizedExperiment
+RoxygenNote: 7.3.3

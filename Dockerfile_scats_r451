@@ -1,0 +1,7 @@
+FROM xzj/scats-base:r451
+
+WORKDIR /scATS
+COPY . /scATS
+
+# 安装 scATS
+RUN R -e "install.packages('/scATS', repos=NULL, type='source')"

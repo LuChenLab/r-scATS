@@ -1,5 +1,5 @@
 ## scATS
-![GitHub release (latest SemVer)](https://img.shields.io/badge/Version-v0.5.5-yellowgreen) ![GitHub release (latest SemVer)](https://img.shields.io/badge/Language-R-yellowgreen)
+![GitHub release (latest SemVer)](https://img.shields.io/badge/Version-v0.5.6-yellowgreen) ![GitHub release (latest SemVer)](https://img.shields.io/badge/Language-R-yellowgreen)
 
 
 **An R package for quantifying alternative transcription start site (ATS) in 5' single-cell RNA-seq data**
@@ -33,49 +33,100 @@ We further applied scATS on three different 5’ scRNA-seq datasets, including m
 
 ## <span id="Requirements">Requirements</span>
 
-scATS has been developed with `R 4.0.0` and the following packages are needed to be installed in `R` (R scripts in `scATS` automatically check to see if an R library is already installed and then install those that are needed. So no need for manual preinstallation):
+Please choose the appropriate version of `scATS` based on your R environment:
 
-| Packages        |    Version   |
-| -------------------- | ------------ |
-| data.table           | >= 1.15.4    |
-| fitdistrplus         | >= 1.2-1     |
-| GenomicAlignments    | >= 1.22.1    |
-| GenomicFeatures      | >= 1.38.2    |
-| GenomicRanges        | >= 1.38.0    |
-| ggbio                | >= 1.42.0    |
-| mclust               | >= 6.1.1     |
-| mixtools             | >= 2.0.0     |
-| parallel             | >= 3.6.0     |
-| rtracklayer          | >= 1.46.0    |
-| Seurat               | >= 4.4.0     |
-| SummarizedExperiment | >= 1.16.1    |
+- `v0.5.6` (Recommended): For users with R >= 4.4 (developed with `R 4.5.2`).
+- `v0.5.5` (Legacy): For users with R < 4.4 (developed under `R 4.0.0`).
+
+- System Dependencies
+
+Before installing scATS, please ensure that `samtools` (version >= 1.19.2) is installed and available in your system's PATH.
+
+- R Dependencies
+The following R packages are required for all versions of scATS. You can install them using the following command:
+
+```r
+install.packages(c(
+    'remotes',
+    'R.utils', 
+    'TTR', 
+    'VGAM',
+    'prettyunits',
+    'httr2',
+    'mclust',
+    'mixtools'))
+```
+
+> **Note:** 💡 For v0.5.5, you must manually install the smoother package from the CRAN archive before installing scATS:
+```r
+install.packages('https://cran.r-project.org/src/contrib/Archive/smoother/smoother_1.3.tar.gz', repos = NULL, type = 'source')
+``` 
+
 
 ## <span id="Installation">Installation</span>
 
 To install `scATS`, you have two options: either install directly from GitHub or use the compressed source file.
-In addition, we provide installation [logs](https://github.com/LuChenLab/r-scATS/tree/main/logs) for three successful installation methods to ensure full reproducibility.
 
+- Via GitHub:
 
 ```r
-# Install from GitHub if remotes package is not installed
-if (!requireNamespace("remotes", quietly = TRUE))
-    install.packages("remotes")
-
 remotes::install_github("LuChenLab/r-scATS")
 ```
 
-Alternatively, you can install `scATS` using the source file downloaded from the [repository](https://github.com/LuChenLab/r-scATS/blob/main/scATS_0.5.5.tar.gz) :
+- Via Source File:
+
+Alternatively, you can install `scATS` using the source file downloaded from the [repository](https://github.com/LuChenLab/r-scATS/blob/main/scATS_0.5.6.tar.gz) :
 ```bash
 # Install scATS from a downloaded source file
-R CMD INSTALL scATS_0.5.5.tar.gz
+R CMD INSTALL scATS_0.5.6.tar.gz
 ```
 
 ```r
 # or
-install.packages("scATS_0.5.5.tar.gz", repos=NULL)
+install.packages("scATS_0.5.6.tar.gz", repos=NULL)
 
 ```
 
+### Installation Logs
+To ensure reproducibility, we provide comprehensive installation logs for three different installation methods across multiple R versions:
+- [Installation Logs for R 4.5.x](https://github.com/LuChenLab/r-scATS/tree/main/logs/R4.5)
+- [Installation Logs for R 4.0.x](https://github.com/LuChenLab/r-scATS/tree/main/logs/R4.0)
+
+
+## Docker Guide
+
+We provide a pre-configured Docker container to eliminate system-specific dependency conflicts.
+
+- Step 1: Install Docker
+If you do not have Docker installed, please follow the [official Docker installation guide](https://docs.docker.com/engine/install/).
+
+- Step 2: Run the scATS Container
+Pull the pre-built image from the GitHub Container Registry and start an interactive session:
+
+```bash
+# Pull the image
+docker pull ghcr.io/kayla-xu/scats-evi:r451
+
+# Run the container
+docker run -it ghcr.io/kayla-xu/scats-evi:r451
+```
+
+- Step 3: Build Docker Locally (Optional)
+If you prefer to build the image locally, use the provided Dockerfiles. Building logs are also provided for your reference.
+
+```bash
+# Build the base environment
+docker build --no-cache \
+  -t scATS/base:r451 \
+  -f Dockerfile_base_r451 . \
+  2>&1 | tee Dockerfile_base_r451.log
+
+# Build the final scATS image
+docker build --no-cache \
+  -t scATS/evi:r451 \
+  -f Dockerfile_scats_r451 . \
+  2>&1 | tee Dockerfile_scats_r451.log
+```
 
 ## <span id="Quick start">Quick start</span>
 

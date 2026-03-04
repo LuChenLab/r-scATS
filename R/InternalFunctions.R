@@ -84,58 +84,58 @@ DTSS <- function(x, groupBy, groups, group1, ratio1, ratio2, method, gs, deltaPS
       } else {
         PSI1 = mati[!is.na(PSI) & groupBy == G1, mean(PSI)]
         PSI2 = mati[!is.na(PSI) & groupBy != G1, mean(PSI)]
-        SudobulkPSI1 = mati[!is.na(PSI) & groupBy == G1, sum(n) / sum(N)]
-        SudobulkPSI2 = mati[!is.na(PSI) & groupBy != G1, sum(n) / sum(N)]
+        PseudobulkPSI1 = mati[!is.na(PSI) & groupBy == G1, sum(n) / sum(N)]
+        PseudobulkPSI2 = mati[!is.na(PSI) & groupBy != G1, sum(n) / sum(N)]
 
-        if(ifelse(is.na(abs(PSI1 - PSI2)), max(c(PSI1, PSI2), na.rm = T), abs(PSI1 - PSI2)) < deltaPSI & ifelse(is.na(abs(SudobulkPSI1 - SudobulkPSI2)), max(c(SudobulkPSI1, SudobulkPSI2), na.rm = T), abs(SudobulkPSI1 - SudobulkPSI2)) < deltaPSI) {
+        if(ifelse(is.na(abs(PSI1 - PSI2)), max(c(PSI1, PSI2), na.rm = T), abs(PSI1 - PSI2)) < deltaPSI & ifelse(is.na(abs(PseudobulkPSI1 - PseudobulkPSI2)), max(c(PseudobulkPSI1, PseudobulkPSI2), na.rm = T), abs(PseudobulkPSI1 - PseudobulkPSI2)) < deltaPSI) {
           return(NULL)
         } else {
           if(mati[!is.na(PSI), sd(PSI)] == 0 | is.na(n1/N1) | is.na(n2/N2)) {
             if(is.na(n1/N1) | is.na(n2/N2)) {
               if(is.null(method)) {
                 return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                  PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                  PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                   wald.test = 0, wilcox.test = 0, prop.test = 0))
               } else {
                 if(method == "wilcox.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     wilcox.test = 0))
                 }
 
                 if(method == "prop.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     prop.test = 0))
                 }
 
                 if(method == "wald.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     wald.test = 0))
                 }
               }
             } else {
               if(is.null(method)) {
                 return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                  PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                  PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                   wald.test = NA, wilcox.test = NA, prop.test = NA))
               } else {
                 if(method == "wilcox.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     wilcox.test = NA))
                 }
 
                 if(method == "prop.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     prop.test = NA))
                 }
 
                 if(method == "wald.test") {
                   return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                    PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                    PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                     wald.test = NA))
                 }
               }
@@ -151,13 +151,13 @@ DTSS <- function(x, groupBy, groups, group1, ratio1, ratio2, method, gs, deltaPS
               m1 <- tryCatch(suppressWarnings(VGAM::vglm(cbind(n, N - n) ~ groupBy, "betabinomial", data = mati[!is.na(PSI)], trace = FALSE, maxit = 100)), error = function(e) NA)
               wald.test <- tryCatch(suppressWarnings(lmtest::waldtest(m0, m1))$`Pr(>Chisq)`[2], error = function(e) NA)
               return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                 wald.test, wilcox.test = wilcox.test$p.value, prop.test = prop.test$p.value))
             } else {
               if(method == "wilcox.test") {
                 wilcox.test <- mati[!is.na(PSI), suppressWarnings(wilcox.test(PSI ~ groupBy))]
                 return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                  PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                  PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                   wilcox.test = wilcox.test$p.value))
               }
               if(method == "prop.test") {
@@ -166,7 +166,7 @@ DTSS <- function(x, groupBy, groups, group1, ratio1, ratio2, method, gs, deltaPS
                                                 mati[groupBy != G1, sum(n)],
                                                 mati[groupBy != G1, sum(N) - sum(n)]), ncol = 2, byrow = T))
                 return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                  PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                  PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                   prop.test = prop.test$p.value))
               }
               if(method == "wald.test") {
@@ -174,7 +174,7 @@ DTSS <- function(x, groupBy, groups, group1, ratio1, ratio2, method, gs, deltaPS
                 m1 <- tryCatch(suppressWarnings(VGAM::vglm(cbind(n, N - n) ~ groupBy, "betabinomial", data = mati[!is.na(PSI)], trace = FALSE, maxit = 100)), error = function(e) NA)
                 wald.test <- tryCatch(suppressWarnings(lmtest::waldtest(m0, m1))$`Pr(>Chisq)`[2], error = function(e) NA)
                 return(data.frame(TSS = unique(as.character(mati$Var1)), G1, G2, n1, n2, N1, N2, Cells1, Cells2,
-                                  PSI1 = PSI1, PSI2 = PSI2, SudobulkPSI1 = SudobulkPSI1, SudobulkPSI2 = SudobulkPSI2,
+                                  PSI1 = PSI1, PSI2 = PSI2, PseudobulkPSI1 = PseudobulkPSI1, PseudobulkPSI2 = PseudobulkPSI2,
                                   wald.test))
               }
             }
@@ -277,8 +277,8 @@ rss <- function(region, bam, EBG, ExonicReadsOnly = FALSE, mapqFilter = 255,
 #' @description Internal function for TSSCDF
 #' @importFrom IRanges IRanges countOverlaps
 #' @importFrom S4Vectors subjectHits mcols
-gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE,
-                  MinGeneReads = 1000, min.TSS.percent = 5, min.local.percent = 1, p.cutoff = 0.01, window = 10, greedy = TRUE,
+gmmc <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE, greedy = TRUE,
+                  MinGeneReads = 1000, min.TSS.percent = 5, min.local.percent = 1, p.cutoff = 0.01, window = 10, scDR = FALSE, MinscTSSReads = 5,
                   mapqFilter = 255, isSecondaryAlignment = FALSE, isSupplementaryAlignment = FALSE, isDuplicate = FALSE, sep = "_") {
   CellsTU <- as.character(slot(object, "Cell"))
   map0 <- loadbamgene(bam = bams, gene = with(as.data.frame(region), gene_id), region = region,
@@ -287,7 +287,8 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
                       isSupplementaryAlignment = isSupplementaryAlignment,
                       isSecondaryAlignment = isSecondaryAlignment,
                       isDuplicate = isDuplicate, mapqFilter = mapqFilter, sep = sep)
-
+  if(is.null(map0)) return(NULL)
+  map0 <- map0[S4Vectors::mcols(map0)$CB %in% CellsTU]
   if(length(map0) < MinGeneReads) {
     warning("Reads < MinGeneReads.")
     return(NULL)
@@ -305,7 +306,7 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
   }
 
   if(is.null(UTROnly)) {
-    UTROnly <- Pos[pos %in% Pos[, .N, pos][N > 1, pos], mean(inrange(pos, start(EBG[[with(as.data.frame(region), gene_id)]]), end(EBG[[with(as.data.frame(region), gene_id)]])))] >= 0.8
+    UTROnly <- Pos[pos %in% Pos[, .N, pos][N > 1, pos], mean(data.table::inrange(pos, start(EBG[[with(as.data.frame(region), gene_id)]]), end(EBG[[with(as.data.frame(region), gene_id)]])))] >= 0.8
   }
   if(UTROnly) {
     utr <- UTR[UTR$gene_name == region$gene_name]
@@ -319,14 +320,12 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
   }
   tsss <- unique(GenomicRanges::start(GenomicRanges::promoters(gtfrange[gtfrange$type == "transcript" & gtfrange$gene_name == region$gene_name], upstream = 0, downstream = 1)))
   if(Pos[, sd(pos)] == 0) {
-    warning("No ATS")
     paras <- data.table::data.table(gene_id = region$gene_id,
                                     gene_name = region$gene_name,
-                                    TSS = paste(as.character(GenomeInfoDb::seqnames(region)), Pos[, unique(pos)], as.character(strand(region)), sep = ":"),
-                                    Region = paste0(Pos[, unique(pos)], "-", Pos[, unique(pos)]),
-                                    Base = 1, PSI = 1, Percent = 100, Annotated = intersect(tsss, Pos[, unique(pos)]), Greedy = FALSE,
-                                    AUC = 1, MaxDist = 1, AboveRandom = 1, ApicesX = 0, ApicesY = 1,
-                                    alpha1 = NA, alpha2 = NA, theta = 1, UnclassifiedReads = 0, AllReads = Pos[ , .N])
+                                    TSS = paste(as.character(GenomeInfoDb::seqnames(region)), Pos[, unique(pos)], as.character(GenomicRanges::strand(region)), sep = ":"),
+                                    Region = paste0(Pos[, unique(pos)], "-", Pos[, unique(pos)]), PSI = 1, Percent = 1,
+                                    Annotated = ifelse(any(is.element(tsss, Pos[, unique(pos)])), Pos[, unique(pos)], NA),
+                                    Greedy = FALSE, AllReads = Pos[ , .N], beta = 1, alpha = 0, theta = 1)
     Pos$TSS <- paras$TSS
     mat <- Pos[, .(count = .N), .(CB, TSS)]
     data.table::setkey(mat, CB)
@@ -339,9 +338,19 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
     mat_count[, TSS := NULL]
 
     if(!identical(colnames(mat_count), CellsTU)) mat_count <- mat_count[, CellsTU, with = F]
-    mat_psi <- apply(mat_count, 2, myproportions)
-    res <- list(mat_count = mat_count, mat_psi = mat_psi, paras = paras)
-    return(res)
+
+    if(paras[, .N] > 1) {
+      mat_psi <- apply(mat_count, 2, myproportions)
+    } else {
+      mat_psi <- matrix(apply(mat_count, 2, myproportions), nrow = 1)
+      colnames(mat_psi) <- colnames(mat_count)
+    }
+    if(scDR) {
+      mat_alpha <- matrix(data = 1, nrow = nrow(mat_psi), ncol = ncol(mat_psi), dimnames = list(rownames(mat_psi), colnames(mat_psi)))
+      res <- list(mat_count = mat_count, mat_psi = mat_psi, mat_theta = mat_psi, mat_alpha = mat_alpha, paras = paras)
+    } else {
+      res <- list(mat_count = mat_count, mat_psi = mat_psi, paras = paras)
+    }
   } else {
     if(as.character(GenomicRanges::strand(region)) == "+") {
       Ts <- CliffSite(x = Pos$pos, direction = "start", introns = IBG[names(IBG) == with(as.data.frame(region), gene_id)], RefTSS = tsss, plots = 3,
@@ -355,19 +364,79 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
     TsPos <- lapply(seq_along(Ts), function(x) {
       Pos[pos %in% with(as.data.frame(Ts[x]), start:end)]
     })
-    Ts <- as.data.frame(Ts)
+    Ts <- as.data.table(Ts)
     paras <- data.table::data.table(gene_id = region$gene_id,
                                     gene_name = region$gene_name,
                                     TSS = paste(as.character(GenomeInfoDb::seqnames(region)), with(Ts, SS), as.character(BiocGenerics::strand(region)), sep = ":"),
                                     Region = with(Ts, paste(start, end, sep = "-")),
-                                    Base = with(Ts, Base), PSI = with(Ts, PSI), Percent = with(Ts, Percent),
+                                    PSI = with(Ts, PSI), Percent = with(Ts, Percent),
                                     Annotated = with(Ts, Annotated), Greedy = with(Ts, Greedy),
-                                    AUC = with(Ts, AUC), MaxDist = with(Ts, MaxDist),
-                                    AboveRandom = with(Ts, AboveRandom), ApicesX = with(Ts, ApicesX),
-                                    ApicesY = with(Ts, ApicesY), alpha1 = with(Ts, alpha1),
-                                    alpha2 = with(Ts, alpha2), theta = with(Ts, theta),
-                                    UnclassifiedReads = 100 - sum(with(Ts, Percent)), AllReads = Pos[ , .N])
+                                    AllReads = Pos[ , .N], beta = with(Ts, beta))
     TsPos <- data.table::data.table(TSS = rep(paras[, TSS], mapply(nrow, TsPos)), do.call(rbind, TsPos))
+
+    if(as.character(GenomicRanges::strand(region)) == "+") {
+      TsPos[, pos2 := pos]
+      for (i in seq_len(nrow(Ts))) {
+        TsPos[, pos2 := plyr::mapvalues(pos2, Ts[i, start]:Ts[i, end], pmax(Ts[i, start]:Ts[i, end], Ts[i, SS]), warn_missing = FALSE)] # Be careful for +/-
+      }
+      TsPos[, TSS := factor(TSS, levels = TsPos[, min(pos2), TSS][order(V1, decreasing = F), TSS])] # Be careful for +/-
+      DRT <- TsPos[, .(count = .N), .(TSS, start = pos2, index = as.numeric(TSS))] # Be careful for +/-
+    } else {
+      TsPos[, pos2 := pos]
+      for (i in seq_len(nrow(Ts))) {
+        TsPos[, pos2 := plyr::mapvalues(pos2, Ts[i, end]:Ts[i, start], pmin(Ts[i, end]:Ts[i, start], Ts[i, SS]), warn_missing = FALSE)] # Be careful for +/-
+      }
+      TsPos[, TSS := factor(TSS, levels = TsPos[, max(pos2), TSS][order(V1, decreasing = T), TSS])] # Be careful for +/-
+      DRT <- TsPos[, .(count = .N), .(TSS, start = -pos2, index = as.numeric(TSS))] # Be careful for +/-
+    }
+
+    DRT$start <- DRT$start - min(DRT$start) + 1
+    DRT[, end := start]
+    DRT <- DRT[order(index, start)]
+    DRT$count <- cumsum(DRT$count)
+    DRR <- DR(x = DRT)
+    if(!is.null(DRR)) {
+      paras <- merge(paras, DRR, by = "TSS", all.x = TRUE)
+    } else {
+      paras <- data.table(paras, alpha = NA, theta = NA)
+    }
+    data.table::setkey(paras, TSS)
+
+    if(scDR & paras[, .N] >= 1) {
+      if(as.character(GenomicRanges::strand(region)) == "+") {
+        DRT <- TsPos[, .(count = .N), .(TSS, start = pos2, index = as.numeric(TSS), CB)] # Be careful for +/-
+      } else {
+        DRT <- TsPos[, .(count = .N), .(TSS, start = -pos2, index = as.numeric(TSS), CB)] # Be careful for +/-
+      }
+      DRT$start <- DRT$start - min(DRT$start) + 1
+      DRT[, end := start]
+      DRT <- DRT[order(CB, index, start)]
+      DRT <- split(DRT, DRT$CB)
+      DRT <- lapply(DRT, function(x) {x$count <- cumsum(x$count); return(x)})
+      DRR <- lapply(DRT, function(x) DR(x = x, minreads = MinscTSSReads))
+      DRR <- DRR[!mapply(is.null, DRR)]
+      DRR <- data.table::data.table(CB = rep(names(DRR), mapply(nrow, DRR)), do.call(rbind, DRR))
+
+      mat_alpha <- data.table::dcast(DRR, TSS ~ CB, value.var = "alpha")
+      mat_alpha <- mat_alpha[!is.na(TSS)]
+      data.table::setkey(mat_alpha, TSS)
+      if(!identical(mat_alpha$TSS, paras$TSS)) mat_alpha <- mat_alpha[paras$TSS, ]
+      mat_alpha[, TSS := NULL]
+      mat_alpha <- data.table::as.data.table(t(mat_alpha), keep.rownames = "CB")
+      data.table::setkey(mat_alpha, CB)
+      if(!identical(mat_alpha[, CB], CellsTU)) mat_alpha <- mat_alpha[CellsTU, ]
+      mat_alpha <- as.data.table(t(data.frame(mat_alpha[, -1], row.names = mat_alpha[[1]])))
+
+      mat_theta <- data.table::dcast(DRR, TSS ~ CB, value.var = "theta")
+      mat_theta <- mat_theta[!is.na(TSS)]
+      data.table::setkey(mat_theta, TSS)
+      if(!identical(mat_theta$TSS, paras$TSS)) mat_theta <- mat_theta[paras$TSS, ]
+      mat_theta[, TSS := NULL]
+      mat_theta <- data.table::as.data.table(t(mat_theta), keep.rownames = "CB")
+      data.table::setkey(mat_theta, CB)
+      if(!identical(mat_theta[, CB], CellsTU)) mat_theta <- mat_theta[CellsTU, ]
+      mat_theta <- as.data.table(t(data.frame(mat_theta[, -1], row.names = mat_theta[[1]])))
+    }
     mat <- TsPos[, .(count = .N), .(CB, TSS)]
     data.table::setkey(mat, CB)
     if(any(duplicated(mat[CellsTU, ][, .(TSS, CB)]))) return(NULL)
@@ -375,28 +444,45 @@ gmmc4 <- function(object, region, bams, gtfrange, UTR, EBG, IBG, UTROnly = FALSE
     mat_count <- data.table::dcast(mat[CellsTU, ], TSS ~ CB, value.var = "count")
     mat_count <- mat_count[!is.na(TSS)]
     data.table::setkey(mat_count, TSS)
-    data.table::setkey(paras, TSS)
 
     if(!identical(mat_count$TSS, paras$TSS)) mat_count <- mat_count[paras$TSS, ]
     mat_count[, TSS := NULL]
 
     if(!identical(colnames(mat_count), CellsTU)) mat_count <- mat_count[, CellsTU, with = F]
-    mat_psi <- apply(mat_count, 2, myproportions)
-    res <- list(mat_count = mat_count, mat_psi = mat_psi, paras = paras)
-    return(res)
+    if(paras[, .N] > 1) {
+      mat_psi <- apply(mat_count, 2, myproportions)
+    } else {
+      mat_psi <- matrix(apply(mat_count, 2, myproportions), nrow = 1)
+      colnames(mat_psi) <- colnames(mat_count)
+    }
+
+    if(scDR) {
+      if(paras[, .N] > 1) {
+        res <- list(mat_count = mat_count, mat_psi = mat_psi, mat_theta = mat_theta, mat_alpha = mat_alpha, paras = paras)
+      } else {
+        res <- list(mat_count = mat_count, mat_psi = mat_psi, mat_theta = mat_psi, mat_alpha = mat_alpha, paras = paras)
+      }
+    } else {
+      res <- list(mat_count = mat_count, mat_psi = mat_psi, paras = paras)
+    }
   }
+  return(res)
 }
 
 
 #' @title InternalFunctions
-#' @description Internal function for gmmc4
+#' @description Internal function for gmmc
 #' @importFrom plyr mapvalues
-#' @importFrom smoother smth.gaussian
 #' @importFrom MASS fitdistr
-#' @importFrom data.table `%inrange%`
+#' @importFrom data.table `%inrange%` inrange
+#' @importFrom BiocGenerics sort
 
 CliffSite <- function(x, introns = NULL, direction = "start", minreads = 100, min.TSS.percent = 5, min.local.percent = 1, p.cutoff = 0.01,
                       window = 6, RefTSS = NULL, greedy = FALSE, plots = 0) {
+  if(length(x) < minreads) {
+    message("The number of reads is smaller than minreads")
+    return(NULL)
+  }
   stopifnot(is.element(direction, c("start", "end")))
   if(!is.null(introns)) {
     sjsite <- if(direction == "start") end(introns) + 1 else start(introns) - 1
@@ -405,214 +491,143 @@ CliffSite <- function(x, introns = NULL, direction = "start", minreads = 100, mi
   }
   From <- sort(unique(c(x, RefTSS, sjsite)))
   From <- c((min(From) - window):(min(From) - 1), From, (max(From) + 1):(max(From) + window))
-  To <- seq_along(From)
+  To <- if(direction == "start") seq_along(From) else rev(seq_along(From))
+
   RefTSS <- plyr::mapvalues(RefTSS, From, To, warn_missing = FALSE)
-  sjsite <- plyr::mapvalues(sjsite, From, To, warn_missing = F)
+  sjsite <- plyr::mapvalues(sjsite, From, To, warn_missing = FALSE)
   x <- plyr::mapvalues(x, From, To, warn_missing = FALSE)
 
   if(length(x) == 0) return(NULL)
   if(length(RefTSS) == 0) RefTSS <- NULL
-  z <- c(min(x) - window, max(x) + window)
-  if(direction == "end") {
-    y <- x
-    x <- min(z) + max(z) - x
-    if(!is.null(RefTSS)) RefTSS <- min(z) + max(z) - RefTSS
-    if(!is.null(sjsite)) sjsite <- min(z) + max(z) - sjsite
-  }
-  F0 <- ecdf(sample(min(z):max(z), size = length(x), replace = TRUE))
+
+  set.seed(length(x))
+  F0 <- ecdf(sample(min(x):max(x), size = length(x), replace = TRUE))
   F1 <- ecdf(x)
-  L1 <- data.table::data.table(pos = min(z):max(z), CDR0 = F0(min(z):max(z)), CDR1 = F1(min(z):max(z)))
+  L1 <- data.table::data.table(pos = min(x):max(x), CDR0 = F0(min(x):max(x)), CDR1 = F1(min(x):max(x)))
   L1 <- merge(data.table::data.table(pos = x)[, .N, pos], L1, by = "pos", all.y = T)[order(pos)]
   data.table::setkey(L1, pos)
   L1[is.na(N), N := 0]
-  # L1$CDR00 <- smoother::smth.gaussian(L1$CDR0, window = window, tails = TRUE)
-  L1$CDR11 <- smoother::smth.gaussian(L1$CDR1, window = window, tails = TRUE)
-  L1$d0 <- c(0, diff(L1[, CDR0]))
-  L1$d1 <- c(0, diff(L1[, CDR1]))
-  # L1$d0 <- smoother::smth.gaussian(L1$d0, window = window, tails = TRUE)
-  L1$d1 <- smoother::smth.gaussian(L1$d1, window = window, tails = TRUE)
-  L1[, D := CDR1 - CDR11]
 
-  # Peaks
-  m0 <- InflexionPoint(x = L1$pos, y = L1$d1)
-  m1 <- m0[P == "T"]; m0 <- m0[P == "B", ]
+  if(L1[, .N] > 1) {
+    L1$CDR11 <- smthgaussian(L1$CDR1, window = pmin(window, L1[, .N - 1]), tails = TRUE)
+    L1[, D := CDR1 - CDR11]
+    L1$d0 <- L1[, splinefun(pos, CDR0, "monoH.FC")(pos, deriv = 1)]
+    L1$d1 <- L1[, splinefun(pos, CDR11, "monoH.FC")(pos, deriv = 1)]
+    # L1$d1 <- smthgaussian(L1$d1, window = pmin(window, L1[, .N - 1]), tails = TRUE)
 
-  m1$start <- mapply(m1$pos, FUN = function (m) m0[pos < m, ifelse(.N == 0, min(z), max(end))])
-  m1$end <- mapply(m1$pos, FUN = function (m) m0[pos > m, ifelse(.N == 0, max(x), min(start))])
-  m1[, P := (F1(end) - F1(start)) * 100]
+    # Peaks
+    m0 <- InflexionPoint(x = L1$pos, y = L1$d1)
+    m1 <- m0[P == "T"]; m0 <- m0[P == "B", ]
+    m1$start <- mapply(m1$pos, FUN = function (m) m0[pos < m, ifelse(.N == 0, min(x), max(end))])
+    m1$end <- mapply(m1$pos, FUN = function (m) m0[pos > m, ifelse(.N == 0, max(x), min(start))])
+    m1[, P := (F1(end) - F1(start)) * 100]
+    m1 <- m1[P > 0]
 
-  if(length(RefTSS) > 0) RefTSS <- RefTSS[RefTSS %inrange% m1[, .(start, end)]]
-
-  if(length(RefTSS) > 0) {
-    if(any(RefTSS %inrange% m1[, .(start, end)])) {
-      ol <- IRanges::findOverlaps(IRanges::IRanges(RefTSS, RefTSS), m1[, IRanges::IRanges(start, end)])
-      ol <- with(as.data.frame(ol), data.table::data.table(RefTSS = RefTSS[queryHits], pos = m1[subjectHits, pos]))
-      ol <- ol[, .(RefTSS = RefTSS[which.min(abs(RefTSS - pos))]), pos]
-      m1 <- merge(m1, ol, by = "pos", all.x = TRUE)
+    # RefTSS in region
+    if(length(RefTSS) > 0) RefTSS <- RefTSS[RefTSS %inrange% m1[, .(start, end)]]
+    if(length(RefTSS) > 0) {
+      if(any(RefTSS %inrange% m1[, .(start, end)])) {
+        ol <- IRanges::findOverlaps(IRanges::IRanges(RefTSS, RefTSS), m1[, IRanges::IRanges(start, end)])
+        ol <- with(as.data.frame(ol), data.table::data.table(RefTSS = RefTSS[queryHits], pos = m1[subjectHits, pos]))
+        ol <- ol[, .(RefTSS = RefTSS[which.min(abs(RefTSS - pos))]), pos]
+        m1 <- merge(m1, ol, by = "pos", all.x = TRUE)
+      } else {
+        m1[, RefTSS := NA]
+      }
     } else {
       m1[, RefTSS := NA]
     }
-  } else {
-    m1[, RefTSS := NA]
-  }
-  # Candidate 1
-  mod0 <- MASS::fitdistr(L1[!is.na(d0), d0], "normal")
-  ci <- qnorm(1 - p.cutoff, mod0$estimate[1], mod0$estimate[2])
-  cd1 <- data.table::as.data.table(L1[d1 > ci, IRanges::IRanges(pos)]); cd1[, width := NULL]
-  if(nrow(cd1) > 0) {
-    if(is.null(RefTSS)) {
-      cd1[, Ref := FALSE]
-    } else {
-      cd1$Ref <- mapply(seq_len(nrow(cd1)), FUN = function(i) any(RefTSS %inrange% cd1[i]))
-    }
-    cd1 <- data.table::data.table(start = mapply(cd1[[1]], FUN = function(i) m1[data.table::between(i, start, end), start]),
-                                  end = mapply(cd1[[2]], FUN = function(i) m1[data.table::between(i, start, end), end]),
-                                  Ref = cd1$Ref)
-    cd1[, P := (F1(end) - F1(start)) * 100]
-    cd1 <- cd1[Ref | P >= min.TSS.percent]
-  }
-  if(nrow(cd1) > 0) cd1 <- cd1[mapply(function(i) L1[pos %inrange% cd1[i], max(abs(D))] , seq_len(nrow(cd1))) >= min.local.percent / 100]
-  if(nrow(cd1) > 0) cd1 <- cd1[mapply(seq_len(nrow(cd1)), FUN = function(i) m1[!is.na(RefTSS) | P >= min.TSS.percent, any(pos %inrange% cd1[i])])] # Has significant peak
-  if(nrow(cd1) > 0) if(cd1[, sum(P)] <= 50 & cd1[, max(P)] <= 10) cd1 <- cd1[P == 100]
-  cd1$SS <- mapply(function(i) {
-    if(m1[pos %inrange% cd1[i], any(P >= min.TSS.percent)]) {
-      # m1[pos %inrange% cd1[i] & P >= min.TSS.percent][which.min(pos), pos]
-      # m1[pos %inrange% cd1[i] & P >= min.TSS.percent][which.max(P), pos]
-      L1[pos %inrange% cd1[i]][which.max(d1), pos]
-    } else {
-      NA
-    }
-  }, seq_len(nrow(cd1)))
 
-  cd1$Ref <- mapply(function(i) {
-    if(cd1[i, Ref]) {
-      # m1[pos %inrange% cd1[i] & !is.na(RefTSS)][which.max(P), RefTSS]
-      L1[pos %inrange% cd1[i] & pos %in% RefTSS][which.max(d1), pos]
-    } else {
-      NA
-    }
-  }, seq_len(nrow(cd1)))
-
-  cd1 <- cd1[!is.na(SS)]
-  if(length(x) < minreads & nrow(cd1) > 0) cd1 <- cd1[P > 1]
-
-  # First TSS
-  cd1[, Greedy := FALSE]
-  if(greedy == TRUE & m1[, any(!is.na(RefTSS))]) {
+    # Candidate 1
+    mod0 <- MASS::fitdistr(L1[!is.na(d0), d0], "normal")
+    ci <- qnorm(1 - p.cutoff, mod0$estimate[1], mod0$estimate[2])
+    cd1 <- data.table::as.data.table(L1[d1 > ci, IRanges::IRanges(pos)]); cd1[, width := NULL]
     if(nrow(cd1) > 0) {
-      if(any(m1[!is.na(RefTSS), end] < cd1[, min(start)])) {
-        cd1 <- rbind(m1[!is.na(RefTSS) & end < cd1[, min(start)], .(start, end, P, Ref = RefTSS, SS = RefTSS, Greedy = TRUE)][which.min(SS)], cd1)
-      }
-    } else {
-      cd1 <- m1[!is.na(RefTSS), .(start, end, P, Ref = RefTSS, SS = RefTSS, Greedy = TRUE)][which.min(SS)]
+      cd1 <- m1[pos %inrange% cd1, .(start, end, Ref = !is.na(RefTSS))]
+      cd1[, P := (F1(end) - F1(start)) * 100]
+      cd1 <- cd1[Ref | P >= min.TSS.percent]
     }
-  }
-
-  if(!is.null(sjsite)) {
-    if(nrow(cd1) > 0) cd1 <- cd1[with(as.data.frame(IRanges::distanceToNearest(cd1[, IRanges::IRanges(SS, SS)], IRanges::IRanges(sjsite))), distance) >= 3] # remove splice junction sites
-  }
-
-  if(nrow(cd1) == 0) {
-    solution <- NULL
-  } else {
-    solution <- cd1[, IRanges(start, end, SS = SS, Ref = Ref, Greedy = Greedy, P = P)]
-  }
-
-
-
-
-
-  # Maximization
-  if(!is.null(solution)) {
-    solution <- sort(solution)
-    x2 <- x[inrange(x, start(solution), end(solution))]
-    F2 <- ecdf(x2)
-    mcols(solution)$PSI <- mapply(function(i) F2(with(as.data.frame(solution[i]), end)) - F2(with(as.data.frame(solution[i]), start)), seq_along(solution))
-
-    DRT <- lapply(function(i) {
-      xi <- x[data.table::between(x, with(as.data.frame(solution[i]), SS), with(as.data.frame(solution[i]), end))]
-      if(length(xi) == 0) return(NULL)
-      if(length(unique(xi)) == 1) return(NULL)
-      data.table(start = sort(unique(xi)), end = sort(unique(xi)), count = F2(sort(unique(xi))) * length(x2), index = with(as.data.frame(solution[i]), paste0(start, "-", end)))
-    }, X = seq_along(solution))
-    DRT <- do.call(rbind, DRT)
-    DRR <- if(is.null(DRT)) NULL else DR(x = DRT)
-
-    mi <- lapply(function(i) {
-      xi <- x2[data.table::between(x2, with(as.data.frame(solution[i]), SS), with(as.data.frame(solution[i]), end))]
-      if(length(xi) == 0) {
-        return(data.table(AUC = NA, MaxDist = NA, AboveRandom = NA, ApicesX = NA, ApicesY = NA))
+    if(nrow(cd1) > 0) cd1 <- cd1[mapply(function(i) L1[pos %inrange% cd1[i], max(abs(D))] , seq_len(nrow(cd1))) >= min.local.percent / 100]
+    if(nrow(cd1) > 0) cd1 <- cd1[mapply(seq_len(nrow(cd1)), FUN = function(i) m1[!is.na(RefTSS) | P >= min.TSS.percent, any(pos %inrange% cd1[i])])] # Has significant peak
+    if(nrow(cd1) > 0) if(cd1[, sum(P)] <= 50 & cd1[, max(P)] <= 10) cd1 <- cd1[P == 100]
+    cd1$SS <- mapply(function(i) {
+      if(m1[pos %inrange% cd1[i], any(P >= min.TSS.percent)]) {
+        L1[pos %inrange% cd1[i]][which.max(d1), pos]
+      } else {
+        NA
       }
-      if(length(unique(xi)) == 1) {
-        return(data.table(AUC = 1, MaxDist = 1, AboveRandom = 1, ApicesX = 0, ApicesY = 1))
-      }
-      Fi <- ecdf(xi)
-      T0 <- data.table(x = min(xi):max(xi), E = seq(0, 1, length.out = length(min(xi):max(xi))), O = Fi(min(xi):max(xi)))
-      data.table(AUC = T0[, sum(O) / .N],
-                 MaxDist = T0[, max(O - E)],
-                 AboveRandom = T0[, mean(O >= E)],
-                 ApicesX = T0[, which.max(O - E) / .N],
-                 ApicesY = T0[which.max(O - E), O])
-    }, X = seq_along(solution))
-    mi <- do.call(rbind, mi)
-    mcols(solution) <- cbind(mcols(solution), mi)
+    }, seq_len(nrow(cd1)))
 
-    if(!is.null(DRR)) {
-      setkey(DRR, ATS)
-      mcols(solution)$alpha1 <- DRR[with(as.data.frame(solution), paste0(start, "-", end)), alpha1]
-      mcols(solution)$alpha2 <- DRR[with(as.data.frame(solution), paste0(start, "-", end)), alpha2]
-      mcols(solution)$theta <- DRR[with(as.data.frame(solution), paste0(start, "-", end)), theta]
+    cd1$Ref <- mapply(function(i) {
+      if(cd1[i, Ref]) {
+        # m1[pos %inrange% cd1[i] & !is.na(RefTSS)][which.max(P), RefTSS]
+        L1[pos %inrange% cd1[i] & pos %in% RefTSS][which.max(d1), pos]
+      } else {
+        NA
+      }
+    }, seq_len(nrow(cd1)))
+
+    cd1 <- cd1[!is.na(SS)]
+    if(length(x) < minreads & nrow(cd1) > 0) cd1 <- cd1[P > 1]
+
+    # First TSS
+    cd1[, Greedy := FALSE]
+    if(greedy == TRUE & m1[, any(!is.na(RefTSS))]) {
+      if(nrow(cd1) > 0) {
+        if(any(m1[!is.na(RefTSS), end] < cd1[, min(start)])) {
+          cd1 <- rbind(m1[!is.na(RefTSS) & end < cd1[, min(start)], .(start, end, P, Ref = RefTSS, SS = RefTSS, Greedy = TRUE)][which.min(SS)], cd1)
+        }
+      } else {
+        cd1 <- m1[!is.na(RefTSS), .(start, end, P, Ref = RefTSS, SS = RefTSS, Greedy = TRUE)][which.min(SS)]
+      }
+    }
+
+    # remove splice junction sites
+    if(!is.null(sjsite)) {
+      if(nrow(cd1) > 0) cd1 <- cd1[with(as.data.frame(IRanges::distanceToNearest(cd1[, IRanges::IRanges(SS, SS)], IRanges::IRanges(sjsite))), distance) >= 3]
+    }
+    if(nrow(cd1) == 0) {
+      solution <- NULL
     } else {
-      mcols(solution)$alpha1 <- NA
-      mcols(solution)$alpha2 <- NA
-      mcols(solution)$theta <- NA
+      solution <- cd1[, IRanges::IRanges(start, end, SS = SS, Ref = Ref, Greedy = Greedy, P = P)]
+    }
+
+    # Maximization
+    if(!is.null(solution)) {
+      solution <- BiocGenerics::sort(solution)
+      x2 <- x[data.table::inrange(x, IRanges::start(solution), IRanges::end(solution))]
+      F2 <- ecdf(x2)
+      S4Vectors::mcols(solution)$PSI <- mapply(function(i) mean(x2 %in% IRanges::start(solution[i]):IRanges::end(solution[i])), seq_along(solution))
+      S4Vectors::mcols(solution)$beta <- mapply(function(i) {
+        integral_result <- integrate(F2, lower = S4Vectors::mcols(solution[i])$SS - 1, upper = IRanges::end(solution[i]), subdivisions = 1000L)
+        (integral_result$value - F2(S4Vectors::mcols(solution[i])$SS - 1) * (IRanges::end(solution[i]) - S4Vectors::mcols(solution[i])$SS + 1)) / ((IRanges::end(solution[i]) - S4Vectors::mcols(solution[i])$SS + 1) * (F2(IRanges::end(solution[i])) - F2(S4Vectors::mcols(solution[i])$SS - 1)))
+      }, seq_along(solution))
+    }
+  } else {
+    if(length(RefTSS) > 0 & is.element(L1[, pos], RefTSS)) {
+      solution <- L1[, IRanges::IRanges(start = pos, end = pos, SS = pos, Ref = pos, Greedy = FALSE, P = 1, PSI = 1, beta = 1)]
+    } else {
+      solution <- L1[, IRanges::IRanges(start = pos, end = pos, SS = pos, Ref = NA, Greedy = FALSE, P = 1, PSI = 1, beta = 1)]
     }
   }
 
   # re-orientation
   if(!is.null(solution)) {
-    if(direction == "end") {
-      solution <- as.data.table(solution)
-      solution[, start := plyr::mapvalues(start, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
-      solution[, end := plyr::mapvalues(end, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
-      solution[, SS := plyr::mapvalues(SS, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
-      solution[, Ref := plyr::mapvalues(Ref, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
-      solution <- solution[, IRanges(end, start, SS = SS, Ref = Ref, Greedy = Greedy, P = P, PSI = PSI, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
-      solution <- sort(solution)
-      if(length(RefTSS) != 0) RefTSS <- plyr::mapvalues(RefTSS, min(z):max(z), max(z):min(z), warn_missing = FALSE)
-    }
-  }
-
-  #  Window-switch
-  if(!is.null(solution)) {
+    solution <- data.table::as.data.table(solution)
+    solution[, start := plyr::mapvalues(start, To, From, warn_missing = FALSE)]
+    solution[, end := plyr::mapvalues(end, To, From, warn_missing = FALSE)]
+    solution[, SS := plyr::mapvalues(SS, To, From, warn_missing = FALSE)]
+    solution[, Ref := plyr::mapvalues(Ref, To, From, warn_missing = FALSE)]
     if(direction == "start") {
-      solution <- as.data.table(solution)[, IRanges(start = start, end = end, SS = SS, Base = width, Percent = P, PSI = PSI, Annotated = Ref, Greedy = Greedy, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
+      solution <- solution[, IRanges::IRanges(start, end, SS = SS, Annotated = Ref, Greedy = Greedy, Percent = P, PSI = PSI, beta = beta)]
     } else {
-      solution <- as.data.table(solution)[, IRanges(start = start, end = end, SS = SS, Base = width, Percent = P, PSI = PSI, Annotated = Ref, Greedy = Greedy, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
+      solution <- solution[, IRanges::IRanges(end, start, SS = SS, Annotated = Ref, Greedy = Greedy, Percent = P, PSI = PSI, beta = beta)]
     }
+    solution <- BiocGenerics::sort(solution)
+    if(length(RefTSS) != 0) RefTSS <- plyr::mapvalues(RefTSS, To, From, warn_missing = FALSE)
   }
 
   if(plots == 1) {
-    if(direction == "end") {
-      ggplot(data.table(x = min(z):max(z), y = ecdf(y)(min(z):max(z))), aes(x, 1 - y)) +
-        geom_step(colour = "grey") +
-        scale_x_continuous(limits = z) +
-        scale_y_continuous(limits = c(0, 1)) +
-        theme_classic() -> p1
-    } else {
-      ggplot() +
-        scale_x_continuous(limits = z) +
-        scale_y_continuous(limits = c(0, 1)) +
-        geom_step(data = L1, aes(x = pos, y = CDR1), colour = "grey") +
-        theme_classic() -> p1
-    }
-    if(!is.null(solution)) {
-      p1 <- p1 + geom_vline(xintercept = with(as.data.frame(solution), SS), lty = 1)
-      p1 <- p1 + geom_vline(xintercept = with(as.data.frame(solution), Annotated[!is.na(Annotated)]), lty = 2, colour = "red", lwd = 2)
-    }
-    print(p1)
-  }
-  if(plots == 2) {
     par(mfrow = c(2, 1))
     L1[, plot(pos, CDR1, type = "s", ylim = c(0, 1))]
     L1[, lines(pos, CDR11, type = "s", col = 2)]
@@ -624,29 +639,17 @@ CliffSite <- function(x, introns = NULL, direction = "start", minreads = 100, mi
     abline(v = cd1[, SS], lty = 2, col = "grey20")
   }
 
-  # if(!is.null(introns)) {
-  if(length(solution) > 0) {
-    solution <- as.data.table(solution)
-    solution[, start := plyr::mapvalues(start, To, From, warn_missing = FALSE)]
-    solution[, end := plyr::mapvalues(end, To, From, warn_missing = FALSE)]
-    solution[, SS := plyr::mapvalues(SS, To, From, warn_missing = FALSE)]
-    solution[, Annotated := plyr::mapvalues(Annotated, To, From, warn_missing = FALSE)]
-    solution <- solution[, IRanges(start, end, SS = SS, Base = Base, Percent = Percent, PSI = PSI, Annotated = Annotated, Greedy = Greedy, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
-    solution <- sort(solution)
-  }
-  # }
-
-  if(plots == 0) {
+  if(plots == 2) {
     if(direction == "end") {
-      y2 <- plyr::mapvalues(y, To, From, warn_missing = FALSE)
-      y3 <- y2[y2 >= min(with(as.data.frame(solution), SS1)) & y2 <= max(with(as.data.frame(solution), SS2))]
-      ggplot(data.table(x = min(with(as.data.frame(solution), SS1)):max(with(as.data.frame(solution), SS2)), y = ecdf(y3)(min(with(as.data.frame(solution), SS1)):max(with(as.data.frame(solution), SS2)))), aes(x, 1 - y)) +
+      y2 <- plyr::mapvalues(x, To, From, warn_missing = FALSE)
+      y3 <- y2[y2 >= min(with(as.data.frame(solution), start)) & y2 <= max(with(as.data.frame(solution), end))]
+      ggplot(data.table(x = min(with(as.data.frame(solution), start)):max(with(as.data.frame(solution), end)), y = ecdf(y3)(min(with(as.data.frame(solution), start)):max(with(as.data.frame(solution), end)))), aes(x, 1 - y)) +
         geom_step(colour = "grey") +
         scale_y_continuous(limits = c(0, 1)) +
         theme_classic() -> p1
     } else {
       y <- plyr::mapvalues(x, To, From, warn_missing = FALSE)
-      ggplot(data.table(x = min(with(as.data.frame(solution), SS1)):max(with(as.data.frame(solution), SS2)), y = ecdf(y)(min(with(as.data.frame(solution), SS1)):max(with(as.data.frame(solution), SS2)))), aes(x, y)) +
+      ggplot(data.table(x = min(with(as.data.frame(solution), start)):max(with(as.data.frame(solution), end)), y = ecdf(y)(min(with(as.data.frame(solution), start)):max(with(as.data.frame(solution), end)))), aes(x, y)) +
         geom_step(colour = "grey") +
         scale_y_continuous(limits = c(0, 1)) +
         theme_classic() -> p1
@@ -659,6 +662,8 @@ CliffSite <- function(x, introns = NULL, direction = "start", minreads = 100, mi
   }
   return(solution)
 }
+
+
 
 
 #' @title InternalFunctions
@@ -681,7 +686,7 @@ InflexionPoint <- function(x, y) {
 
 DR <- function(x, minreads = 10, iteration = 100) {
   stopifnot(is(x, "data.table"))
-  stopifnot(all(is.element(c("start", "end", "count", "index"), colnames(x))))
+  stopifnot(all(is.element(c("start", "end", "count", "index", "TSS"), colnames(x))))
   if(x[, max(count)] < minreads) return(NULL)
   x <- x[index %in% x[, .(count = max(count)), index][count >= minreads, index]]
   iso_g <- x[, unique(index)]
@@ -766,7 +771,7 @@ DR <- function(x, minreads = 10, iteration = 100) {
     exon_c <- tot_g[, count] # Ngij
     for(k in 1:nrow(tot_g)) {
       #print(k)
-      INDEX[k, ] <- as.numeric(countOverlaps(as(iso_g, "IRanges"), IRanges(1, tot_g[k, start]))) # Igij
+      INDEX[k, ] <- as.numeric(iso_g <= tot_g[k, index]) # Igij
       if(k == 1) {
         DIST[k, ] <- lexon[k] * INDEX[k, ] / 2
       }
@@ -779,7 +784,7 @@ DR <- function(x, minreads = 10, iteration = 100) {
       DIST[, k] <- DIST[, k] / sum(lexon * INDEX[, k]) # sum(lexon * INDEX[, k] = Lgi; 得到dgij
     }
 
-    alpha <- ATS_alpha[iso_g]
+    alpha <- ATS_alpha[as.character(iso_g)]
     # theta <- rep(1 / length(iso_g), length(iso_g))
     theta <- prop.table(mapply(function(x) tot_g[index == x, max(count)], iso_g))
 
@@ -800,6 +805,7 @@ DR <- function(x, minreads = 10, iteration = 100) {
       ## M-Step
       a <- alpha
       for(n in seq_len(iteration)) { # 迭代10次就可以让a值收敛（在supplementary里面公式（1）下面的一段话有说明）
+        # print(n)
         eee <- exp(- a * DIST)
         D0 <- lexon %*% (INDEX * eee) # 公式2.5下面的Gt的log函数的分子，在supplementary里面，即W0
         # %*% 是两个矩阵相乘
@@ -824,7 +830,8 @@ DR <- function(x, minreads = 10, iteration = 100) {
       theta <- BBB / sum(BBB) # 原文中公式2.6
     }
     if(!anyNA(alpha)) {
-      data.table(ATS = iso_g, alpha1 = ATS_alpha[iso_g], alpha2 = alpha, theta = as.numeric(theta))
+      # data.table(TSS = x[, levels(TSS)][iso_g], alpha1 = ATS_alpha[as.character(iso_g)], alpha2 = alpha, theta = as.numeric(theta))
+      data.table(TSS = x[, levels(TSS)][iso_g], alpha = ATS_alpha[as.character(iso_g)], theta = as.numeric(theta))
     }
   }
 }
@@ -865,10 +872,11 @@ loadbamregion <- function(bam, region, txdb = NULL,
 
   param <- Rsamtools::ScanBamParam(flag = Rsamtools::scanBamFlag(isSupplementaryAlignment = isSupplementaryAlignment,
                                                                  isPaired = TRUE,
+                                                                 isFirstMateRead = TRUE,
                                                                  isDuplicate = isDuplicate,
                                                                  isNotPassingQualityControls = FALSE,
                                                                  isSecondaryAlignment = isSecondaryAlignment),
-                                   tag = "CB", mapqFilter = mapqFilter, which = region)
+                                   tag = "CB", mapqFilter = mapqFilter)
   if(length(bam) == 1) {
     bami <- paste0(tempfile(), ".bam")
     sh <- paste("samtools view -1h -q", mapqFilter, "-o", bami, bam, gsub(":[-\\+]", "", as.character(region)))
@@ -933,6 +941,62 @@ loadbamregion <- function(bam, region, txdb = NULL,
 
 #' @title InternalFunctions
 #' @description Internal functions
+loadregionR1 <- function(bam, region,
+                         isDuplicate = NA,
+                         mapqFilter = 255,
+                         ignore.strand = FALSE,
+                         sep = "_") {
+  options(warn = -1)
+  stopifnot(all(file.exists(bam)))
+  stopifnot(is.logical(ignore.strand))
+  stopifnot(is.numeric(mapqFilter))
+  stopifnot(mapqFilter >= 0)
+  stopifnot(is.character(sep))
+  stopifnot(length(sep) == 1)
+
+  param <- Rsamtools::ScanBamParam(flag = Rsamtools::scanBamFlag(isSupplementaryAlignment = FALSE,
+                                                                 isPaired = TRUE,
+                                                                 isFirstMateRead = TRUE,
+                                                                 isDuplicate = isDuplicate,
+                                                                 isNotPassingQualityControls = FALSE,
+                                                                 isSecondaryAlignment = FALSE),
+                                   tag = "CB", mapqFilter = mapqFilter)
+  if(length(bam) == 1) {
+    bami <- paste0(tempfile(), ".bam")
+    sh <- paste("samtools view -1h -q", mapqFilter, "-o", bami, bam, gsub(":[-\\+]", "", as.character(region)))
+    system(command = sh); system(command = paste("samtools index", bami))
+    map0 <- suppressWarnings(GenomicAlignments::readGAlignments(bami, param = param, use.names = TRUE))
+    map0 <- map0[!is.na(S4Vectors::mcols(map0)$CB)]
+    if(length(map0) > 0) {
+      S4Vectors::mcols(map0)$CB <- S4Vectors::mcols(map0)$CB
+    }
+    system(command = paste0("rm ", bami)); system(command = paste0("rm ", bami, ".bai"))
+  } else {
+    map0 <- lapply(bam, function(x) {
+      bami <- paste0(tempfile(), "_", basename(x))
+      sh <- paste("samtools view -1h -q", mapqFilter, "-o", bami, x, gsub(":[-\\+]", "", as.character(region)))
+      system(command = sh); system(command = paste("samtools index", bami))
+      map0 <- suppressWarnings(GenomicAlignments::readGAlignments(bami, param = param, use.names = TRUE))
+      map0 <- map0[!is.na(S4Vectors::mcols(map0)$CB)]
+      if(length(map0) > 0) {
+        S4Vectors::mcols(map0)$CB <- paste(S4Vectors::mcols(map0)$CB, gsub(".bam", "", basename(x)), sep = sep)
+      }
+      system(command = paste("rm ", bami)); system(command = paste0("rm ", bami, ".bai"))
+      return(map0)
+    })
+    map0 <- do.call(c, map0)
+  }
+  map0 <- map0[S4Vectors::queryHits(GenomicRanges::findOverlaps(GenomicRanges::GRanges(map0), region, ignore.strand = ignore.strand))]
+
+  if(length(map0) == 0) {
+    return(NULL)
+  } else {
+    return(map0)
+  }
+}
+
+#' @title InternalFunctions
+#' @description Internal functions
 loadbamgene <- function(bam, gene, region = NULL, txdb = NULL, exonByGene = NULL,
                         exonIntersect = FALSE,
                         junctionIntersect = FALSE,
@@ -964,7 +1028,7 @@ loadbamgene <- function(bam, gene, region = NULL, txdb = NULL, exonByGene = NULL
                                                                  isDuplicate = isDuplicate,
                                                                  isNotPassingQualityControls = FALSE,
                                                                  isSecondaryAlignment = isSecondaryAlignment),
-                                   tag = "CB", mapqFilter = mapqFilter, which = region)
+                                   tag = "CB", mapqFilter = mapqFilter)
   if(length(bam) == 1) {
     bami <- paste0(tempfile(), ".bam")
     sh <- paste("samtools view -1h -q", mapqFilter, "-o", bami, bam, gsub(":[-\\+]", "", as.character(region)))
@@ -1062,7 +1126,7 @@ CliffSite2 <- function(x, SS, direction = "start", minreads = 100, max.degradati
   F1 <- ecdf(x)
   # Maximization
   if(!is.null(solution)) {
-    solution <- sort(solution)
+    solution <- BiocGenerics::sort(solution)
     mcols(solution)$PSI <- mapply(function(i) F1(with(as.data.frame(solution[i]), end)) - F1(with(as.data.frame(solution[i]), start)), seq_along(solution))
     if(!is.null(max.degradation.length) | !is.null(min.Nodegradation.length)) {
       x2 <- lapply(function(i) {
@@ -1072,7 +1136,7 @@ CliffSite2 <- function(x, SS, direction = "start", minreads = 100, max.degradati
           xi <- xi[xi <= min(xi) + max.degradation.length]
         }
         if(!is.null(min.Nodegradation.length)) {
-          si <- gaps(reduce(IRanges(xi)))
+          si <- IRanges::gaps(IRanges::reduce(IRanges::IRanges(xi)))
           if(max(width(si)) > min.Nodegradation.length) {
             xi <- xi[xi <= min(start(si[width(si) > min.Nodegradation.length]))]
           }
@@ -1140,7 +1204,7 @@ CliffSite2 <- function(x, SS, direction = "start", minreads = 100, max.degradati
       solution[, end := plyr::mapvalues(end, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
       solution[, SS := plyr::mapvalues(SS, min(z):max(z), max(z):min(z), warn_missing = FALSE)]
       solution <- solution[, IRanges(start = end, end = start, SS = SS, PSI = PSI, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
-      solution <- sort(solution)
+      solution <- BiocGenerics::sort(solution)
     }
   }
 
@@ -1151,9 +1215,86 @@ CliffSite2 <- function(x, SS, direction = "start", minreads = 100, max.degradati
     solution[, end := plyr::mapvalues(end, To, From, warn_missing = FALSE)]
     solution[, SS := plyr::mapvalues(SS, To, From, warn_missing = FALSE)]
     solution <- solution[, IRanges(start, end, SS = SS, PSI = PSI, AUC = AUC, MaxDist = MaxDist, AboveRandom = AboveRandom, ApicesX = ApicesX, ApicesY = ApicesY, alpha1 = alpha1, alpha2 = alpha2, theta = theta)]
-    solution <- sort(solution)
+    solution <- BiocGenerics::sort(solution)
   }
   SS <- sort(SS)
   stopifnot(identical(as.character(solution), as.character(SS)))
   return(solution)
+}
+
+#' @title InternalFunctions
+#' @description Internal functions
+determineWindowLength <- function (x, w) {
+  if (!is.numeric(x) | !is.numeric(w)) {
+    stop("Arguments 'x' and 'w' must be numeric")
+  }
+  l = length(x)
+  w.orig = w
+  if (w > 0 && w < 1) {
+    w = w * l
+  }
+  ret = as.integer(max(abs(w[1]), 1))
+  if (length(x) <= ret | ret < 1) {
+    stop(paste("Resultant window length is out of range (", ret, "), must be >= 1", sep = ""), call. = FALSE)
+  }
+  return(ret)
+}
+
+#' @title InternalFunctions
+#' @description Internal functions
+normalize <- function (x) {
+  if (!is.numeric(x)) {
+    stop("argument 'x' must be numeric")
+  }
+  if (length(x) == 1) {
+    return(1)
+  }
+  total = sum(x)
+  if (total == 0) {
+    stop("argument 'x' must not sum to zero")
+  }
+  return(x/total)
+}
+
+#' @title InternalFunctions
+#' @description Internal functions
+smthgaussian <- function (x, window = 0.1, alpha = 2.5, tails = TRUE) {
+  if (!is.numeric(x) | !is.numeric(alpha)) {
+    stop("argument 'x' and 'alpha' must be numeric", call. = FALSE)
+  }
+  windowLength = determineWindowLength(x, window)
+  makeWindow = function(w, a) {
+    hw = abs(w/2)
+    e = exp(1)
+    a = abs(a)
+    ret = sapply(c(0:(w - 1)), function(x) {
+      n = x - as.integer(hw)
+      k = -0.5 * (a * n/hw)^2
+      e^k
+    })
+    ret
+  }
+  w = makeWindow(windowLength, alpha[1])
+  sizeW = length(w)
+  sizeD = length(x)
+  w = normalize(w)
+  hkwL = as.integer(sizeW/2)
+  hkwR = sizeW - hkwL
+  ret = sapply(c(1:sizeD), function(i) {
+    ix.d = c((i - hkwL):(i + hkwR - 1))
+    ix.w = which(ix.d %in% 1:sizeD)
+    ix.d = ix.d[ix.w]
+    W.nm = if (length(ix.w) != sizeW) {
+      normalize(w[ix.w])
+    }
+    else {
+      w
+    }
+    D.nm = x[ix.d]
+    as.numeric(D.nm %*% W.nm)
+  })
+  if (!tails) {
+    ret[c(1:hkwL, (sizeD - hkwR + 1):sizeD)] = NA
+  }
+  ret
 }

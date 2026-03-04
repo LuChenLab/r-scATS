@@ -19,5 +19,5 @@ CliffSite(
 )
 }
 \description{
-Internal function for gmmc4
+Internal function for gmmc
 }
