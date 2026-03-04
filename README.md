@@ -38,11 +38,12 @@ Please choose the appropriate version of `scATS` based on your R environment:
 - `v0.5.6` (Recommended): For users with R >= 4.4 (developed with `R 4.5.2`).
 - `v0.5.5` (Legacy): For users with R < 4.4 (developed under `R 4.0.0`).
 
-- System Dependencies
+1. System Dependencies
 
 Before installing scATS, please ensure that `samtools` (version >= 1.19.2) is installed and available in your system's PATH.
 
-- R Dependencies
+2. R Dependencies
+
 The following R packages are required for all versions of scATS. You can install them using the following command:
 
 ```r
@@ -67,13 +68,13 @@ install.packages('https://cran.r-project.org/src/contrib/Archive/smoother/smooth
 
 To install `scATS`, you have two options: either install directly from GitHub or use the compressed source file.
 
-- Via GitHub:
+- Via GitHub (only for `v0.5.6`):
 
 ```r
 remotes::install_github("LuChenLab/r-scATS")
 ```
 
-- Via Source File:
+- Via Source File (for `v0.5.6` and `v0.5.5`):
 
 Alternatively, you can install `scATS` using the source file downloaded from the [repository](https://github.com/LuChenLab/r-scATS/blob/main/scATS_0.5.6.tar.gz) :
 ```bash
@@ -98,9 +99,11 @@ To ensure reproducibility, we provide comprehensive installation logs for three 
 We provide a pre-configured Docker container to eliminate system-specific dependency conflicts.
 
 - Step 1: Install Docker
+
 If you do not have Docker installed, please follow the [official Docker installation guide](https://docs.docker.com/engine/install/).
 
 - Step 2: Run the scATS Container
+
 Pull the pre-built image from the GitHub Container Registry and start an interactive session:
 
 ```bash
@@ -112,7 +115,8 @@ docker run -it ghcr.io/kayla-xu/scats-evi:r451
 ```
 
 - Step 3: Build Docker Locally (Optional)
-If you prefer to build the image locally, use the provided Dockerfiles. Building logs are also provided for your reference.
+
+If you prefer to build the image locally, use the provided Dockerfiles. Building [logs](https://github.com/LuChenLab/r-scATS/tree/main/logs/docker) are also provided for your reference.
 
 ```bash
 # Build the base environment

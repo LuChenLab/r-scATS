@@ -1,0 +1,226 @@
+
+>remotes::install_github("LuChenLab/r-scATS")
+Downloading GitHub repo LuChenLab/r-scATS@HEAD
+These packages have more recent versions available.
+It is recommended to update all of them.
+Which would you like to update?
+
+ 1: All
+ 2: CRAN packages only
+ 3: None
+ 4: Rcpp         (1.1.0   -> 1.1.1   ) [CRAN]
+ 5: RcppAnnoy    (0.0.22  -> 0.0.23  ) [CRAN]
+ 6: irlba        (2.3.5.1 -> 2.3.7   ) [CRAN]
+ 7: vctrs        (0.6.5   -> 0.7.1   ) [CRAN]
+ 8: rlang        (1.1.6   -> 1.1.7   ) [CRAN]
+ 9: lifecycle    (1.0.4   -> 1.0.5   ) [CRAN]
+10: spatstat.... (3.2-0   -> 3.2-1   ) [CRAN]
+11: spatstat.... (3.1-5   -> 3.1-6   ) [CRAN]
+12: spatstat.... (3.4-3   -> 3.4-4   ) [CRAN]
+13: spatstat.... (3.6-1   -> 3.7-0   ) [CRAN]
+14: rappdirs     (0.3.3   -> 0.3.4   ) [CRAN]
+15: base64enc    (0.1-3   -> 0.1-6   ) [CRAN]
+16: xtable       (1.8-4   -> 1.8-8   ) [CRAN]
+17: later        (1.4.4   -> 1.4.7   ) [CRAN]
+18: bslib        (0.9.0   -> 0.10.0  ) [CRAN]
+19: viridisLite  (0.4.2   -> 0.4.3   ) [CRAN]
+20: cpp11        (0.5.2   -> 0.5.3   ) [CRAN]
+21: globals      (0.18.0  -> 0.19.0  ) [CRAN]
+22: tibble       (3.3.0   -> 3.3.1   ) [CRAN]
+23: ggplot2      (4.0.1   -> 4.0.2   ) [CRAN]
+24: parallelly   (1.46.0  -> 1.46.1  ) [CRAN]
+25: future       (1.68.0  -> 1.69.0  ) [CRAN]
+26: future.apply (1.20.1  -> 1.20.2  ) [CRAN]
+27: dplyr        (1.1.4   -> 1.2.0   ) [CRAN]
+28: xfun         (0.55    -> 0.56    ) [CRAN]
+29: openssl      (2.3.4   -> 2.3.5   ) [CRAN]
+30: data.table   (1.17.8  -> 1.18.2.1) [CRAN]
+31: purrr        (1.2.0   -> 1.2.1   ) [CRAN]
+32: httr         (1.4.7   -> 1.4.8   ) [CRAN]
+33: shiny        (1.12.1  -> 1.13.0  ) [CRAN]
+34: spam         (2.11-1  -> 2.11-3  ) [CRAN]
+35: sp           (2.2-0   -> 2.2-1   ) [CRAN]
+36: spatstat.... (3.6-0   -> 3.7-0   ) [CRAN]
+37: sctransform  (0.4.2   -> 0.4.3   ) [CRAN]
+38: ROCR         (1.0-11  -> 1.0-12  ) [CRAN]
+39: reticulate   (1.44.1  -> 1.45.0  ) [CRAN]
+40: plotly       (4.11.0  -> 4.12.0  ) [CRAN]
+41: igraph       (2.2.1   -> 2.2.2   ) [CRAN]
+42: ggrepel      (0.9.6   -> 0.9.7   ) [CRAN]
+43: fitdistrplus (1.2-4   -> 1.2-6   ) [CRAN]
+44: segmented    (2.1-4   -> 2.2-1   ) [CRAN]
+45: Seurat       (5.3.1   -> 5.4.0   ) [CRAN]
+
+Enter one or more numbers, or an empty line to skip updates:
+Installing 1 packages: rprojroot
+Installing package into ‘/mnt/data/xuzijie/Rpack’
+(as ‘lib’ is unspecified)
+
+trying URL 'https://cloud.r-project.org/src/contrib/rprojroot_2.1.1.tar.gz'
+Content type 'application/x-gzip' length 59899 bytes (58 KB)
+==================================================
+downloaded 58 KB
+* installing *source* package ‘rprojroot’ ...
+** this is package ‘rprojroot’ version ‘2.1.1’
+** package ‘rprojroot’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rprojroot)
+
+The downloaded source packages are in
+        ‘/tmp/RtmprTaZ5k/downloaded_packages’
+Running `R CMD build`...
+* checking for file ‘/tmp/RtmprTaZ5k/remotes10ce3f9a03bf/LuChenLab-r-scATS-b379864/DESCRIPTION’ ... OK
+* preparing ‘scATS’:
+* checking DESCRIPTION meta-information ... OK
+* excluding invalid files
+Subdirectory 'demo' contains invalid file names:
+  ‘demo.bam’ ‘demo.bam.bai’ ‘demo.gtf’ ‘demo_seurat.Rds’
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+Removed empty directory ‘scATS/demo’
+* building ‘scATS_0.5.5.tar.gz’
+Installing package into ‘/mnt/data/xuzijie/Rpack’
+(as ‘lib’ is unspecified)
+* installing *source* package ‘scATS’ ...
+** this is package ‘scATS’ version ‘0.5.5’
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (scATS)
+> library(scATS)
+> sessionInfo()
+R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=zh_CN.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=zh_CN.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=zh_CN.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=zh_CN.UTF-8 LC_IDENTIFICATION=C
+
+time zone: Asia/Shanghai
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+other attached packages:
+[1] scATS_0.5.5
+
+loaded via a namespace (and not attached):
+  [1] RcppAnnoy_0.0.22            splines_4.5.2
+  [3] later_1.4.4                 BiocIO_1.20.0
+  [5] bitops_1.0-9                tibble_3.3.0
+  [7] R.oo_1.27.1                 polyclip_1.10-7
+  [9] graph_1.88.1                xts_0.14.1
+ [11] rpart_4.1.24                XML_3.99-0.20
+ [13] fastDummies_1.7.5           lifecycle_1.0.4
+ [15] OrganismDbi_1.52.0          ensembldb_2.34.0
+ [17] globals_0.18.0              lattice_0.22-5
+ [19] MASS_7.3-65                 backports_1.5.0
+ [21] magrittr_2.0.4              rmarkdown_2.30
+ [23] Hmisc_5.2-4                 plotly_4.11.0
+ [25] yaml_2.3.12                 remotes_2.5.0
+ [27] httpuv_1.6.16               otel_0.2.0
+ [29] Seurat_5.3.1                sctransform_0.4.2
+ [31] spam_2.11-1                 sp_2.2-0
+ [33] spatstat.sparse_3.1-0       reticulate_1.44.1
+ [35] ggbio_1.58.0                cowplot_1.2.0
+ [37] pbapply_1.7-4               DBI_1.2.3
+ [39] RColorBrewer_1.1-3          abind_1.4-8
+ [41] Rtsne_0.17                  GenomicRanges_1.62.1
+ [43] mixtools_2.0.0.1            purrr_1.2.0
+ [45] R.utils_2.13.0              AnnotationFilter_1.34.0
+ [47] biovizBase_1.58.0           BiocGenerics_0.56.0
+ [49] RCurl_1.98-1.17             nnet_7.3-20
+ [51] VariantAnnotation_1.56.0    IRanges_2.44.0
+ [53] S4Vectors_0.48.0            ggrepel_0.9.6
+ [55] irlba_2.3.5.1               listenv_0.10.0
+ [57] spatstat.utils_3.2-0        goftest_1.2-3
+ [59] RSpectra_0.16-2             spatstat.random_3.4-3
+ [61] fitdistrplus_1.2-4          parallelly_1.46.0
+ [63] smoother_1.3                codetools_0.2-19
+ [65] DelayedArray_0.36.0         tidyselect_1.2.1
+ [67] UCSC.utils_1.6.1            farver_2.1.2
+ [69] base64enc_0.1-3             matrixStats_1.5.0
+ [71] stats4_4.5.2                spatstat.explore_3.6-0
+ [73] Seqinfo_1.0.0               GenomicAlignments_1.46.0
+ [75] jsonlite_2.0.0              Formula_1.2-5
+ [77] progressr_0.18.0            ggridges_0.5.7
+ [79] survival_3.8-3              segmented_2.1-4
+ [81] tools_4.5.2                 ica_1.0-3
+ [83] Rcpp_1.1.0                  glue_1.8.0
+ [85] gridExtra_2.3               SparseArray_1.10.8
+ [87] xfun_0.55                   TTR_0.24.4
+ [89] MatrixGenerics_1.22.0       GenomeInfoDb_1.46.2
+ [91] dplyr_1.1.4                 BiocManager_1.30.27
+ [93] fastmap_1.2.0               digest_0.6.39
+ [95] R6_2.6.1                    mime_0.13
+ [97] colorspace_2.1-2            scattermore_1.2
+ [99] tensor_1.5.1                dichromat_2.0-0.1
+[101] spatstat.data_3.1-9         RSQLite_2.4.5
+[103] cigarillo_1.0.0             R.methodsS3_1.8.2
+[105] tidyr_1.3.2                 generics_0.1.4
+[107] data.table_1.17.8           rtracklayer_1.70.0
+[109] httr_1.4.7                  htmlwidgets_1.6.4
+[111] S4Arrays_1.10.1             uwot_0.2.4
+[113] pkgconfig_2.0.3             gtable_0.3.6
+[115] blob_1.2.4                  lmtest_0.9-40
+[117] S7_0.2.1                    XVector_0.50.0
+[119] htmltools_0.5.9             dotCall64_1.2
+[121] RBGL_1.86.0                 ProtGenerics_1.42.0
+[123] SeuratObject_5.3.0          scales_1.4.0
+[125] Biobase_2.70.0              png_0.1-8
+[127] spatstat.univar_3.1-5       rstudioapi_0.17.1
+[129] knitr_1.51                  reshape2_1.4.5
+[131] rjson_0.2.23                checkmate_2.3.3
+[133] nlme_3.1-168                curl_7.0.0
+[135] cachem_1.1.0                zoo_1.8-15
+[137] stringr_1.6.0               KernSmooth_2.23-26
+[139] parallel_4.5.2              miniUI_0.1.2
+[141] foreign_0.8-90              AnnotationDbi_1.72.0
+[143] restfulr_0.0.16             pillar_1.11.1
+[145] grid_4.5.2                  vctrs_0.6.5
+[147] RANN_2.6.2                  VGAM_1.1-14
+[149] promises_1.5.0              xtable_1.8-4
+[151] cluster_2.1.8.1             htmlTable_2.4.3
+[153] evaluate_1.0.5              GenomicFeatures_1.62.0
+[155] cli_3.6.5                   compiler_4.5.2
+[157] Rsamtools_2.26.0            rlang_1.1.6
+[159] crayon_1.5.3                future.apply_1.20.1
+[161] mclust_6.1.2                plyr_1.8.9
+[163] stringi_1.8.7               viridisLite_0.4.2
+[165] deldir_2.0-4                BiocParallel_1.44.0
+[167] Biostrings_2.78.0           lazyeval_0.2.2
+[169] spatstat.geom_3.6-1         Matrix_1.7-4
+[171] BSgenome_1.78.0             RcppHNSW_0.6.0
+[173] patchwork_1.3.2             bit64_4.6.0-1
+[175] future_1.68.0               ggplot2_4.0.1
+[177] KEGGREST_1.50.0             shiny_1.12.1
+[179] SummarizedExperiment_1.40.0 kernlab_0.9-33
+[181] ROCR_1.0-11                 igraph_2.2.1
+[183] memoise_2.0.1               bit_4.6.0
