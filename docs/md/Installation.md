@@ -9,7 +9,10 @@ Please choose the appropriate version of scATS based on your R environment:
 ## Requirements
 - System Dependencies
 
-Before installing scATS, please ensure that `samtools` (version >= 1.19.2) is installed and available in your system's PATH.
+Before installing scATS, please ensure that `samtools` is installed and available in your system's PATH.
+```bash
+conda install -c bioconda samtools
+```
 
 - R Dependencies
 
@@ -17,7 +20,6 @@ The following R packages are required for all versions of scATS. You can install
 
 ```r
 install.packages(c(
-    'remotes',
     'R.utils', 
     'TTR', 
     'VGAM',
@@ -37,6 +39,11 @@ To install `scATS`, you have two options: either install directly from GitHub or
 
 - Via GitHub (only for `v0.5.6`):
 ```r
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("LuChenLab/r-scATS", force = TRUE)
+
+# or
+if (!require("remotes")) install.packages("remotes")
 remotes::install_github("LuChenLab/r-scATS")
 ```
 

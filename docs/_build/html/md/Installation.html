@@ -101,13 +101,15 @@
 <ul class="simple">
 <li><p>System Dependencies</p></li>
 </ul>
-<p>Before installing scATS, please ensure that <code class="docutils literal notranslate"><span class="pre">samtools</span></code> (version &gt;= 1.19.2) is installed and available in your system’s PATH.</p>
+<p>Before installing scATS, please ensure that <code class="docutils literal notranslate"><span class="pre">samtools</span></code> is installed and available in your system’s PATH.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>bioconda<span class="w"> </span>samtools
+</pre></div>
+</div>
 <ul class="simple">
-<li><p>R Dependencies
-The following R packages are required for all versions of scATS. You can install them using the following command:</p></li>
+<li><p>R Dependencies</p></li>
 </ul>
+<p>The following R packages are required for all versions of scATS. You can install them using the following command:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span>
-<span class="w">    </span><span class="s">&#39;remotes&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s">&#39;R.utils&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s">&#39;TTR&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s">&#39;VGAM&#39;</span><span class="p">,</span>
@@ -128,13 +130,18 @@ The following R packages are required for all versions of scATS. You can install
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <p>To install <code class="docutils literal notranslate"><span class="pre">scATS</span></code>, you have two options: either install directly from GitHub or use the compressed source file.</p>
 <ul class="simple">
-<li><p>Via GitHub:</p></li>
+<li><p>Via GitHub (only for <code class="docutils literal notranslate"><span class="pre">v0.5.6</span></code>):</p></li>
 </ul>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">require</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">))</span><span class="w"> </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+<span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># or</span>
+<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">require</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">))</span><span class="w"> </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;remotes&quot;</span><span class="p">)</span>
+<span class="n">remotes</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;LuChenLab/r-scATS&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Via Source File:</p></li>
+<li><p>Via Source File (for <code class="docutils literal notranslate"><span class="pre">v0.5.6</span></code> and <code class="docutils literal notranslate"><span class="pre">v0.5.5</span></code>):</p></li>
 </ul>
 <p>Alternatively, you can install <code class="docutils literal notranslate"><span class="pre">scATS</span></code> using the source file downloaded from the <a class="reference external" href="https://github.com/LuChenLab/r-scATS">repository</a> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install scATS from a downloaded source file</span>
@@ -158,11 +165,13 @@ R<span class="w"> </span>CMD<span class="w"> </span>INSTALL<span class="w"> </sp
 <h2>Docker Guide<a class="headerlink" href="#docker-guide" title="Permalink to this heading"></a></h2>
 <p>We provide a pre-configured Docker container to eliminate system-specific dependency conflicts.</p>
 <ul class="simple">
-<li><p>Step 1: Install Docker
-If you do not have Docker installed, please follow the <a class="reference external" href="https://docs.docker.com/engine/install/">official Docker installation guide</a>.</p></li>
-<li><p>Step 2: Run the scATS Container
-Pull the pre-built image from the GitHub Container Registry and start an interactive session:</p></li>
+<li><p>Step 1: Install Docker</p></li>
 </ul>
+<p>If you do not have Docker installed, please follow the <a class="reference external" href="https://docs.docker.com/engine/install/">official Docker installation guide</a>.</p>
+<ul class="simple">
+<li><p>Step 2: Run the scATS Container</p></li>
+</ul>
+<p>Pull the pre-built image from the GitHub Container Registry and start an interactive session:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pull the image</span>
 docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/kayla-xu/scats-evi:r451
 
@@ -171,9 +180,9 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Step 3: Build Docker Locally (Optional)
-If you prefer to build the image locally, use the provided Dockerfiles. Building logs are also provided for your reference.</p></li>
+<li><p>Step 3: Build Docker Locally (Optional)</p></li>
 </ul>
+<p>If you prefer to build the image locally, use the provided Dockerfiles. Building <a class="reference external" href="https://github.com/LuChenLab/r-scATS/tree/main/logs/docker">logs</a> are also provided for your reference.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the base environment</span>
 docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-t<span class="w"> </span>scATS/base:r451<span class="w"> </span><span class="se">\</span>
