@@ -57,6 +57,7 @@ install.packages(c(
     'VGAM',
     'prettyunits',
     'httr2',
+    'fitdistrplus',
     'mclust',
     'mixtools'))
 ```
