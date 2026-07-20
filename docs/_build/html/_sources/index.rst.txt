@@ -33,7 +33,11 @@ To use scATS, you can follow the instructions below:
 
 Citing scATS
 ------------
-If you use scATS in your research, please cite **********************************
+If you use scATS in your research, please cite:
+
+Xu, Z., Zhou, Z., Tang, C. et al. Accurate profiling of single-cell alternative transcript start sites by correcting RNA degradation. Nat Commun 17, 5798 (2026).
+
+https://doi.org/10.1038/s41467-026-72298-8
 
 Contacts
 --------
@@ -42,4 +46,3 @@ from Sichuan University. If you want to contribute or have any questions,
 please leave an issue in our `repository <https://github.com/LuChenLab/r-scATS/issues>`_.
 
 Thank you !
-
