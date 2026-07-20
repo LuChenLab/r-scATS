@@ -279,4 +279,6 @@ See the detailed [documentation](https://r-scats.readthedocs.io/en/latest/md/Dis
 
 ## <span id="Citing">Citing</span>
 
-A pre-print is going to be uploaded soon.
+Xu, Z., Zhou, Z., Tang, C. et al. Accurate profiling of single-cell alternative transcript start sites by correcting RNA degradation. Nat Commun 17, 5798 (2026).
+
+https://doi.org/10.1038/s41467-026-72298-8
